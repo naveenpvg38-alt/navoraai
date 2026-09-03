@@ -3,7 +3,7 @@ import {
   Sparkles, MapPin, Clock, Wallet, Users,
   Compass, Footprints, Bike, Train, Car, Navigation,
   Check, ChevronRight, Coffee, Palette, Landmark, Trees,
-  ShoppingBag, Music
+  ShoppingBag, Music, Dices
 } from 'lucide-react';
 
 const SectionCard = ({ children, className = '' }) => (
@@ -120,6 +120,28 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
     );
   };
 
+  const handleQuickShuffle = () => {
+    const randomMood = moods[Math.floor(Math.random() * moods.length)].id;
+    const randomBudget = budgets[Math.floor(Math.random() * budgets.length)].id;
+    const randomDuration = durations[Math.floor(Math.random() * durations.length)];
+    const randomRegion = popularTumkurRegions[Math.floor(Math.random() * popularTumkurRegions.length)];
+    const randomTransport = transportModes[Math.floor(Math.random() * transportModes.length)].id;
+    const randomTrip = tripTypes[Math.floor(Math.random() * tripTypes.length)];
+    
+    // Pick 2 random interests
+    const shuffledInterests = [...availableInterests].sort(() => 0.5 - Math.random());
+    const pickedInterests = shuffledInterests.slice(0, 2).map(i => i.name);
+
+    setMood(randomMood);
+    setBudget(randomBudget);
+    setDuration(randomDuration);
+    setLocation(randomRegion);
+    setTransport(randomTransport);
+    setTripType(randomTrip.type);
+    setPeopleCount(randomTrip.count);
+    setInterests(pickedInterests);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onGenerate({ mood, interests, budget, duration, start_time: startTime,
@@ -134,9 +156,19 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
         <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-3">
           Craft Your <span className="text-gradient-cyan">Ideal Day</span>
         </h1>
-        <p className="text-slate-500 text-sm font-light max-w-md mx-auto">
+        <p className="text-slate-500 text-sm font-light max-w-md mx-auto mb-4">
           Tell us your vibe and we'll synthesize a route-optimized itinerary across Tumkur District.
         </p>
+
+        {/* Quick Shuffle Button */}
+        <button
+          type="button"
+          onClick={handleQuickShuffle}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-semibold text-cyan-300 bg-white/4 border border-white/8 hover:border-cyan-400/30 hover:bg-cyan-500/10 transition-all cursor-pointer group shadow-sm"
+        >
+          <Dices className="w-4 h-4 text-cyan-400 group-hover:rotate-180 transition-transform duration-500" />
+          <span>🎲 QUICK SHUFFLE ALL PREFERENCES</span>
+        </button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">

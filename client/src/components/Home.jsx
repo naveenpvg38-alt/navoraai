@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   MapPin,
@@ -14,10 +14,13 @@ import {
   TreePine,
   Zap,
   Shield,
-  Eye
+  Eye,
+  Dices
 } from 'lucide-react';
+import VibeRouletteModal from './VibeRouletteModal';
 
 export default function Home({ onStartPlanning, onQuickTemplate }) {
+  const [showRoulette, setShowRoulette] = useState(false);
 
   const benefits = [
     {
@@ -172,11 +175,18 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
           </p>
 
           {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up">
             <button onClick={onStartPlanning} className="btn-primary text-[15px] !py-3.5 !px-8 !rounded-2xl">
               <Sparkles className="w-4 h-4" />
               Plan My Outing
               <ArrowRight className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setShowRoulette(true)}
+              className="btn-secondary text-[15px] !py-3.5 !px-6 !rounded-2xl !gap-2 cursor-pointer hover:border-cyan-400/40 transition-all group"
+            >
+              <Dices className="w-4 h-4 text-cyan-400 group-hover:rotate-180 transition-transform duration-500" />
+              <span>🎲 Surprise Vibe Roulette</span>
             </button>
           </div>
 
@@ -318,6 +328,12 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
         </div>
       </section>
 
+      {/* Vibe Roulette Modal */}
+      <VibeRouletteModal
+        isOpen={showRoulette}
+        onClose={() => setShowRoulette(false)}
+        onSelectVibe={onQuickTemplate}
+      />
     </div>
   );
 }

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import {
   Sparkles, Clock, Wallet, MapPin, Heart,
   Bookmark, CheckCircle, Share2, Printer,
-  ArrowLeft, Route, Compass, Lightbulb, Check, Train
+  ArrowLeft, Route, Compass, Lightbulb, Check, Train,
+  Navigation, ExternalLink
 } from 'lucide-react';
 import LeafletMap from './LeafletMap';
+import OutingToolkit from './OutingToolkit';
 
 const actionBtn = {
   base:     { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px' },
@@ -12,11 +14,25 @@ const actionBtn = {
   complete: { background: 'rgba(16,185,129,0.1)',   border: '1px solid rgba(16,185,129,0.3)',  borderRadius: '10px' },
 };
 
+const buildGoogleMapsUrl = (items = []) => {
+  const valid = items.filter(it => it.latitude && it.longitude);
+  if (valid.length === 0) return null;
+  if (valid.length === 1) {
+    return `https://www.google.com/maps/search/?api=1&query=${valid[0].latitude},${valid[0].longitude}`;
+  }
+  const origin = `${valid[0].latitude},${valid[0].longitude}`;
+  const destination = `${valid[valid.length - 1].latitude},${valid[valid.length - 1].longitude}`;
+  const waypoints = valid.slice(1, -1).map(it => `${it.latitude},${it.longitude}`).join('|');
+  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints ? `&waypoints=${encodeURIComponent(waypoints)}` : ''}&travelmode=driving`;
+};
+
 export default function ItineraryView({ plan, user, onSave, onToggleFavourite, onToggleComplete, onBack, onOpenAuth }) {
   const [copied, setCopied]         = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   if (!plan) return null;
+
+  const googleMapsUrl = buildGoogleMapsUrl(plan.items || []);
 
   const handleShare = () => {
     const text = `✦ NAVORA AI Outing: ${plan.title}\nDuration: ${plan.duration}\nCost: ${plan.estimated_cost}\nStops: ${plan.items.map((it, idx) => `${idx + 1}. ${it.place_name} (${it.start_time})`).join(', ')}`;
@@ -44,6 +60,22 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
         </button>
 
         <div className="flex items-center gap-2">
+          {/* Google Maps Multi-Stop Navigation */}
+          {googleMapsUrl && (
+            <a
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-semibold text-cyan-300 flex items-center gap-1.5 cursor-pointer transition-all hover:brightness-110"
+              style={{ background: 'rgba(34,211,238,0.12)', border: '1px solid rgba(34,211,238,0.35)', boxShadow: '0 0 15px rgba(34,211,238,0.2)' }}
+              title="Open Route in Google Maps for Turn-by-Turn GPS Navigation"
+            >
+              <Navigation className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Navigate Route</span>
+              <ExternalLink className="w-3 h-3 text-cyan-400 opacity-75" />
+            </a>
+          )}
+
           {/* Share */}
           <button onClick={handleShare} title="Share" className="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white flex items-center gap-1.5 cursor-pointer transition-all"
             style={actionBtn.base}>
@@ -153,6 +185,9 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
         )}
       </div>
 
+      {/* Unique Feature: Tumkur Outing Intelligence Suite (Weather Radar, Group Splitter, Smart Packing, Kannada Phrases) */}
+      <OutingToolkit plan={plan} />
+
       {/* Timeline + Map */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Timeline */}
@@ -224,7 +259,20 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
               <MapPin className="w-4 h-4 text-cyan-400" />
               <h2 className="font-semibold text-white text-base">Interactive Route Map</h2>
             </div>
-            <span className="font-mono text-xs text-slate-600">OPENSTREETMAP</span>
+            {googleMapsUrl ? (
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 font-mono text-[11px] text-cyan-400 hover:text-cyan-300 transition-colors"
+                title="Launch in Google Maps App"
+              >
+                <span>Google Maps GPS</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            ) : (
+              <span className="font-mono text-xs text-slate-600">OPENSTREETMAP</span>
+            )}
           </div>
 
           <div className="sticky top-24 h-[500px]">
