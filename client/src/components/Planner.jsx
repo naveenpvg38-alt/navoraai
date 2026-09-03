@@ -1,492 +1,393 @@
 import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  MapPin, 
-  Clock, 
-  Wallet, 
-  Users, 
-  Compass, 
-  Footprints, 
-  Bike, 
-  Train, 
-  Car, 
-  Navigation, 
-  Check, 
-  ChevronRight,
-  Coffee,
-  Palette,
-  Landmark,
-  Trees,
-  ShoppingBag,
-  Music,
-  Smile,
-  Heart,
-  Zap,
-  Utensils
+import {
+  Sparkles, MapPin, Clock, Wallet, Users,
+  Compass, Footprints, Bike, Train, Car, Navigation,
+  Check, ChevronRight, Coffee, Palette, Landmark, Trees,
+  ShoppingBag, Music
 } from 'lucide-react';
 
+const SectionCard = ({ children, className = '' }) => (
+  <div
+    className={`p-6 sm:p-7 rounded-2xl ${className}`}
+    style={{ background: 'rgba(13,18,32,0.7)', border: '1px solid rgba(255,255,255,0.06)' }}
+  >
+    {children}
+  </div>
+);
+
+const SectionHeader = ({ step, title, desc, badge }) => (
+  <div className="flex items-start justify-between mb-5">
+    <div>
+      <div className="flex items-center gap-2.5 mb-1">
+        <span className="font-mono text-xs font-bold text-slate-700">{step}</span>
+        <h2 className="text-white font-semibold text-base tracking-tight">{title}</h2>
+      </div>
+      <p className="text-slate-600 text-xs">{desc}</p>
+    </div>
+    {badge && (
+      <span className="font-mono text-[11px] text-cyan-400 px-2.5 py-1 rounded-full shrink-0 ml-3"
+        style={{ background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.2)' }}>
+        {badge}
+      </span>
+    )}
+  </div>
+);
+
+const inputStyle = {
+  background: 'rgba(255,255,255,0.04)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  borderRadius: '12px',
+};
+
 export default function Planner({ onGenerate, initialPreferences = {} }) {
-  const [mood, setMood] = useState(initialPreferences.mood || 'Relaxed');
-  const [interests, setInterests] = useState(
-    initialPreferences.interests || ['Cafes & Dining', 'Scenic Outdoors']
-  );
-  const [budget, setBudget] = useState(initialPreferences.budget || 'Budget ($)');
-  const [duration, setDuration] = useState(initialPreferences.duration || 'Half Day (4-5h)');
+  const [mood, setMood]           = useState(initialPreferences.mood || 'Relaxed');
+  const [interests, setInterests] = useState(initialPreferences.interests || ['Cafes & Dining', 'Scenic Outdoors']);
+  const [budget, setBudget]       = useState(initialPreferences.budget || 'Budget ($)');
+  const [duration, setDuration]   = useState(initialPreferences.duration || 'Half Day (4-5h)');
   const [startTime, setStartTime] = useState(initialPreferences.start_time || '08:30 AM');
-  const [tripType, setTripType] = useState(initialPreferences.trip_type || 'Friends');
+  const [tripType, setTripType]   = useState(initialPreferences.trip_type || 'Friends');
   const [peopleCount, setPeopleCount] = useState(initialPreferences.people_count || 3);
   const [transport, setTransport] = useState(initialPreferences.transport || 'Bike / Two-Wheeler');
-  const [location, setLocation] = useState(initialPreferences.location || 'Tumkur, Karnataka');
+  const [location, setLocation]   = useState(initialPreferences.location || 'Tumkur, Karnataka');
   const [detectingLocation, setDetectingLocation] = useState(false);
 
-  // Available Moods
   const moods = [
-    { id: 'Relaxed', label: 'Relaxed', icon: '🌿', desc: 'Scenic DD hills & quiet springs' },
-    { id: 'Foodie', label: 'Foodie', icon: '🍲', desc: 'Kyathsandra butter Thatte Idli' },
-    { id: 'Adventurous', label: 'Adventurous', icon: '⚡', desc: 'Madhugiri monolith & fort trek' },
-    { id: 'Cultural', label: 'Cultural', icon: '🏛️', desc: 'Kaidala Hoysala stone temples' },
-    { id: 'Romantic', label: 'Romantic', icon: '✨', desc: 'Amanikere & Markonahalli sunset' },
-    { id: 'Energetic', label: 'Energetic', icon: '🔥', desc: 'High energy hill exploration' },
-    { id: 'Chill', label: 'Chill', icon: '☕', desc: 'Town kaapi & lake promenade' },
-    { id: 'Nature Explorer', label: 'Nature', icon: '🌲', desc: 'Forest canopy & deer sanctuary' }
+    { id: 'Relaxed',        icon: '🌿', label: 'Relaxed',    desc: 'Quiet hills & scenic springs' },
+    { id: 'Foodie',         icon: '🍲', label: 'Foodie',     desc: 'Butter Thatte Idli trails' },
+    { id: 'Adventurous',    icon: '⚡', label: 'Adventure',  desc: 'Madhugiri monolith trek' },
+    { id: 'Cultural',       icon: '🏛️', label: 'Cultural',   desc: 'Hoysala stone temples' },
+    { id: 'Romantic',       icon: '✨', label: 'Romantic',   desc: 'Amanikere sunset lakeside' },
+    { id: 'Energetic',      icon: '🔥', label: 'Energetic',  desc: 'High energy hill exploration' },
+    { id: 'Chill',          icon: '☕', label: 'Chill',      desc: 'Town kaapi & lake walks' },
+    { id: 'Nature Explorer',icon: '🌲', label: 'Nature',     desc: 'Forest canopy & wildlife' },
   ];
 
-  // Available Interests
   const availableInterests = [
-    { name: 'Cafes & Dining', icon: <Coffee className="w-4 h-4 text-amber-400" /> },
-    { name: 'Scenic Outdoors', icon: <Trees className="w-4 h-4 text-emerald-400" /> },
-    { name: 'Heritage & Sightseeing', icon: <Landmark className="w-4 h-4 text-cyan-400" /> },
-    { name: 'Art & Culture', icon: <Palette className="w-4 h-4 text-violet-400" /> },
-    { name: 'Hidden Gems', icon: <Compass className="w-4 h-4 text-pink-400" /> },
-    { name: 'Live Music & Nightlife', icon: <Music className="w-4 h-4 text-rose-400" /> },
-    { name: 'Shopping & Bazaars', icon: <ShoppingBag className="w-4 h-4 text-indigo-400" /> },
+    { name: 'Cafes & Dining',           icon: <Coffee     className="w-3.5 h-3.5 text-amber-400"  /> },
+    { name: 'Scenic Outdoors',          icon: <Trees      className="w-3.5 h-3.5 text-emerald-400"/> },
+    { name: 'Heritage & Sightseeing',   icon: <Landmark   className="w-3.5 h-3.5 text-cyan-400"   /> },
+    { name: 'Art & Culture',            icon: <Palette    className="w-3.5 h-3.5 text-violet-400" /> },
+    { name: 'Hidden Gems',              icon: <Compass    className="w-3.5 h-3.5 text-pink-400"   /> },
+    { name: 'Live Music & Nightlife',   icon: <Music      className="w-3.5 h-3.5 text-rose-400"   /> },
+    { name: 'Shopping & Bazaars',       icon: <ShoppingBag className="w-3.5 h-3.5 text-indigo-400"/> },
   ];
 
-  // Available Budgets in INR
   const budgets = [
-    { id: 'Free ($0)', label: 'Free (₹0)', desc: 'Zero cost; public hills, viewpoints & lake walks' },
-    { id: 'Budget ($)', label: 'Budget (₹)', desc: 'Thatte idli breakfast, tea & minimal entry fees' },
-    { id: 'Moderate ($$)', label: 'Moderate (₹₹)', desc: 'Comfortable dining, fuel & ticketed heritage sites' },
-    { id: 'Luxury ($$$)', label: 'Luxury (₹₹₹)', desc: 'Resort dining & private vehicle roadtrip' }
+    { id: 'Free ($0)',     label: 'Free (₹0)',    desc: 'Public hills, viewpoints & lake walks' },
+    { id: 'Budget ($)',    label: 'Budget (₹)',   desc: 'Thatte idli & minimal entry fees' },
+    { id: 'Moderate ($$)', label: 'Moderate (₹₹)', desc: 'Comfortable dining & heritage sites' },
+    { id: 'Luxury ($$$)', label: 'Luxury (₹₹₹)', desc: 'Resort dining & private roadtrip' },
   ];
 
-  // Durations
-  const durations = [
-    'Quick (2 Hours)',
-    'Half Day (4-5h)',
-    'Full Day (8h+)'
-  ];
+  const durations = ['Quick (2 Hours)', 'Half Day (4-5h)', 'Full Day (8h+)'];
 
-  // Trip Types
   const tripTypes = [
-    { type: 'Solo', count: 1 },
+    { type: 'Solo',   count: 1 },
     { type: 'Couple', count: 2 },
-    { type: 'Friends', count: 3 },
+    { type: 'Friends',count: 3 },
     { type: 'Family', count: 4 },
-    { type: 'Group', count: 6 }
+    { type: 'Group',  count: 6 },
   ];
 
-  // Transport modes
   const transportModes = [
-    { id: 'Bike / Two-Wheeler', label: 'Two-Wheeler', icon: <Bike className="w-4 h-4" /> },
-    { id: 'Car / Cab', label: 'Car / Cab', icon: <Car className="w-4 h-4" /> },
-    { id: 'KSRTC / Town Bus', label: 'Bus / Transit', icon: <Train className="w-4 h-4" /> },
-    { id: 'Scenic Walk', label: 'Scenic Walk', icon: <Footprints className="w-4 h-4" /> }
+    { id: 'Bike / Two-Wheeler', label: 'Two-Wheeler',  icon: <Bike      className="w-4 h-4" /> },
+    { id: 'Car / Cab',          label: 'Car / Cab',    icon: <Car       className="w-4 h-4" /> },
+    { id: 'KSRTC / Town Bus',   label: 'Bus / Transit',icon: <Train     className="w-4 h-4" /> },
+    { id: 'Scenic Walk',        label: 'Scenic Walk',  icon: <Footprints className="w-4 h-4" /> },
   ];
 
   const popularTumkurRegions = [
-    'Tumkur City',
-    'Devarayanadurga (DD Hills)',
-    'Kyathsandra',
-    'Namada Chilume',
-    'Madhugiri Monolith',
-    'Kaidala Temple',
-    'Kunigal & Markonahalli',
-    'Gubbi',
-    'Sira'
+    'Tumkur City', 'Devarayanadurga (DD Hills)', 'Kyathsandra',
+    'Namada Chilume', 'Madhugiri Monolith', 'Kaidala Temple',
+    'Kunigal & Markonahalli', 'Gubbi', 'Sira',
   ];
 
   const toggleInterest = (name) => {
     if (interests.includes(name)) {
-      if (interests.length > 1) {
-        setInterests(interests.filter(i => i !== name));
-      }
+      if (interests.length > 1) setInterests(interests.filter(i => i !== name));
     } else {
       setInterests([...interests, name]);
     }
   };
 
   const handleDetectLocation = () => {
-    if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.');
-      return;
-    }
-
+    if (!navigator.geolocation) { alert('Geolocation not supported.'); return; }
     setDetectingLocation(true);
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setDetectingLocation(false);
-        setLocation('Current Location (Detected)');
-      },
-      (error) => {
-        setDetectingLocation(false);
-        console.warn('Geolocation error:', error);
-        setLocation('Bengaluru'); // fallback
-      },
+      () => { setDetectingLocation(false); setLocation('Current Location (Detected)'); },
+      () => { setDetectingLocation(false); setLocation('Tumkur, Karnataka'); },
       { timeout: 5000 }
     );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onGenerate({
-      mood,
-      interests,
-      budget,
-      duration,
-      start_time: startTime,
-      trip_type: tripType,
-      people_count: Number(peopleCount),
-      transport,
-      location
-    });
+    onGenerate({ mood, interests, budget, duration, start_time: startTime,
+      trip_type: tripType, people_count: Number(peopleCount), transport, location });
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pb-24">
-      {/* Title Header */}
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14 pb-28">
+      {/* Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Interactive Outing Preferences</span>
-        </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold font-display text-white tracking-tight">
-          Craft Your Ideal Day
-        </h1>
-        <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
-          Customize your vibe, pace, and destination. Our AI synthesizes a timed, route-optimized itinerary in seconds.
+        <p className="label-overline mb-3">Personalize Your Experience</p>
+        <h1 className="font-display text-5xl sm:text-6xl text-white leading-none mb-3">CRAFT YOUR DAY</h1>
+        <p className="text-slate-500 text-sm font-light max-w-md mx-auto">
+          Tell us your vibe and we'll synthesize a route-optimized itinerary across Tumkur District.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        {/* 1. Mood Selection */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-base sm:text-lg font-bold font-display text-white flex items-center gap-2">
-                <span>1. What’s Your Mood?</span>
-              </h2>
-              <p className="text-xs text-slate-400">Sets the emotional tone and energy level of the outing.</p>
-            </div>
-            <span className="text-xs font-semibold text-cyan-400 px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-              {mood}
-            </span>
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-5">
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {/* 1. Mood */}
+        <SectionCard>
+          <SectionHeader step="01" title="What's Your Mood?" desc="Sets the emotional tone and energy of your outing." badge={mood} />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {moods.map((m) => {
               const active = mood === m.id;
               return (
-                <button
-                  key={m.id}
-                  type="button"
-                  onClick={() => setMood(m.id)}
-                  className={`p-3.5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
-                    active
-                      ? 'bg-gradient-to-br from-cyan-950/80 to-indigo-950/80 border-cyan-500 text-white shadow-glow-cyan/20'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/40'
-                  }`}
+                <button key={m.id} type="button" onClick={() => setMood(m.id)}
+                  className="p-3.5 rounded-xl border text-left cursor-pointer transition-all duration-200"
+                  style={{
+                    background: active ? 'rgba(34,211,238,0.07)' : 'rgba(255,255,255,0.03)',
+                    borderColor: active ? 'rgba(34,211,238,0.45)' : 'rgba(255,255,255,0.06)',
+                  }}
                 >
-                  <div className="text-2xl mb-1">{m.icon}</div>
-                  <div className="font-semibold text-xs sm:text-sm text-white">{m.label}</div>
-                  <div className="text-[10px] text-slate-400 truncate mt-0.5">{m.desc}</div>
+                  <div className="text-2xl mb-2">{m.icon}</div>
+                  <div className="font-semibold text-xs text-white">{m.label}</div>
+                  <div className="text-[10px] text-slate-600 mt-0.5 truncate">{m.desc}</div>
                 </button>
               );
             })}
           </div>
-        </div>
+        </SectionCard>
 
-        {/* 2. Interests Multi-Select */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-base sm:text-lg font-bold font-display text-white">
-                2. Select Interests & Activities
-              </h2>
-              <p className="text-xs text-slate-400">Choose all categories you want included (multi-select).</p>
-            </div>
-            <span className="text-xs text-slate-400">{interests.length} selected</span>
-          </div>
-
-          <div className="flex flex-wrap gap-2.5">
+        {/* 2. Interests */}
+        <SectionCard>
+          <SectionHeader step="02" title="Select Interests & Activities"
+            desc="Choose all categories you want included." badge={`${interests.length} selected`} />
+          <div className="flex flex-wrap gap-2">
             {availableInterests.map((interest) => {
               const active = interests.includes(interest.name);
               return (
-                <button
-                  key={interest.name}
-                  type="button"
-                  onClick={() => toggleInterest(interest.name)}
-                  className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border flex items-center gap-2 transition-all cursor-pointer ${
-                    active
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-200 font-semibold shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
-                  }`}
+                <button key={interest.name} type="button" onClick={() => toggleInterest(interest.name)}
+                  className="px-3.5 py-2 rounded-xl border text-sm flex items-center gap-2 cursor-pointer transition-all"
+                  style={{
+                    background: active ? 'rgba(34,211,238,0.08)' : 'rgba(255,255,255,0.03)',
+                    borderColor: active ? 'rgba(34,211,238,0.4)' : 'rgba(255,255,255,0.06)',
+                    color: active ? '#67E8F9' : '#64748B',
+                  }}
                 >
                   {interest.icon}
                   <span>{interest.name}</span>
-                  {active && <Check className="w-3.5 h-3.5 text-cyan-400" />}
+                  {active && <Check className="w-3 h-3 text-cyan-400" />}
                 </button>
               );
             })}
           </div>
-        </div>
+        </SectionCard>
 
         {/* 3. Budget */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-base sm:text-lg font-bold font-display text-white flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-emerald-400" />
-                <span>3. Budget Preference</span>
-              </h2>
-              <p className="text-xs text-slate-400">Expected spending per person across meals, tickets, and activities.</p>
-            </div>
-            <span className="text-xs font-semibold text-emerald-400 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-              {budget}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <SectionCard>
+          <SectionHeader step="03" title="Budget Preference"
+            desc="Expected spend per person across meals, tickets, and activities." badge={budget.split(' ')[0]} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
             {budgets.map((b) => {
               const active = budget === b.id;
               return (
-                <button
-                  key={b.id}
-                  type="button"
-                  onClick={() => setBudget(b.id)}
-                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
-                    active
-                      ? 'bg-emerald-950/40 border-emerald-500 text-white shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
-                  }`}
+                <button key={b.id} type="button" onClick={() => setBudget(b.id)}
+                  className="p-4 rounded-xl border text-left cursor-pointer transition-all"
+                  style={{
+                    background: active ? 'rgba(16,185,129,0.07)' : 'rgba(255,255,255,0.03)',
+                    borderColor: active ? 'rgba(16,185,129,0.4)' : 'rgba(255,255,255,0.06)',
+                  }}
                 >
-                  <div className="font-bold text-sm text-white mb-1">{b.label}</div>
-                  <div className="text-[11px] text-slate-400">{b.desc}</div>
+                  <div className={`font-semibold text-sm mb-1 ${active ? 'text-emerald-300' : 'text-white'}`}>{b.label}</div>
+                  <div className="text-[10px] text-slate-600 leading-relaxed">{b.desc}</div>
                 </button>
               );
             })}
           </div>
-        </div>
+        </SectionCard>
 
-        {/* 4. Duration & Start Time */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-            <h2 className="text-base font-bold font-display text-white mb-1 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-cyan-400" />
-              <span>4. Total Available Duration</span>
-            </h2>
-            <p className="text-xs text-slate-400 mb-4">How long do you want the outing to last?</p>
-
+        {/* 4. Duration + Start Time */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <SectionCard>
+            <SectionHeader step="04" title="Duration" desc="How long do you want your outing to last?" />
             <div className="space-y-2">
-              {durations.map((d) => (
-                <button
-                  key={d}
-                  type="button"
-                  onClick={() => setDuration(d)}
-                  className={`w-full p-2.5 rounded-xl border text-left text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
-                    duration === d
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-200'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
-                  }`}
+              {durations.map((d) => {
+                const active = duration === d;
+                return (
+                  <button key={d} type="button" onClick={() => setDuration(d)}
+                    className="w-full p-3 rounded-xl border text-left text-sm font-medium flex items-center justify-between cursor-pointer transition-all"
+                    style={{
+                      background: active ? 'rgba(34,211,238,0.07)' : 'rgba(255,255,255,0.03)',
+                      borderColor: active ? 'rgba(34,211,238,0.4)' : 'rgba(255,255,255,0.06)',
+                      color: active ? '#67E8F9' : '#64748B',
+                    }}
+                  >
+                    <span>{d}</span>
+                    {active && <Check className="w-3.5 h-3.5 text-cyan-400" />}
+                  </button>
+                );
+              })}
+            </div>
+          </SectionCard>
+
+          <SectionCard>
+            <SectionHeader step="04b" title="Start Time" desc="When should your first stop begin?" />
+            <input
+              type="text" value={startTime} onChange={(e) => setStartTime(e.target.value)}
+              placeholder="e.g. 10:30 AM or 03:00 PM"
+              className="w-full px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition-all mb-3"
+              style={inputStyle}
+              onFocus={(e) => { e.target.style.borderColor = 'rgba(34,211,238,0.45)'; }}
+              onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+            />
+            <div className="flex flex-wrap gap-2">
+              {['08:30 AM', '10:00 AM', '02:00 PM', '05:30 PM'].map((t) => (
+                <button key={t} type="button" onClick={() => setStartTime(t)}
+                  className="px-2.5 py-1 text-[11px] font-mono text-slate-400 hover:text-white cursor-pointer transition-colors rounded-lg"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
                 >
-                  <span>{d}</span>
-                  {duration === d && <Check className="w-3.5 h-3.5 text-cyan-400" />}
+                  {t}
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-            <h2 className="text-base font-bold font-display text-white mb-1 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-violet-400" />
-              <span>Start Time</span>
-            </h2>
-            <p className="text-xs text-slate-400 mb-4">When do you want your first stop to begin?</p>
-
-            <div className="space-y-3">
-              <input
-                type="text"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-                placeholder="e.g. 10:30 AM or 03:00 PM"
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
-              />
-              <div className="flex flex-wrap gap-2">
-                {['09:00 AM', '11:00 AM', '02:30 PM', '05:00 PM'].map((preset) => (
-                  <button
-                    key={preset}
-                    type="button"
-                    onClick={() => setStartTime(preset)}
-                    className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-[11px] text-slate-300 transition-colors"
-                  >
-                    {preset}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+          </SectionCard>
         </div>
 
-        {/* 5. Trip Type & People Count */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="flex items-center justify-between mb-4">
+        {/* 5. Trip Type + People */}
+        <SectionCard>
+          <div className="flex items-start justify-between mb-5">
             <div>
-              <h2 className="text-base sm:text-lg font-bold font-display text-white flex items-center gap-2">
-                <Users className="w-5 h-5 text-pink-400" />
-                <span>5. Trip Type & Group Size</span>
-              </h2>
-              <p className="text-xs text-slate-400">Tailors place capacities and ambiance for your party.</p>
+              <div className="flex items-center gap-2.5 mb-1">
+                <span className="font-mono text-xs font-bold text-slate-700">05</span>
+                <h2 className="text-white font-semibold text-base">Trip Type & Group Size</h2>
+              </div>
+              <p className="text-slate-600 text-xs">Tailors place capacities and ambiance for your party.</p>
             </div>
-            <div className="flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-700">
-              <span className="text-xs text-slate-400">People:</span>
-              <button
-                type="button"
-                onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
-                className="w-5 h-5 rounded bg-slate-800 flex items-center justify-center text-xs font-bold text-white hover:bg-slate-700"
-              >
-                -
-              </button>
-              <span className="text-sm font-bold text-cyan-300 w-4 text-center">{peopleCount}</span>
-              <button
-                type="button"
-                onClick={() => setPeopleCount(peopleCount + 1)}
-                className="w-5 h-5 rounded bg-slate-800 flex items-center justify-center text-xs font-bold text-white hover:bg-slate-700"
-              >
-                +
-              </button>
+            {/* People counter */}
+            <div className="flex items-center gap-2 shrink-0 ml-3"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '6px 12px' }}>
+              <span className="text-[11px] font-mono text-slate-600">PEOPLE</span>
+              <button type="button" onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
+                className="w-6 h-6 rounded-lg flex items-center justify-center text-sm font-bold text-white cursor-pointer transition-colors"
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>−</button>
+              <span className="font-mono text-sm font-bold text-cyan-300 w-4 text-center">{peopleCount}</span>
+              <button type="button" onClick={() => setPeopleCount(peopleCount + 1)}
+                className="w-6 h-6 rounded-lg flex items-center justify-center text-sm font-bold text-white cursor-pointer transition-colors"
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>+</button>
             </div>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
             {tripTypes.map((t) => {
               const active = tripType === t.type;
               return (
-                <button
-                  key={t.type}
-                  type="button"
-                  onClick={() => {
-                    setTripType(t.type);
-                    setPeopleCount(t.count);
+                <button key={t.type} type="button"
+                  onClick={() => { setTripType(t.type); setPeopleCount(t.count); }}
+                  className="p-3 rounded-xl border text-center cursor-pointer transition-all"
+                  style={{
+                    background: active ? 'rgba(236,72,153,0.07)' : 'rgba(255,255,255,0.03)',
+                    borderColor: active ? 'rgba(236,72,153,0.4)' : 'rgba(255,255,255,0.06)',
                   }}
-                  className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
-                    active
-                      ? 'bg-pink-950/30 border-pink-500 text-white shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
-                  }`}
                 >
-                  <div className="text-xs font-bold text-white">{t.type}</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">~{t.count} {t.count === 1 ? 'person' : 'people'}</div>
+                  <div className={`text-xs font-bold ${active ? 'text-pink-300' : 'text-white'}`}>{t.type}</div>
+                  <div className="text-[10px] text-slate-600 mt-0.5">~{t.count} {t.count === 1 ? 'person' : 'people'}</div>
                 </button>
               );
             })}
           </div>
-        </div>
+        </SectionCard>
 
-        {/* 6. Transport Mode */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-base sm:text-lg font-bold font-display text-white">
-                6. Transport Preference
-              </h2>
-              <p className="text-xs text-slate-400">Determines transit speed and route connectivity between stops.</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {/* 6. Transport */}
+        <SectionCard>
+          <SectionHeader step="06" title="Transport Preference"
+            desc="Determines transit speed and route connectivity between stops." />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {transportModes.map((tm) => {
               const active = transport === tm.id;
               return (
-                <button
-                  key={tm.id}
-                  type="button"
-                  onClick={() => setTransport(tm.id)}
-                  className={`p-3 rounded-xl border flex items-center gap-2.5 transition-all cursor-pointer ${
-                    active
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-200 font-semibold'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
-                  }`}
+                <button key={tm.id} type="button" onClick={() => setTransport(tm.id)}
+                  className="p-3.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all"
+                  style={{
+                    background: active ? 'rgba(34,211,238,0.07)' : 'rgba(255,255,255,0.03)',
+                    borderColor: active ? 'rgba(34,211,238,0.4)' : 'rgba(255,255,255,0.06)',
+                    color: active ? '#67E8F9' : '#64748B',
+                  }}
                 >
-                  <div className="p-1.5 rounded-lg bg-slate-800">{tm.icon}</div>
-                  <span className="text-xs">{tm.label}</span>
+                  <div className="p-1.5 rounded-lg" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                    {tm.icon}
+                  </div>
+                  <span className="text-xs font-medium">{tm.label}</span>
                 </button>
               );
             })}
           </div>
-        </div>
+        </SectionCard>
 
-        {/* 7. Location Selection */}
-        <div className="p-6 rounded-2xl glass-panel border border-slate-800">
-          <div className="flex items-center justify-between mb-4">
+        {/* 7. Location */}
+        <SectionCard>
+          <div className="flex items-start justify-between mb-5">
             <div>
-              <h2 className="text-base sm:text-lg font-bold font-display text-white flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-cyan-400" />
-                <span>7. Target Location / Destination</span>
-              </h2>
-              <p className="text-xs text-slate-400">Enter a city or use instant GPS geolocation.</p>
+              <div className="flex items-center gap-2.5 mb-1">
+                <span className="font-mono text-xs font-bold text-slate-700">07</span>
+                <h2 className="text-white font-semibold text-base">Target Destination</h2>
+              </div>
+              <p className="text-slate-600 text-xs">Type any Tumkur region or use GPS detection.</p>
             </div>
-            <button
-              type="button"
-              onClick={handleDetectLocation}
-              disabled={detectingLocation}
-              className="px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer"
+            <button type="button" onClick={handleDetectLocation} disabled={detectingLocation}
+              className="flex items-center gap-1.5 text-xs font-medium cursor-pointer transition-all rounded-xl px-3 py-1.5 shrink-0 ml-3"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#94A3B8' }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor='rgba(34,211,238,0.3)'; e.currentTarget.style.color='#67E8F9'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor='rgba(255,255,255,0.08)'; e.currentTarget.style.color='#94A3B8'; }}
             >
               <Navigation className={`w-3.5 h-3.5 ${detectingLocation ? 'animate-spin' : ''}`} />
-              <span>{detectingLocation ? 'Detecting...' : 'Detect GPS'}</span>
+              {detectingLocation ? 'Detecting...' : 'Detect GPS'}
             </button>
           </div>
 
           <div className="relative mb-3">
-            <MapPin className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              required
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="e.g. Tumkur, Devarayanadurga (DD Hills), Kyathsandra, Madhugiri..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+            <MapPin className="w-4 h-4 text-slate-600 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input type="text" required value={location} onChange={(e) => setLocation(e.target.value)}
+              placeholder="e.g. Tumkur, DD Hills, Kyathsandra, Madhugiri..."
+              className="w-full pl-11 pr-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition-all"
+              style={inputStyle}
+              onFocus={(e) => { e.target.style.borderColor = 'rgba(34,211,238,0.45)'; }}
+              onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
-            <span className="text-[11px] text-slate-400 mr-1">Tumkur Regions:</span>
-            {popularTumkurRegions.map((region) => (
-              <button
-                key={region}
-                type="button"
-                onClick={() => setLocation(region)}
-                className={`px-2.5 py-0.5 rounded-lg border text-[11px] transition-colors cursor-pointer ${
-                  location.toLowerCase().includes(region.toLowerCase())
-                    ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300'
-                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
-                }`}
-              >
-                {region}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="label-overline text-slate-700 mr-1">Regions:</span>
+            {popularTumkurRegions.map((region) => {
+              const active = location.toLowerCase().includes(region.toLowerCase());
+              return (
+                <button key={region} type="button" onClick={() => setLocation(region)}
+                  className="px-2.5 py-0.5 rounded-lg border text-[11px] cursor-pointer transition-all"
+                  style={{
+                    background: active ? 'rgba(34,211,238,0.08)' : 'rgba(255,255,255,0.03)',
+                    borderColor: active ? 'rgba(34,211,238,0.3)' : 'rgba(255,255,255,0.06)',
+                    color: active ? '#67E8F9' : '#475569',
+                  }}
+                >
+                  {region}
+                </button>
+              );
+            })}
           </div>
-        </div>
+        </SectionCard>
 
-        {/* Generate Button */}
-        <div className="pt-4">
-          <button
-            type="submit"
-            className="w-full py-4 px-6 rounded-2xl btn-shimmer text-white font-black font-display text-base sm:text-lg shadow-glow-cyan flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer group"
-          >
-            <Sparkles className="w-5 h-5 text-cyan-200 group-hover:rotate-12 transition-transform" />
-            <span>Generate Personalized Outing Plan</span>
-            <ChevronRight className="w-5 h-5 text-white/80 group-hover:translate-x-1.5 transition-transform" />
+        {/* Submit */}
+        <div className="pt-2">
+          <button type="submit" className="btn-primary w-full !rounded-2xl !py-4 !text-base !gap-3 justify-center">
+            <Sparkles className="w-5 h-5" />
+            Generate My Outing Plan
+            <ChevronRight className="w-5 h-5" />
           </button>
+          <p className="text-center text-[11px] text-slate-700 font-mono mt-3 tracking-wider">
+            POWERED BY NAVORA AI · TUMKUR DISTRICT
+          </p>
         </div>
       </form>
     </div>
