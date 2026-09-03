@@ -1,132 +1,121 @@
 import React from 'react';
-import { Compass, Sparkles, User, Bookmark, LogOut, PlusCircle, Type } from 'lucide-react';
+import { Sparkles, Bookmark, LogOut } from 'lucide-react';
 
-export default function Navbar({ 
-  activeView, 
-  setActiveView, 
-  user, 
-  onOpenAuth, 
-  onLogout,
-  fontTheme = 'neo',
-  onFontThemeChange 
-}) {
+const NavLink = ({ label, active, onClick, icon }) => (
+  <button
+    onClick={onClick}
+    className={`relative px-4 py-1.5 text-[13px] font-medium transition-all duration-200 cursor-pointer rounded-full ${
+      active
+        ? 'text-white'
+        : 'text-slate-500 hover:text-slate-200'
+    }`}
+  >
+    {active && (
+      <span className="absolute inset-0 rounded-full bg-white/8 border border-white/10" />
+    )}
+    <span className="relative flex items-center gap-1.5">
+      {icon}
+      {label}
+    </span>
+  </button>
+);
+
+export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout }) {
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 transition-all duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo */}
+    <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] transition-all duration-200"
+      style={{ background: 'rgba(6, 8, 15, 0.85)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
+    >
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 h-[60px] flex items-center justify-between">
+
+        {/* Brand mark */}
         <button
           onClick={() => setActiveView('home')}
-          className="flex items-center gap-2.5 group text-left focus:outline-none cursor-pointer"
+          className="flex items-center gap-3 group cursor-pointer focus:outline-none"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-400 to-violet-600 flex items-center justify-center shadow-glow-cyan/50 group-hover:scale-105 transition-transform duration-200">
-            <Compass className="w-5 h-5 text-white" />
+          {/* Minimal SVG logo */}
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400/15 to-violet-600/15 border border-white/10 flex items-center justify-center group-hover:border-cyan-400/40 transition-all duration-300 shadow-glow-sm">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2L12.5 9H19L13.5 13L15.5 20L10 16L4.5 20L6.5 13L1 9H7.5L10 2Z"
+                fill="url(#nb-grad)" />
+              <defs>
+                <linearGradient id="nb-grad" x1="1" y1="2" x2="19" y2="20" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#22D3EE"/>
+                  <stop offset="1" stopColor="#7C3AED"/>
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
-          <div>
-            <span className="font-display font-black text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent group-hover:to-cyan-200">
-              ✦ NAVORA AI
+
+          <div className="leading-none">
+            <span className="font-display text-[22px] tracking-[0.08em] text-white group-hover:text-gradient-cyan transition-all duration-300">
+              NAVORA
             </span>
-            <span className="hidden sm:block text-[10px] text-cyan-400 font-mono tracking-wider uppercase -mt-0.5 font-semibold">
-              Tumkur Outing Planner
+            <span className="font-display text-[22px] tracking-[0.08em] text-cyan-400 ml-2">AI</span>
+            <span className="hidden sm:block label-overline text-slate-600 mt-0.5">
+              Tumkur District
             </span>
           </div>
         </button>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-slate-900/60 p-1 rounded-full border border-slate-800">
-          <button
-            onClick={() => setActiveView('home')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-              activeView === 'home'
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            Home
-          </button>
-          <button
+        {/* Center nav */}
+        <nav className="hidden md:flex items-center gap-0.5">
+          <NavLink label="Home"      active={activeView === 'home'}    onClick={() => setActiveView('home')} />
+          <NavLink
+            label="Plan Outing"
+            active={activeView === 'planner'}
             onClick={() => setActiveView('planner')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-              activeView === 'planner'
-                ? 'bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold shadow-glow-cyan/40'
-                : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            Plan Outing
-          </button>
+            icon={<Sparkles className="w-3 h-3 text-cyan-400" />}
+          />
           {user && (
-            <button
+            <NavLink
+              label="Saved"
+              active={activeView === 'saved'}
               onClick={() => setActiveView('saved')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-                activeView === 'saved'
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
-            >
-              <Bookmark className="w-3.5 h-3.5" />
-              Saved Plans
-            </button>
+              icon={<Bookmark className="w-3 h-3" />}
+            />
           )}
         </nav>
 
-        {/* Font Switcher & Auth Area */}
-        <div className="flex items-center gap-2.5">
-          {/* Live Font Switcher */}
-          <div className="flex items-center gap-1 bg-slate-900/90 px-2.5 py-1.5 rounded-full border border-slate-800 shadow-sm hover:border-slate-700 transition-colors">
-            <Type className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-            <select
-              value={fontTheme}
-              onChange={(e) => onFontThemeChange(e.target.value)}
-              className="bg-transparent text-slate-300 text-[11px] font-mono font-bold focus:outline-none cursor-pointer pr-1"
-              title="Change Website Font Style"
-            >
-              <option value="neo" className="bg-[#0B111F] text-white">✦ Neo-Cyber (Syne)</option>
-              <option value="scifi" className="bg-[#0B111F] text-white">⚡ Sci-Fi (Orbitron)</option>
-              <option value="luxury" className="bg-[#0B111F] text-white">🏛️ Imperial (Cinzel)</option>
-              <option value="tech" className="bg-[#0B111F] text-white">💎 Tech (Space)</option>
-            </select>
-          </div>
+        {/* Right: auth */}
+        <div className="flex items-center gap-2">
           {user ? (
-            <div className="flex items-center gap-2">
+            <>
               <button
                 onClick={() => setActiveView('profile')}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                className={`flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-[13px] font-medium border transition-all duration-200 cursor-pointer ${
                   activeView === 'profile'
-                    ? 'bg-violet-600/20 border-violet-500 text-violet-300'
-                    : 'bg-slate-900/80 border-slate-800 text-slate-300 hover:border-slate-700'
+                    ? 'bg-violet-500/10 border-violet-500/30 text-violet-300'
+                    : 'border-white/8 text-slate-400 hover:text-white hover:border-white/15 bg-white/3'
                 }`}
               >
-                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-500 to-violet-500 flex items-center justify-center text-[11px] font-bold text-white uppercase">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-400 to-violet-500 flex items-center justify-center text-[11px] font-bold text-white uppercase leading-none">
                   {user.name ? user.name[0] : 'U'}
                 </div>
-                <span className="hidden sm:inline text-xs font-medium max-w-[100px] truncate">
-                  {user.name || 'Profile'}
-                </span>
+                <span className="hidden sm:inline max-w-[90px] truncate">{user.name || 'Profile'}</span>
               </button>
-
               <button
                 onClick={onLogout}
                 title="Log Out"
-                className="p-2 rounded-full text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors duration-200 border border-transparent hover:border-rose-500/20"
+                className="p-2 rounded-xl text-slate-600 hover:text-rose-400 border border-transparent hover:border-rose-500/20 hover:bg-rose-500/8 transition-all duration-200 cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
               </button>
-            </div>
+            </>
           ) : (
-            <div className="flex items-center gap-2">
+            <>
               <button
                 onClick={() => onOpenAuth('login')}
-                className="px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                className="px-4 py-1.5 text-[13px] text-slate-400 hover:text-white transition-colors cursor-pointer font-medium"
               >
                 Log In
               </button>
               <button
                 onClick={() => onOpenAuth('signup')}
-                className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white text-xs sm:text-sm font-semibold shadow-glow-cyan/30 transition-all duration-200"
+                className="btn-primary !py-2 !px-5 !text-[13px] !rounded-xl !gap-0"
               >
-                Sign Up
+                Get Started
               </button>
-            </div>
+            </>
           )}
         </div>
       </div>

@@ -19,12 +19,6 @@ export default function App() {
   const [currentPlan, setCurrentPlan] = useState(null);
   const [pendingPreferences, setPendingPreferences] = useState({});
   const [plannerInitialPrefs, setPlannerInitialPrefs] = useState({});
-  const [fontTheme, setFontTheme] = useState(() => localStorage.getItem('navora_font_theme') || 'neo');
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-font-theme', fontTheme);
-    localStorage.setItem('navora_font_theme', fontTheme);
-  }, [fontTheme]);
 
   // Check existing session on load
   useEffect(() => {
@@ -128,7 +122,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#090D16] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#06080F] text-slate-100 flex flex-col font-sans">
       {/* 1. Splash Screen */}
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
 
@@ -139,8 +133,6 @@ export default function App() {
         user={user}
         onOpenAuth={handleOpenAuth}
         onLogout={handleLogout}
-        fontTheme={fontTheme}
-        onFontThemeChange={setFontTheme}
       />
 
       {/* 3. Main Views */}
