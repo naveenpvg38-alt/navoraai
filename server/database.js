@@ -103,38 +103,38 @@ function initializeDatabase() {
 
     const demoUserId = result.lastInsertRowid;
 
-    // Default user preference
+    // Default user preference for Tumkur District
     db.prepare(`
       INSERT INTO preferences (user_id, mood, interests, budget, duration, start_time, trip_type, people_count, transport, location)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       demoUserId,
-      'Adventurous',
-      'Art & Culture, Cafes, Hidden Gems',
-      'Moderate ($$)',
+      'Foodie',
+      'Cafes & Dining, Scenic Outdoors, Art & Culture',
+      'Budget ($)',
       'Half Day (4-5h)',
-      '10:30 AM',
+      '08:30 AM',
       'Friends',
       3,
-      'Metro / Public Transit',
-      'Bengaluru, Karnataka'
+      'Bike / Two-Wheeler',
+      'Tumkur, Karnataka'
     );
 
-    // Seed an initial sample outing plan
+    // Seed an initial sample outing plan for Tumkur
     const samplePlan = db.prepare(`
       INSERT INTO plans (user_id, title, description, estimated_cost, duration, match_score, route_info, why_matched, mood, location)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       demoUserId,
-      'Artistic Heritage & Craft Coffee Trail',
-      'A curated cultural escape featuring premier contemporary art, artisanal pour-overs, and a historic botanical twilight stroll.',
-      '$35 - $50 total',
+      'Devarayanadurga Hill Canopy & Kyathsandra Thatte Idli Trail',
+      'An authentic Tumkur day trail combining world-famous Kyathsandra butter Thatte Idli, sacred deer park spring at Namada Chilume, and the panoramic mist of DD Hills.',
+      '₹140 / person (~₹420 total for 3 people)',
       '4.5 Hours',
-      98,
-      'Metro Purple Line + 10 min scenic walk',
-      'Tailored for an Adventurous mood with strong interests in Art and Cafes, keeping comfortable within a moderate budget for 3 people.',
-      'Adventurous',
-      'Bengaluru, Karnataka'
+      99,
+      '3 curated spots across Tumkur & DD Hills connected via Two-Wheeler / Car',
+      'Engineered specifically for Tumkur District, pairing iconic local gastronomy with scenic hill shrines and serene forest reserves.',
+      'Foodie',
+      'Tumkur, Karnataka'
     );
 
     const samplePlanId = samplePlan.lastInsertRowid;
@@ -146,44 +146,44 @@ function initializeDatabase() {
 
     insertItem.run(
       samplePlanId,
-      'National Gallery of Modern Art (NGMA)',
-      'Explore colonial heritage architecture and modern Indian master sculptures in the garden gallery.',
-      '10:30 AM',
-      '12:00 PM',
-      'Start Point',
-      '$6 / person',
-      12.9892,
-      77.5878,
-      'Art & Culture',
-      'Check out the open-air sculpture courtyard behind the heritage mansion for quiet photo ops.'
-    );
-
-    insertItem.run(
-      samplePlanId,
-      'Third Wave Coffee Roasters (Lavelle Rd)',
-      'Enjoy signature cold brews, flaky almond croissants, and artisanal single-origin pour-overs.',
-      '12:20 PM',
-      '01:30 PM',
-      '20 mins via Metro / Walk',
-      '$12 / person',
-      12.9719,
-      77.5996,
+      'Kyathsandra Iconic Thatte Idli Square',
+      'Savor warm, fluffy Thatte Idlis bathed in homemade butter (benne), fiery red chutney, and freshly brewed South Indian filter kaapi.',
+      '08:30 AM',
+      '09:30 AM',
+      'Starting Point',
+      '₹60 / person',
+      13.3106,
+      77.1472,
       'Cafes & Dining',
-      'Grab a seat on the second-floor terrace overlooking the tree-canopied avenue.'
+      'Order at Sri Krishna or Venkateshwara Thatte Idli; try the crispy uddina vade alongside.'
     );
 
     insertItem.run(
       samplePlanId,
-      'Cubbon Park & Bamboo Grove Trail',
-      'A peaceful nature and heritage canopy walk through 300 acres of green paradise right in the city center.',
-      '01:45 PM',
-      '03:00 PM',
-      '15 mins walk',
-      'Free ($0)',
-      12.9763,
-      77.5929,
+      'Namada Chilume Natural Spring & Deer Sanctuary',
+      'Explore the perennial sacred spring emerging from rock crevices, walk the quiet deer trail, and discover medicinal herbs.',
+      '10:00 AM',
+      '11:15 AM',
+      '20 mins via DD Hills Road (9.5 km)',
+      '₹20 / person',
+      13.3444,
+      77.1989,
       'Scenic Outdoors',
-      'The bamboo pavilion near Queen Victoria statue has the best shade during early afternoons.'
+      'Tender coconut stalls right outside the gate offer refreshing coconut water after the stroll.'
+    );
+
+    insertItem.run(
+      samplePlanId,
+      'Devarayanadurga (DD Hills) Yoga Narasimha Peak',
+      'Ascend the winding hill steps to the 3,940-foot sacred cliff top with panoramic vistas over Tumkur district’s rocky valleys.',
+      '11:35 AM',
+      '01:00 PM',
+      '15 mins hill climb drive (5.2 km)',
+      'Free (₹0)',
+      13.3736,
+      77.2114,
+      'Scenic Outdoors',
+      'Visit the ancient Kalyani (temple pond) nestled in the boulders on your way down.'
     );
 
     // Seed favourite

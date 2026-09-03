@@ -148,29 +148,29 @@ async function generatePlanWithAI(preferences) {
     currentMinutes += dwellMins;
     const itemEndStr = minutesToTimeStr(currentMinutes);
 
-    // Cost estimation
-    let placeCost = place.costModerate;
+    // Cost estimation (in ₹ INR for Tumkur)
+    let placeCost = place.costModerate * 25; // in ₹
     const bStr = (budget || '').toLowerCase();
     if (bStr.includes('free') || bStr.includes('0')) {
       placeCost = 0;
-    } else if (bStr.includes('budget') || bStr.includes('$') && !bStr.includes('$$')) {
-      placeCost = place.costBudget;
+    } else if (bStr.includes('budget') || (bStr.includes('₹') || bStr.includes('$')) && !bStr.includes('$$')) {
+      placeCost = place.costBudget * 20;
     } else if (bStr.includes('luxury') || bStr.includes('$$$')) {
-      placeCost = place.costLuxury;
+      placeCost = place.costLuxury * 40;
     }
 
     totalCostPerPerson += placeCost;
 
     // Meaningful tailored activity description
     let activityDesc = `Immerse in ${place.name} tailored for your ${mood.toLowerCase()} pace.`;
-    if (place.category.includes('Cafe')) {
-      activityDesc = `Recharge with artisanal beverages and seasonal tastings, enjoying comfortable seating for ${trip_type.toLowerCase()} conversation.`;
+    if (place.category.includes('Cafe') || place.name.includes('Idli')) {
+      activityDesc = `Enjoy authentic hot Thatte Idlis, fresh butter (benne), aromatic filter coffee, and local Tumkur delicacies with ${trip_type.toLowerCase()} companions.`;
     } else if (place.category.includes('Art') || place.category.includes('Heritage')) {
-      activityDesc = `Appreciate curated exhibitions, architectural history, and striking visual elements at your own rhythm.`;
-    } else if (place.category.includes('Scenic')) {
-      activityDesc = `Stroll along scenic view paths, capture scenic photos, and take in the ambient open atmosphere.`;
+      activityDesc = `Explore centuries-old Hoysala stone craft, temple architecture, and historical heritage at your own relaxed pace.`;
+    } else if (place.category.includes('Scenic') || place.name.includes('Hills')) {
+      activityDesc = `Climb scenic viewpoints, soak in the panoramic hill breezes, and capture scenic photographs across Tumkur's rocky landscape.`;
     } else if (place.category.includes('Hidden')) {
-      activityDesc = `Explore quirky corners, unique local craft discoveries, and quaint surroundings off the main tourist track.`;
+      activityDesc = `Uncover off-beat fortress corridors and rustic rural paths away from crowded tourist routes.`;
     }
 
     items.push({
@@ -179,7 +179,7 @@ async function generatePlanWithAI(preferences) {
       start_time: itemStartStr,
       end_time: itemEndStr,
       travel_time: travelTimeText,
-      estimated_cost: placeCost === 0 ? 'Free ($0)' : `$${placeCost} / person`,
+      estimated_cost: placeCost === 0 ? 'Free (₹0)' : `₹${placeCost} / person`,
       latitude: place.lat,
       longitude: place.lng,
       category: place.category,
@@ -191,27 +191,27 @@ async function generatePlanWithAI(preferences) {
   const matchScore = Math.min(99, Math.max(88, 88 + Math.floor(Math.random() * 10)));
   const totalCostOverall = totalCostPerPerson * people_count;
   const costSummary = totalCostPerPerson === 0 
-    ? 'Free ($0)' 
-    : `$${totalCostPerPerson} / person (~$${totalCostOverall} total for ${people_count} ${people_count === 1 ? 'person' : 'people'})`;
+    ? 'Free (₹0)' 
+    : `₹${totalCostPerPerson} / person (~₹${totalCostOverall} total for ${people_count} ${people_count === 1 ? 'person' : 'people'})`;
 
   const moodAdjectives = {
     'Relaxed': 'Serene & Unhurried',
-    'Adventurous': 'Dynamic Discovery',
-    'Romantic': 'Charming & Intimate',
-    'Energetic': 'Vibrant High-Energy',
-    'Foodie': 'Epicurean & Flavorful',
-    'Chill': 'Laid-Back Acoustic',
-    'Cultural': 'Heritage & Aesthetic',
-    'Nature Explorer': 'Scenic Green Canopy'
+    'Adventurous': 'Thrilling Monolith & Fort',
+    'Romantic': 'Charming Lakeside & Sunset',
+    'Energetic': 'High-Energy Hilltop',
+    'Foodie': 'Authentic Thatte Idli & Kaapi',
+    'Chill': 'Laid-Back Temple & Lake',
+    'Cultural': 'Hoysala & Heritage',
+    'Nature Explorer': 'Green Canopy & Spring'
   };
 
   const adj = moodAdjectives[mood] || 'Curated Signature';
   const planTitle = `${adj} ${catalog.name} Trail`;
-  const planDescription = `A thoughtfully sequenced ${duration.toLowerCase()} outing crafted for ${trip_type.toLowerCase()} (${people_count} ${people_count === 1 ? 'guest' : 'guests'}), weaving through ${selectedPlaces.map(p => p.name).slice(0, 2).join(' and ')}.`;
+  const planDescription = `A thoughtfully sequenced ${duration.toLowerCase()} outing crafted for ${trip_type.toLowerCase()} (${people_count} ${people_count === 1 ? 'person' : 'people'}), journeying through ${selectedPlaces.map(p => p.name).slice(0, 2).join(' and ')}.`;
 
-  const whyMatched = `This itinerary is precision-tuned to your ${mood} mood and passion for ${interestsList.slice(0, 3).join(', ')}. Each stop is sequenced along efficient ${transport.toLowerCase()} transit corridors to eliminate backtracking, perfectly respecting your ${budget} budget while providing dedicated time for relaxation and memorable moments.`;
+  const whyMatched = `This itinerary is precision-tuned for your ${mood} mood across Tumkur District, highlighting ${interestsList.slice(0, 3).join(', ')}. Each stop is sequenced along direct Tumkur highways and scenic hill roads to eliminate backtracking, staying comfortably within your ${budget} budget while reserving ample time for peaceful exploration.`;
 
-  const routeInfo = `${selectedPlaces.length} curated stops in ${catalog.name} connected via ${transport}`;
+  const routeInfo = `${selectedPlaces.length} curated stops across Tumkur District connected via ${transport}`;
 
   return {
     title: planTitle,

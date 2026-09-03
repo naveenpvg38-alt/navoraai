@@ -69,57 +69,57 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
 
   const inspirations = [
     {
-      title: 'Artistic Heritage & Coffee Trail',
-      tag: 'Relaxed & Cultural',
-      icon: <Palette className="w-4 h-4 text-cyan-400" />,
-      budget: 'Moderate ($$)',
+      title: 'DD Hills & Namada Chilume Nature Trail',
+      tag: 'Scenic & Spiritual',
+      icon: <TreePine className="w-4 h-4 text-emerald-400" />,
+      budget: 'Budget (₹)',
       duration: '4-5 Hours',
-      city: 'Bengaluru',
-      stops: 'Gallery • Specialty Roasters • Canopy Garden',
+      city: 'Devarayanadurga',
+      stops: 'Yoga Narasimha Peak • Deer Sanctuary • Perennial Spring',
       preset: {
         mood: 'Relaxed',
-        interests: ['Art & Culture', 'Cafes & Dining'],
-        budget: 'Moderate ($$)',
+        interests: ['Scenic Outdoors', 'Heritage & Sightseeing'],
+        budget: 'Budget ($)',
         duration: 'Half Day (4-5h)',
-        location: 'Bengaluru',
+        location: 'Devarayanadurga (DD Hills), Tumkur',
         trip_type: 'Friends',
-        transport: 'Metro / Public Transit'
+        transport: 'Bike / Two-Wheeler'
       }
     },
     {
-      title: 'Sunset Quayside & Gourmet Bites',
-      tag: 'Romantic & Scenic',
-      icon: <Coffee className="w-4 h-4 text-pink-400" />,
-      budget: 'Moderate ($$)',
+      title: 'Kyathsandra Thatte Idli & Heritage Trail',
+      tag: 'Foodie & Cultural',
+      icon: <Coffee className="w-4 h-4 text-amber-400" />,
+      budget: 'Budget (₹)',
       duration: '4 Hours',
-      city: 'Mumbai',
-      stops: 'Art Precinct • Specialty Bakehouse • Sunset Promenade',
+      city: 'Kyathsandra',
+      stops: 'Butter Thatte Idli • Sree Siddaganga Mutt • Hill Pathway',
       preset: {
-        mood: 'Romantic',
-        interests: ['Cafes & Dining', 'Scenic Outdoors'],
-        budget: 'Moderate ($$)',
+        mood: 'Foodie',
+        interests: ['Cafes & Dining', 'Art & Culture'],
+        budget: 'Budget ($)',
         duration: 'Half Day (4-5h)',
-        location: 'Mumbai',
-        trip_type: 'Couple',
-        transport: 'Scenic Walk'
+        location: 'Kyathsandra & Siddaganga, Tumkur',
+        trip_type: 'Friends',
+        transport: 'Bike / Two-Wheeler'
       }
     },
     {
-      title: 'Urban Explorer & Street Murals',
+      title: 'Madhugiri Monolith Adventure Trek',
       tag: 'Adventurous',
-      icon: <TreePine className="w-4 h-4 text-emerald-400" />,
-      budget: 'Budget ($)',
+      icon: <Palette className="w-4 h-4 text-cyan-400" />,
+      budget: 'Free (₹0)',
       duration: 'Full Day (8h+)',
-      city: 'Delhi',
-      stops: 'Lodhi Murals • Heritage Nursery • Lake Ruins',
+      city: 'Madhugiri',
+      stops: 'Asia’s 2nd Largest Monolith • Stone Fort Bastions • Sunset Vistas',
       preset: {
         mood: 'Adventurous',
-        interests: ['Art & Culture', 'Hidden Gems', 'Scenic Outdoors'],
-        budget: 'Budget ($)',
+        interests: ['Scenic Outdoors', 'Hidden Gems'],
+        budget: 'Free ($0)',
         duration: 'Full Day (8h+)',
-        location: 'Delhi',
+        location: 'Madhugiri, Tumkur',
         trip_type: 'Friends',
-        transport: 'Metro / Public Transit'
+        transport: 'Car / Cab'
       }
     }
   ];
@@ -133,18 +133,18 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
 
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-semibold mb-6 shadow-glow-cyan/20 animate-fade-in">
           <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-          <span>Next-Gen AI Outing & Itinerary Intelligence</span>
+          <span>TUMKUR (TUMAKURU) DISTRICT • AI OUTING PLANNER</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight text-white max-w-4xl mx-auto leading-tight mb-6">
           Plan Less.{' '}
           <span className="bg-gradient-to-r from-cyan-400 via-indigo-300 to-violet-400 bg-clip-text text-transparent">
-            Experience More.
+            Experience Tumkur.
           </span>
         </h1>
 
         <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-          ✦ <strong className="font-semibold text-white">NAVORA AI</strong> turns your mood, budget, and time into a perfectly sequenced outing plan with real transit routes, interactive maps, and insider tips.
+          ✦ <strong className="font-semibold text-white">NAVORA AI</strong> curates your ultimate day across <strong className="text-cyan-300">Tumkur District</strong> — from Kyathsandra's iconic butter Thatte Idli and mist-shrouded Devarayanadurga hills to Madhugiri monolith treks and Hoysala temples.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">

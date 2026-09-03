@@ -18,7 +18,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
               ✦ NAVORA AI
             </span>
             <span className="hidden sm:block text-[10px] text-cyan-400 font-medium tracking-wider uppercase -mt-0.5">
-              Outing Planner
+              Tumkur Outing Planner
             </span>
           </div>
         </button>

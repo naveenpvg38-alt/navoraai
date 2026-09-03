@@ -30,44 +30,44 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
   const [interests, setInterests] = useState(
     initialPreferences.interests || ['Cafes & Dining', 'Scenic Outdoors']
   );
-  const [budget, setBudget] = useState(initialPreferences.budget || 'Moderate ($$)');
+  const [budget, setBudget] = useState(initialPreferences.budget || 'Budget ($)');
   const [duration, setDuration] = useState(initialPreferences.duration || 'Half Day (4-5h)');
-  const [startTime, setStartTime] = useState(initialPreferences.start_time || '10:30 AM');
+  const [startTime, setStartTime] = useState(initialPreferences.start_time || '08:30 AM');
   const [tripType, setTripType] = useState(initialPreferences.trip_type || 'Friends');
-  const [peopleCount, setPeopleCount] = useState(initialPreferences.people_count || 2);
-  const [transport, setTransport] = useState(initialPreferences.transport || 'Metro / Public Transit');
-  const [location, setLocation] = useState(initialPreferences.location || 'Bengaluru');
+  const [peopleCount, setPeopleCount] = useState(initialPreferences.people_count || 3);
+  const [transport, setTransport] = useState(initialPreferences.transport || 'Bike / Two-Wheeler');
+  const [location, setLocation] = useState(initialPreferences.location || 'Tumkur, Karnataka');
   const [detectingLocation, setDetectingLocation] = useState(false);
 
   // Available Moods
   const moods = [
-    { id: 'Relaxed', label: 'Relaxed', icon: '🌿', desc: 'Unhurried, peaceful, serene spots' },
-    { id: 'Adventurous', label: 'Adventurous', icon: '⚡', desc: 'Thrill, discovering hidden gems' },
-    { id: 'Romantic', label: 'Romantic', icon: '✨', desc: 'Intimate ambiance, scenic views' },
-    { id: 'Energetic', label: 'Energetic', icon: '🔥', desc: 'Vibrant, high energy activities' },
-    { id: 'Foodie', label: 'Foodie', icon: '🍜', desc: 'Culinary adventures & tastings' },
-    { id: 'Chill', label: 'Chill', icon: '☕', desc: 'Laid-back conversation & coffee' },
-    { id: 'Cultural', label: 'Cultural', icon: '🏛️', desc: 'Art galleries, history & heritage' },
-    { id: 'Nature Explorer', label: 'Nature', icon: '🌲', desc: 'Green parks, botanic walks, lakes' }
+    { id: 'Relaxed', label: 'Relaxed', icon: '🌿', desc: 'Scenic DD hills & quiet springs' },
+    { id: 'Foodie', label: 'Foodie', icon: '🍲', desc: 'Kyathsandra butter Thatte Idli' },
+    { id: 'Adventurous', label: 'Adventurous', icon: '⚡', desc: 'Madhugiri monolith & fort trek' },
+    { id: 'Cultural', label: 'Cultural', icon: '🏛️', desc: 'Kaidala Hoysala stone temples' },
+    { id: 'Romantic', label: 'Romantic', icon: '✨', desc: 'Amanikere & Markonahalli sunset' },
+    { id: 'Energetic', label: 'Energetic', icon: '🔥', desc: 'High energy hill exploration' },
+    { id: 'Chill', label: 'Chill', icon: '☕', desc: 'Town kaapi & lake promenade' },
+    { id: 'Nature Explorer', label: 'Nature', icon: '🌲', desc: 'Forest canopy & deer sanctuary' }
   ];
 
   // Available Interests
   const availableInterests = [
     { name: 'Cafes & Dining', icon: <Coffee className="w-4 h-4 text-amber-400" /> },
-    { name: 'Art & Culture', icon: <Palette className="w-4 h-4 text-violet-400" /> },
     { name: 'Scenic Outdoors', icon: <Trees className="w-4 h-4 text-emerald-400" /> },
     { name: 'Heritage & Sightseeing', icon: <Landmark className="w-4 h-4 text-cyan-400" /> },
+    { name: 'Art & Culture', icon: <Palette className="w-4 h-4 text-violet-400" /> },
     { name: 'Hidden Gems', icon: <Compass className="w-4 h-4 text-pink-400" /> },
     { name: 'Live Music & Nightlife', icon: <Music className="w-4 h-4 text-rose-400" /> },
     { name: 'Shopping & Bazaars', icon: <ShoppingBag className="w-4 h-4 text-indigo-400" /> },
   ];
 
-  // Available Budgets
+  // Available Budgets in INR
   const budgets = [
-    { id: 'Free ($0)', label: 'Free ($0)', desc: 'Zero spending; public parks, viewpoints & murals' },
-    { id: 'Budget ($)', label: 'Budget ($)', desc: 'Affordable eats, street food & low entry fees' },
-    { id: 'Moderate ($$)', label: 'Moderate ($$)', desc: 'Artisanal cafes, boutique dining, ticketed spots' },
-    { id: 'Luxury ($$$)', label: 'Luxury ($$$)', desc: 'Premium lounges, fine dining & VIP experiences' }
+    { id: 'Free ($0)', label: 'Free (₹0)', desc: 'Zero cost; public hills, viewpoints & lake walks' },
+    { id: 'Budget ($)', label: 'Budget (₹)', desc: 'Thatte idli breakfast, tea & minimal entry fees' },
+    { id: 'Moderate ($$)', label: 'Moderate (₹₹)', desc: 'Comfortable dining, fuel & ticketed heritage sites' },
+    { id: 'Luxury ($$$)', label: 'Luxury (₹₹₹)', desc: 'Resort dining & private vehicle roadtrip' }
   ];
 
   // Durations
@@ -88,13 +88,23 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
 
   // Transport modes
   const transportModes = [
-    { id: 'Scenic Walk', label: 'Scenic Walk', icon: <Footprints className="w-4 h-4" /> },
-    { id: 'Bicycle / Scooter', label: 'Bicycle', icon: <Bike className="w-4 h-4" /> },
-    { id: 'Metro / Public Transit', label: 'Metro / Transit', icon: <Train className="w-4 h-4" /> },
-    { id: 'Car / Cab', label: 'Car / Cab', icon: <Car className="w-4 h-4" /> }
+    { id: 'Bike / Two-Wheeler', label: 'Two-Wheeler', icon: <Bike className="w-4 h-4" /> },
+    { id: 'Car / Cab', label: 'Car / Cab', icon: <Car className="w-4 h-4" /> },
+    { id: 'KSRTC / Town Bus', label: 'Bus / Transit', icon: <Train className="w-4 h-4" /> },
+    { id: 'Scenic Walk', label: 'Scenic Walk', icon: <Footprints className="w-4 h-4" /> }
   ];
 
-  const popularCities = ['Bengaluru', 'Mumbai', 'Delhi', 'Paris', 'New York', 'Tokyo', 'London'];
+  const popularTumkurRegions = [
+    'Tumkur City',
+    'Devarayanadurga (DD Hills)',
+    'Kyathsandra',
+    'Namada Chilume',
+    'Madhugiri Monolith',
+    'Kaidala Temple',
+    'Kunigal & Markonahalli',
+    'Gubbi',
+    'Sira'
+  ];
 
   const toggleInterest = (name) => {
     if (interests.includes(name)) {
@@ -443,25 +453,25 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
               required
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="e.g. Bengaluru, Mumbai, Delhi, Paris, New York..."
+              placeholder="e.g. Tumkur, Devarayanadurga (DD Hills), Kyathsandra, Madhugiri..."
               className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
-            <span className="text-[11px] text-slate-400 mr-1">Popular:</span>
-            {popularCities.map((city) => (
+            <span className="text-[11px] text-slate-400 mr-1">Tumkur Regions:</span>
+            {popularTumkurRegions.map((region) => (
               <button
-                key={city}
+                key={region}
                 type="button"
-                onClick={() => setLocation(city)}
-                className={`px-2.5 py-0.5 rounded-lg border text-[11px] transition-colors ${
-                  location.toLowerCase().includes(city.toLowerCase())
+                onClick={() => setLocation(region)}
+                className={`px-2.5 py-0.5 rounded-lg border text-[11px] transition-colors cursor-pointer ${
+                  location.toLowerCase().includes(region.toLowerCase())
                     ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300'
                     : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
                 }`}
               >
-                {city}
+                {region}
               </button>
             ))}
           </div>
