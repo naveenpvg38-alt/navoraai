@@ -135,18 +135,18 @@ export default function ItineraryView({
       </div>
 
       {/* Plan Header Card */}
-      <div className="p-6 sm:p-8 rounded-3xl glass-panel border border-slate-800 mb-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="p-6 sm:p-8 rounded-3xl glass-panel border border-slate-800 mb-8 relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none animate-aurora" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 text-xs font-mono font-bold shadow-glow-cyan">
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
                 {plan.match_score || 98}% Match Score
               </span>
-              <span className="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">
-                {plan.location || 'Bengaluru'}
+              <span className="px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-medium">
+                {plan.location || 'Tumkur, Karnataka'}
               </span>
               <span className="px-2.5 py-1 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-300 text-xs font-medium">
                 {plan.mood || 'Curated'}
@@ -156,40 +156,40 @@ export default function ItineraryView({
             <h1 className="text-2xl sm:text-4xl font-extrabold font-display text-white tracking-tight">
               {plan.title}
             </h1>
-            <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-3xl leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-3xl leading-relaxed font-light">
               {plan.description}
             </p>
           </div>
 
           {/* Quick Metrics */}
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 lg:gap-4 self-start lg:self-center">
-            <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-center min-w-[110px]">
-              <div className="text-[10px] uppercase font-bold text-slate-400 flex items-center justify-center gap-1 mb-1">
+            <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-center min-w-[120px] shadow-lg">
+              <div className="text-[10px] uppercase font-bold text-slate-400 flex items-center justify-center gap-1 mb-1 font-mono">
                 <Clock className="w-3 h-3 text-cyan-400" /> Duration
               </div>
-              <div className="text-sm font-bold text-white">{plan.duration}</div>
+              <div className="text-sm font-bold font-mono text-white">{plan.duration}</div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-center min-w-[120px]">
-              <div className="text-[10px] uppercase font-bold text-slate-400 flex items-center justify-center gap-1 mb-1">
+            <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-center min-w-[140px] shadow-lg">
+              <div className="text-[10px] uppercase font-bold text-slate-400 flex items-center justify-center gap-1 mb-1 font-mono">
                 <Wallet className="w-3 h-3 text-emerald-400" /> Est. Cost
               </div>
-              <div className="text-sm font-bold text-emerald-400">{plan.estimated_cost}</div>
+              <div className="text-sm font-bold font-mono text-emerald-400">{plan.estimated_cost}</div>
             </div>
           </div>
         </div>
 
-        {/* Why this matches your vibe */}
+        {/* Why this matches your vibe with neon border */}
         {plan.why_matched && (
-          <div className="mt-6 pt-6 border-t border-slate-800/80 flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex-shrink-0 mt-0.5">
+          <div className="mt-6 pt-6 border-t border-slate-800/80 flex items-start gap-3 p-4 rounded-2xl bg-slate-950/40 border border-cyan-500/20 shadow-inner">
+            <div className="p-2 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex-shrink-0 mt-0.5 shadow-glow-cyan/50">
               <Lightbulb className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-1">
-                Why This Plan Matches Your Vibe
+              <h4 className="text-xs font-bold font-mono uppercase tracking-wider text-cyan-300 mb-1">
+                ✦ AI Insight: Why This Plan Matches Your Vibe
               </h4>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
                 {plan.why_matched}
               </p>
             </div>

@@ -128,52 +128,53 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
     <div className="min-h-screen pb-20">
       {/* Hero Section */}
       <section className="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center overflow-hidden">
-        {/* Glow ambient background orbs */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-cyan-500/20 via-violet-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
+        {/* Glow ambient background orbs with shifting aurora motion */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[450px] bg-gradient-to-b from-cyan-500/25 via-indigo-600/15 to-transparent blur-3xl pointer-events-none -z-10 animate-aurora" />
 
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-semibold mb-6 shadow-glow-cyan/20 animate-fade-in">
-          <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-          <span>TUMKUR (TUMAKURU) DISTRICT • AI OUTING PLANNER</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-semibold mb-6 shadow-glow-cyan/20 animate-fade-up">
+          <Sparkles className="w-4 h-4 text-cyan-400 animate-spin-slow" />
+          <span className="font-mono tracking-wider">TUMKUR (TUMAKURU) DISTRICT • AI OUTING PLANNER</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight text-white max-w-4xl mx-auto leading-tight mb-6">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight text-white max-w-4xl mx-auto leading-tight mb-6 animate-fade-up">
           Plan Less.{' '}
           <span className="bg-gradient-to-r from-cyan-400 via-indigo-300 to-violet-400 bg-clip-text text-transparent">
             Experience Tumkur.
           </span>
         </h1>
 
-        <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+        <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed mb-10 animate-fade-up">
           ✦ <strong className="font-semibold text-white">NAVORA AI</strong> curates your ultimate day across <strong className="text-cyan-300">Tumkur District</strong> — from Kyathsandra's iconic butter Thatte Idli and mist-shrouded Devarayanadurga hills to Madhugiri monolith treks and Hoysala temples.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
           <button
             onClick={onStartPlanning}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-semibold text-base shadow-glow-cyan/50 hover:shadow-glow-cyan flex items-center justify-center gap-2.5 transition-all duration-300 group cursor-pointer"
+            className="w-full sm:w-auto px-8 py-4 rounded-2xl btn-shimmer text-white font-bold text-base shadow-glow-cyan flex items-center justify-center gap-3 transition-all duration-300 group cursor-pointer"
           >
-            <span>Plan Your Outing</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Sparkles className="w-5 h-5 text-cyan-200" />
+            <span>Plan Your Tumkur Outing</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
           </button>
         </div>
 
         {/* Quick Highlights Counter */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-16 pt-8 border-t border-slate-800/80">
-          <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800/50">
-            <div className="text-2xl sm:text-3xl font-bold font-display text-cyan-400">98%</div>
-            <div className="text-xs text-slate-400 mt-1">Vibe Match Accuracy</div>
+          <div className="p-4 rounded-2xl glass-card border border-slate-800 hover:border-cyan-500/40 transition-all duration-300 group">
+            <div className="text-2xl sm:text-3xl font-bold font-mono text-cyan-400 group-hover:scale-105 transition-transform">99%</div>
+            <div className="text-xs text-slate-400 mt-1 font-medium">Vibe Match Accuracy</div>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800/50">
-            <div className="text-2xl sm:text-3xl font-bold font-display text-violet-400">4x Faster</div>
-            <div className="text-xs text-slate-400 mt-1">Than Manual Searching</div>
+          <div className="p-4 rounded-2xl glass-card border border-slate-800 hover:border-violet-500/40 transition-all duration-300 group">
+            <div className="text-2xl sm:text-3xl font-bold font-mono text-violet-400 group-hover:scale-105 transition-transform">4x Faster</div>
+            <div className="text-xs text-slate-400 mt-1 font-medium">Than Manual Searching</div>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800/50">
-            <div className="text-2xl sm:text-3xl font-bold font-display text-emerald-400">0$ to Luxury</div>
-            <div className="text-xs text-slate-400 mt-1">Flexible Budget Control</div>
+          <div className="p-4 rounded-2xl glass-card border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 group">
+            <div className="text-2xl sm:text-3xl font-bold font-mono text-emerald-400 group-hover:scale-105 transition-transform">₹0 to Luxury</div>
+            <div className="text-xs text-slate-400 mt-1 font-medium">Flexible Budget Range</div>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800/50">
-            <div className="text-2xl sm:text-3xl font-bold font-display text-pink-400">100% Free</div>
-            <div className="text-xs text-slate-400 mt-1">Open-Source & Local</div>
+          <div className="p-4 rounded-2xl glass-card border border-slate-800 hover:border-pink-500/40 transition-all duration-300 group">
+            <div className="text-2xl sm:text-3xl font-bold font-mono text-pink-400 group-hover:scale-105 transition-transform">100% Free</div>
+            <div className="text-xs text-slate-400 mt-1 font-medium">Open & Local First</div>
           </div>
         </div>
       </section>

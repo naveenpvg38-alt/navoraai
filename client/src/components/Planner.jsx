@@ -481,11 +481,11 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-bold text-base sm:text-lg shadow-glow-cyan/50 hover:shadow-glow-cyan flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer"
+            className="w-full py-4 px-6 rounded-2xl btn-shimmer text-white font-black font-display text-base sm:text-lg shadow-glow-cyan flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer group"
           >
-            <Sparkles className="w-5 h-5 text-cyan-200" />
+            <Sparkles className="w-5 h-5 text-cyan-200 group-hover:rotate-12 transition-transform" />
             <span>Generate Personalized Outing Plan</span>
-            <ChevronRight className="w-5 h-5 text-white/80" />
+            <ChevronRight className="w-5 h-5 text-white/80 group-hover:translate-x-1.5 transition-transform" />
           </button>
         </div>
       </form>
