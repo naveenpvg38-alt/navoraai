@@ -43,8 +43,8 @@ export default function GenerationLoader({ preferences }) {
       </div>
 
       <p className="label-overline mb-3">AI Synthesis In Progress</p>
-      <h1 className="font-display text-5xl sm:text-6xl text-white text-center leading-none mb-3">
-        BUILDING YOUR PLAN
+      <h1 className="font-display text-center text-white mb-3" style={{ fontSize: 'clamp(2.5rem, 7vw, 5rem)', fontWeight: 700, lineHeight: 1.05 }}>
+        Building Your <em style={{ fontStyle: 'italic', color: '#22D3EE' }}>Perfect Plan</em>
       </h1>
       <p className="text-slate-600 text-sm font-light text-center max-w-xs mb-10">
         Evaluating real distances, local food trails, and heritage sites across Tumkur District.

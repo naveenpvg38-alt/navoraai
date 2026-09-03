@@ -19,27 +19,30 @@
   body {
     background-color: var(--color-bg);
     color: #E2E8F0;
-    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'Jost', system-ui, -apple-system, sans-serif;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-weight: 300;
   }
 
-  /* Bebas Neue for display headings — tight, bold, cinematic */
+  /* Cormorant Garamond for display headings — editorial serif */
   .font-display,
   h1.display, h2.display {
-    font-family: 'Bebas Neue', Impact, sans-serif !important;
-    letter-spacing: 0.03em;
-    line-height: 0.94;
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 0.97;
+    font-style: normal;
   }
 
-  /* Regular headings use DM Sans bold */
+  /* Regular headings use Jost bold */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   /* Numeric/code elements */

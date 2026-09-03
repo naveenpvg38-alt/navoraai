@@ -131,7 +131,9 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
       {/* Header */}
       <div className="text-center mb-10">
         <p className="label-overline mb-3">Personalize Your Experience</p>
-        <h1 className="font-display text-5xl sm:text-6xl text-white leading-none mb-3">CRAFT YOUR DAY</h1>
+        <h1 className="font-display text-white leading-none mb-3" style={{ fontSize: 'clamp(2.8rem, 7vw, 5.5rem)', fontWeight: 700 }}>
+          Craft Your <em style={{ fontStyle: 'italic', color: '#22D3EE' }}>Ideal Day</em>
+        </h1>
         <p className="text-slate-500 text-sm font-light max-w-md mx-auto">
           Tell us your vibe and we'll synthesize a route-optimized itinerary across Tumkur District.
         </p>

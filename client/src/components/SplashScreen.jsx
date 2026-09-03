@@ -51,8 +51,8 @@ export default function SplashScreen({ onComplete }) {
         </div>
 
         {/* Word mark */}
-        <h1 className="font-display text-[72px] text-white mb-1 leading-none tracking-widest">
-          NAVORA AI
+        <h1 className="font-display text-white mb-1" style={{ fontSize: 'clamp(3rem, 10vw, 7rem)', fontWeight: 700, letterSpacing: '0.04em', lineHeight: 1 }}>
+          Navora <em className="not-italic" style={{ fontStyle: 'italic', color: '#22D3EE' }}>AI</em>
         </h1>
 
         {/* Tagline chips */}

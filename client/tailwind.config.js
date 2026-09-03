@@ -26,8 +26,8 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
-        sans:    ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans:    ['Jost', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', 'Menlo', 'monospace'],
       },
       fontSize: {

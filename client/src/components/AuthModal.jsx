@@ -110,7 +110,9 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
               </svg>
             </div>
             <div>
-              <span className="font-display text-xl text-white tracking-widest">NAVORA AI</span>
+              <span className="font-display text-2xl text-white" style={{ fontWeight: 700, letterSpacing: '0.02em' }}>
+              Navora <em style={{ fontStyle: 'italic', color: '#22D3EE' }}>AI</em>
+            </span>
               <span className="block label-overline text-slate-600 mt-0.5">Tumkur District</span>
             </div>
           </div>

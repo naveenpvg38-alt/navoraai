@@ -47,10 +47,9 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
           </div>
 
           <div className="leading-none">
-            <span className="font-display text-[22px] tracking-[0.08em] text-white group-hover:text-gradient-cyan transition-all duration-300">
-              NAVORA
+            <span className="font-display text-[26px] text-white group-hover:text-gradient-cyan transition-all duration-300" style={{ fontWeight: 700, letterSpacing: '0.02em' }}>
+              Navora <em style={{ fontStyle: 'italic', color: '#22D3EE' }}>AI</em>
             </span>
-            <span className="font-display text-[22px] tracking-[0.08em] text-cyan-400 ml-2">AI</span>
             <span className="hidden sm:block label-overline text-slate-600 mt-0.5">
               Tumkur District
             </span>
