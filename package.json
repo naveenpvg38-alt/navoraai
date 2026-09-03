@@ -1,0 +1,35 @@
+{
+  "name": "navora-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -n \"API,WEB\" -c \"cyan,magenta\" \"node server/index.js\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "node server/index.js",
+    "seed": "node server/database.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naveenpvg38-alt/NAVORA-AI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/naveenpvg38-alt/NAVORA-AI/issues"
+  },
+  "homepage": "https://github.com/naveenpvg38-alt/NAVORA-AI#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
