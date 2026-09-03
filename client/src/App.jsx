@@ -19,6 +19,12 @@ export default function App() {
   const [currentPlan, setCurrentPlan] = useState(null);
   const [pendingPreferences, setPendingPreferences] = useState({});
   const [plannerInitialPrefs, setPlannerInitialPrefs] = useState({});
+  const [fontTheme, setFontTheme] = useState(() => localStorage.getItem('navora_font_theme') || 'neo');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-font-theme', fontTheme);
+    localStorage.setItem('navora_font_theme', fontTheme);
+  }, [fontTheme]);
 
   // Check existing session on load
   useEffect(() => {
@@ -133,6 +139,8 @@ export default function App() {
         user={user}
         onOpenAuth={handleOpenAuth}
         onLogout={handleLogout}
+        fontTheme={fontTheme}
+        onFontThemeChange={setFontTheme}
       />
 
       {/* 3. Main Views */}

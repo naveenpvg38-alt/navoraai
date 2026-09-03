@@ -2,16 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+[data-font-theme="neo"] {
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+[data-font-theme="scifi"] {
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+[data-font-theme="luxury"] {
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+[data-font-theme="tech"] {
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
 @layer base {
   body {
     background-color: #070A12;
     color: #F1F5F9;
-    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body);
     letter-spacing: -0.01em;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', 'Outfit', sans-serif;
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-heading) !important;
     letter-spacing: -0.025em;
   }
 }
