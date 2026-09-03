@@ -51,22 +51,22 @@ export default function SplashScreen({ onComplete }) {
         </div>
 
         {/* Word mark */}
-        <h1 className="font-display text-white mb-1" style={{ fontSize: 'clamp(3rem, 10vw, 7rem)', fontWeight: 700, letterSpacing: '0.04em', lineHeight: 1 }}>
-          Navora <em className="not-italic" style={{ fontStyle: 'italic', color: '#22D3EE' }}>AI</em>
+        <h1 className="font-display text-5xl sm:text-7xl font-extrabold tracking-tight text-white mb-2">
+          NAVORA <span className="text-gradient-cyan">AI</span>
         </h1>
 
         {/* Tagline chips */}
-        <div className="flex items-center gap-2 mb-6">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 label-overline">
-            <MapPin className="w-2.5 h-2.5" />
+        <div className="flex items-center gap-2 mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 label-overline text-cyan-300">
+            <MapPin className="w-3 h-3 text-cyan-400" />
             Tumkur District
           </span>
           <span className="w-1 h-1 rounded-full bg-slate-600" />
           <span className="label-overline text-slate-400 tracking-widest">Karnataka</span>
         </div>
 
-        <p className="text-slate-400 text-base font-light italic mb-10">
-          "Plan Less. Experience More."
+        <p className="text-slate-400 text-sm sm:text-base font-normal mb-10">
+          Plan Less. Experience Tumkur.
         </p>
 
         {/* Progress */}

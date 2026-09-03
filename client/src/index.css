@@ -19,30 +19,29 @@
   body {
     background-color: var(--color-bg);
     color: #E2E8F0;
-    font-family: 'Jost', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     font-size: 15px;
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-weight: 300;
+    font-weight: 400;
   }
 
-  /* Cormorant Garamond for display headings — editorial serif */
+  /* Outfit for display headings — modern, high-tech, confident geometric */
   .font-display,
   h1.display, h2.display {
-    font-family: 'Cormorant Garamond', Georgia, serif !important;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    line-height: 0.97;
-    font-style: normal;
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
   }
 
-  /* Regular headings use Jost bold */
+  /* Headings use Plus Jakarta Sans bold with crisp tracking */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Jost', system-ui, sans-serif;
-    font-weight: 600;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
   /* Numeric/code elements */

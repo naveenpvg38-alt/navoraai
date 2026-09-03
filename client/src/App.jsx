@@ -211,8 +211,8 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-display font-bold text-white">✦ NAVORA AI</span>
-            <span className="text-slate-400">|</span>
-            <span className="italic">“Plan Less. Experience More.”</span>
+            <span className="text-slate-600">•</span>
+            <span className="text-slate-400">“Plan Less. Experience Tumkur.”</span>
           </div>
           <div>Website Version • Prepared for Academic Project Submission</div>
         </div>

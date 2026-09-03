@@ -26,8 +26,8 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans:    ['Jost', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', 'Menlo', 'monospace'],
       },
       fontSize: {

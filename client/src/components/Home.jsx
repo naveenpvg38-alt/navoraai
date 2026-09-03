@@ -158,12 +158,12 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
             <span className="label-overline">Tumkur District · AI-Powered Outing Planner</span>
           </div>
 
-          {/* Hero headline — Bebas Neue display */}
-          <h1 className="font-display text-hero text-white mb-6 animate-fade-up" style={{ fontWeight: 700 }}>
-          Plan Less.{' '}
-          <span className="text-gradient-cyan" style={{ fontStyle: 'italic' }}>Experience</span>
-          {' '}Tumkur.
-        </h1>
+          {/* Hero headline — Outfit font */}
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.08] animate-fade-up">
+            Plan Less.{' '}
+            <span className="text-gradient-cyan">Experience</span>
+            {' '}Tumkur.
+          </h1>
 
           <p className="text-slate-400 text-lg sm:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up">
             NAVORA AI crafts your perfect day across Tumkur — from Kyathsandra's legendary{' '}
