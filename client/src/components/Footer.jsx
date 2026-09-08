@@ -9,9 +9,7 @@ import {
   FileText,
   X,
   Sparkles,
-  Route,
-  MapPin,
-  BookmarkCheck
+  Route
 } from 'lucide-react';
 
 export default function Footer({ setActiveView, onOpenAuth, user }) {
@@ -121,32 +119,6 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
               <span>Terms of Use</span>
             </button>
           </nav>
-        </div>
-
-        {/* ── UNIQUE SIGNATURE STRIP: Tumkur Waypoint Circuit Rail ── */}
-        <div className="py-2.5 px-4 rounded-xl bg-white/[0.02] border border-white/6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-slate-400">
-          <div className="flex items-center flex-wrap justify-center sm:justify-start gap-x-2 gap-y-1">
-            <span className="text-cyan-400 font-semibold flex items-center gap-1">
-              <MapPin className="w-3 h-3" /> Tumkur Waypoints:
-            </span>
-            <span className="text-slate-300">DD Hills</span>
-            <span className="text-cyan-400/60">➔</span>
-            <span className="text-slate-300">Kyathsandra Thatte Idli</span>
-            <span className="text-cyan-400/60">➔</span>
-            <span className="text-slate-300">Madhugiri Monolith</span>
-            <span className="text-cyan-400/60">➔</span>
-            <span className="text-slate-300">Namada Chilume</span>
-            <span className="text-cyan-400/60">➔</span>
-            <span className="text-slate-300">Amanikere</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-slate-500 shrink-0">
-            <span className="flex items-center gap-1 text-emerald-400 font-sans font-medium">
-              <span>✓</span> 0km Backtracking
-            </span>
-            <span>•</span>
-            <span className="text-slate-400">10 Taluks</span>
-          </div>
         </div>
 
         {/* ── BOTTOM TIER: Copyright & Developer Attribution ── */}
