@@ -122,38 +122,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#06080F] text-slate-100 flex flex-col font-sans relative overflow-x-hidden">
-      {/* ── Ambient Thematic Background (NAVORA Navigation & Tumkur Coordinates) ── */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Breathing Aurora Gradient Pools */}
-        <div className="absolute -top-32 -left-32 w-[650px] h-[650px] rounded-full bg-cyan-500/[0.06] blur-[120px] animate-aurora-slow" />
-        <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-violet-600/[0.07] blur-[130px] animate-aurora-slow-rev" />
-        <div className="absolute -bottom-40 left-1/4 w-[700px] h-[700px] rounded-full bg-cyan-500/[0.04] blur-[140px] animate-aurora-pulse" />
-
-        {/* Tumkur Geographic Coordinate Watermark */}
-        <div className="hidden xl:flex flex-col gap-1 absolute top-28 right-8 font-mono text-[10px] text-cyan-400/20 tracking-widest uppercase">
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/50 animate-ping" />
-            TUMKUR GEO 13.34°N · 77.10°E
-          </span>
-          <span className="text-slate-600/30">AI GPS ENGINE ONLINE</span>
-        </div>
-
-        {/* Cyber Geographic Grid Texture */}
-        <div className="absolute inset-0 grid-overlay opacity-30" />
-
-        {/* Soft Diagonal Ambient Light Sweep */}
-        <div className="ambient-scan-beam" />
-
-        {/* Floating Navigation Waypoints (GPS Node Dust) */}
-        <div className="nav-waypoint-1" style={{ top: '15%', left: '16%' }} />
-        <div className="nav-waypoint-2" style={{ top: '28%', right: '12%' }} />
-        <div className="nav-waypoint-3" style={{ top: '48%', left: '7%' }} />
-        <div className="nav-waypoint-4" style={{ top: '65%', right: '20%' }} />
-        <div className="nav-waypoint-5" style={{ top: '82%', left: '30%' }} />
-        <div className="nav-waypoint-6" style={{ top: '75%', right: '7%' }} />
-      </div>
-
+    <div className="min-h-screen bg-[#06080F] text-slate-100 flex flex-col font-sans">
       {/* 1. Splash Screen */}
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
 
