@@ -1,13 +1,5 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Sparkles } from 'lucide-react';
-
-const PLACES = [
-  { label: 'Devarayanadurga', emoji: '⛰️', delay: 0 },
-  { label: 'Madhugiri Fort', emoji: '🏰', delay: 0.4 },
-  { label: 'Thatte Idli', emoji: '🍽️', delay: 0.8 },
-  { label: 'Amanikere Lake', emoji: '🏞️', delay: 1.2 },
-  { label: 'Siddaganga', emoji: '🛕', delay: 1.6 },
-];
 
 const STEPS = [
   { icon: '🗺️', text: 'Loading Tumkur map data…' },
@@ -20,16 +12,14 @@ export default function SplashScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState(0);
   const [stepIdx, setStepIdx] = useState(0);
-  const [showParticles, setShowParticles] = useState(false);
-  const [ringsVisible, setRingsVisible] = useState(false);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 400);
     const t2 = setTimeout(() => setPhase(2), 900);
-    const t3 = setTimeout(() => { setPhase(3); setShowParticles(true); }, 1400);
-    const t4 = setTimeout(() => setRingsVisible(true), 600);
-    return () => [t1, t2, t3, t4].forEach(clearTimeout);
+    const t3 = setTimeout(() => setPhase(3), 1400);
+    return () => [t1, t2, t3].forEach(clearTimeout);
   }, []);
+
 
   useEffect(() => {
     if (phase < 3) return;
@@ -57,28 +47,10 @@ export default function SplashScreen({ onComplete }) {
     return () => clearInterval(interval);
   }, [onComplete]);
 
-  const particlePositions = [
-    { top: '18%', left: '6%' },
-    { top: '14%', right: '8%' },
-    { bottom: '22%', left: '5%' },
-    { bottom: '18%', right: '7%' },
-    { top: '50%', right: '4%' },
-  ];
-
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#06080F] overflow-hidden select-none">
 
       <style>{`
-        @keyframes fadeInFloat {
-          from { opacity: 0; transform: translateY(14px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pingSlow {
-          0%   { transform: translate(-50%,-50%) scale(1);   opacity: 0.5; }
-          100% { transform: translate(-50%,-50%) scale(1.7); opacity: 0; }
-        }
-        .ring-ping { animation: pingSlow 3s ease-out infinite; }
-        .ring-ping-2 { animation: pingSlow 4s ease-out infinite 0.7s; }
         @keyframes orbitA {
           from { transform: rotate(0deg) translateY(-58px) rotate(0deg); }
           to   { transform: rotate(360deg) translateY(-58px) rotate(-360deg); }
@@ -93,40 +65,57 @@ export default function SplashScreen({ onComplete }) {
         @keyframes spinCCW { to { transform: rotate(-360deg); } }
         .spin-cw  { animation: spinCW  20s linear infinite; transform-origin: 24px 24px; }
         .spin-ccw { animation: spinCCW 12s linear infinite; transform-origin: 24px 24px; }
+
+        /* Smooth diagonal scan beam */
+        @keyframes scanBeam {
+          0%   { transform: translateX(-110%) skewX(-18deg); opacity: 0; }
+          15%  { opacity: 0.6; }
+          85%  { opacity: 0.6; }
+          100% { transform: translateX(210%) skewX(-18deg); opacity: 0; }
+        }
+        .scan-beam {
+          animation: scanBeam 3.5s cubic-bezier(0.4,0,0.2,1) infinite;
+        }
+        .scan-beam-2 {
+          animation: scanBeam 3.5s cubic-bezier(0.4,0,0.2,1) infinite 1.75s;
+        }
+
+        /* Floating ambient dots */
+        @keyframes floatDot {
+          0%,100% { transform: translateY(0px);   opacity: 0.4; }
+          50%      { transform: translateY(-14px); opacity: 0.9; }
+        }
+        .dot-float-1 { animation: floatDot 3.2s ease-in-out infinite; }
+        .dot-float-2 { animation: floatDot 4.1s ease-in-out infinite 0.8s; }
+        .dot-float-3 { animation: floatDot 2.8s ease-in-out infinite 1.5s; }
+        .dot-float-4 { animation: floatDot 3.7s ease-in-out infinite 0.4s; }
+        .dot-float-5 { animation: floatDot 5.0s ease-in-out infinite 2.1s; }
+        .dot-float-6 { animation: floatDot 3.5s ease-in-out infinite 1.2s; }
       `}</style>
 
       {/* Ambient blobs */}
       <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-cyan-500/10 animate-aurora blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-violet-600/12 animate-aurora blur-3xl pointer-events-none" style={{ animationDelay: '-8s' }} />
-      <div className="absolute inset-0 grid-overlay pointer-events-none opacity-40" />
+      <div className="absolute inset-0 grid-overlay pointer-events-none opacity-30" />
 
-      {/* Pulsing rings */}
-      {ringsVisible && (
-        <>
-          <div className="ring-ping absolute top-1/2 left-1/2 w-[320px] h-[320px] rounded-full border border-cyan-400/15 pointer-events-none" />
-          <div className="ring-ping-2 absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full border border-violet-500/8 pointer-events-none" />
-        </>
-      )}
+      {/* Smooth diagonal scan beams */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="scan-beam absolute top-0 left-0 w-[2px] h-full"
+          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(34,211,238,0.5) 40%, rgba(124,58,237,0.5) 60%, transparent 100%)' }} />
+        <div className="scan-beam-2 absolute top-0 left-0 w-[1px] h-full"
+          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(34,211,238,0.3) 50%, transparent 100%)' }} />
+      </div>
 
-      {/* Floating place particles */}
-      {showParticles && PLACES.map((p, i) => (
-        <div
-          key={i}
-          className="absolute flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-[11px] font-medium text-slate-300"
-          style={{
-            ...particlePositions[i],
-            background: 'rgba(13,18,36,0.85)',
-            borderColor: 'rgba(34,211,238,0.22)',
-            backdropFilter: 'blur(8px)',
-            animation: `fadeInFloat 0.6s ease forwards`,
-            animationDelay: `${p.delay}s`,
-            opacity: 0,
-          }}
-        >
-          <span>{p.emoji}</span>
-          <span className="hidden sm:inline">{p.label}</span>
-        </div>
-      ))}
+      {/* Floating glowing dots — scattered across screen */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="dot-float-1 absolute w-1.5 h-1.5 rounded-full bg-cyan-400/60"   style={{ top: '20%', left: '12%',  boxShadow: '0 0 8px #22D3EE' }} />
+        <div className="dot-float-2 absolute w-1   h-1   rounded-full bg-violet-400/50" style={{ top: '35%', right: '10%', boxShadow: '0 0 6px #7C3AED' }} />
+        <div className="dot-float-3 absolute w-2   h-2   rounded-full bg-cyan-300/30"   style={{ bottom: '28%', left: '8%' }} />
+        <div className="dot-float-4 absolute w-1.5 h-1.5 rounded-full bg-violet-300/40" style={{ bottom: '22%', right: '12%', boxShadow: '0 0 6px #7C3AED' }} />
+        <div className="dot-float-5 absolute w-1   h-1   rounded-full bg-cyan-400/50"   style={{ top: '60%', left: '18%',  boxShadow: '0 0 5px #22D3EE' }} />
+        <div className="dot-float-6 absolute w-1.5 h-1.5 rounded-full bg-violet-400/35" style={{ top: '15%', right: '22%' }} />
+      </div>
+
 
       {/* Center content */}
       <div className="relative z-10 flex flex-col items-center text-center px-8 max-w-lg">
