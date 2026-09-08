@@ -241,19 +241,9 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
               onClick={onGetStarted || onStartPlanning}
               className="btn-primary text-[15px] !py-3.5 !px-8 !rounded-2xl cursor-pointer group shadow-glow-sm hover:shadow-glow-md transition-all"
             >
-              {user ? (
-                <>
-                  <Compass className="w-4.5 h-4.5 text-cyan-300 group-hover:rotate-45 transition-transform duration-300" />
-                  <span>Discover Website</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
-                  <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </>
-              )}
+              <Sparkles className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => setShowRoulette(true)}
@@ -262,21 +252,6 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
               <Dices className="w-4 h-4 text-cyan-400 group-hover:rotate-180 transition-transform duration-500" />
               <span>🎲 Surprise Vibe Roulette</span>
             </button>
-          </div>
-
-          {/* User Pathway Status Indicator */}
-          <div className="mt-4 text-[12px] flex items-center justify-center gap-2 animate-fade-up">
-            {user ? (
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Logged in as <strong className="text-white font-medium">{user.name || user.email}</strong> · Direct access to AI Outing Planner</span>
-              </div>
-            ) : (
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/4 border border-white/8 text-slate-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
-                <span>Press <strong className="text-white font-medium">Get Started</strong> to join & discover Tumkur · 1-click demo available</span>
-              </div>
-            )}
           </div>
 
           {/* Stats row */}
