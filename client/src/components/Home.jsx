@@ -8,15 +8,10 @@ import {
   Sliders,
   Route,
   BookmarkCheck,
-  Coffee,
-  Palette,
   Flame,
-  TreePine,
   Zap,
   Shield,
-  Eye,
-  Dices,
-  Compass
+  Dices
 } from 'lucide-react';
 import VibeRouletteModal from './VibeRouletteModal';
 
@@ -129,65 +124,6 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
     }
   ];
 
-  const inspirations = [
-    {
-      title: 'DD Hills & Namada Chilume Nature Trail',
-      tag: 'Scenic & Spiritual',
-      tagColor: 'emerald',
-      icon: <TreePine className="w-3.5 h-3.5" />,
-      budget: 'Budget (₹)',
-      duration: '4–5 Hours',
-      city: 'Devarayanadurga',
-      stops: 'Yoga Narasimha Peak · Deer Sanctuary · Perennial Spring',
-      preset: {
-        mood: 'Relaxed',
-        interests: ['Scenic Outdoors', 'Heritage & Sightseeing'],
-        budget: 'Budget ($)',
-        duration: 'Half Day (4-5h)',
-        location: 'Devarayanadurga (DD Hills), Tumkur',
-        trip_type: 'Friends',
-        transport: 'Bike / Two-Wheeler'
-      }
-    },
-    {
-      title: 'Kyathsandra Thatte Idli & Heritage Walk',
-      tag: 'Foodie & Cultural',
-      tagColor: 'amber',
-      icon: <Coffee className="w-3.5 h-3.5" />,
-      budget: 'Budget (₹)',
-      duration: '4 Hours',
-      city: 'Kyathsandra',
-      stops: 'Butter Thatte Idli · Siddaganga Mutt · Hill Pathway',
-      preset: {
-        mood: 'Foodie',
-        interests: ['Cafes & Dining', 'Art & Culture'],
-        budget: 'Budget ($)',
-        duration: 'Half Day (4-5h)',
-        location: 'Kyathsandra & Siddaganga, Tumkur',
-        trip_type: 'Friends',
-        transport: 'Bike / Two-Wheeler'
-      }
-    },
-    {
-      title: 'Madhugiri Monolith Adventure Trek',
-      tag: 'Adventurous',
-      tagColor: 'cyan',
-      icon: <Eye className="w-3.5 h-3.5" />,
-      budget: 'Free (₹0)',
-      duration: 'Full Day (8h+)',
-      city: 'Madhugiri',
-      stops: "Asia's 2nd Largest Monolith · Fort Bastions · Sunset Vistas",
-      preset: {
-        mood: 'Adventurous',
-        interests: ['Scenic Outdoors', 'Hidden Gems'],
-        budget: 'Free ($0)',
-        duration: 'Full Day (8h+)',
-        location: 'Madhugiri, Tumkur',
-        trip_type: 'Friends',
-        transport: 'Car / Cab'
-      }
-    }
-  ];
 
   const accentMap = {
     cyan:    'border-cyan-500/20 text-cyan-300 bg-cyan-500/8',
@@ -371,66 +307,7 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
         </div>
       </section>
 
-      <div className="divider-gradient mx-auto max-w-5xl" />
 
-      {/* ── INSPIRATIONS ──────────────────────────────── */}
-      <section className="py-20 px-5 sm:px-8 max-w-7xl mx-auto">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="label-overline mb-3">Get Inspired</p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-              Popular Outing Archetypes
-            </h2>
-          </div>
-          <button
-            onClick={onStartPlanning}
-            className="hidden sm:flex items-center gap-2 text-sm text-slate-500 hover:text-cyan-400 transition-colors font-medium group cursor-pointer"
-          >
-            Custom Plan
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {inspirations.map((item, i) => (
-            <div
-              key={i}
-              className="glass-card p-6 flex flex-col justify-between min-h-[280px] group"
-            >
-              <div>
-                {/* Tag + City */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border ${accentMap[item.tagColor]}`}>
-                    {item.icon} {item.tag}
-                  </span>
-                  <span className="text-slate-600 text-[11px] font-mono">{item.city}</span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-white font-semibold text-base mb-2 group-hover:text-cyan-300 transition-colors leading-snug">
-                  {item.title}
-                </h3>
-                <p className="text-slate-600 text-xs mb-5 leading-relaxed">{item.stops}</p>
-
-                {/* Meta row */}
-                <div className="flex items-center gap-4 text-[11px] text-slate-600 font-mono">
-                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{item.duration}</span>
-                  <span className="flex items-center gap-1"><Wallet className="w-3 h-3" />{item.budget}</span>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <button
-                onClick={() => onQuickTemplate(item.preset)}
-                className="mt-5 w-full py-2.5 rounded-xl btn-secondary text-xs font-semibold justify-center !gap-2 cursor-pointer"
-              >
-                Generate This Vibe
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Vibe Roulette Modal */}
       <VibeRouletteModal
