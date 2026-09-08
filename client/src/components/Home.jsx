@@ -211,16 +211,11 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
           </div>
 
           {/* Hero headline — Outfit font */}
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.08] animate-fade-up">
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-8 tracking-tight leading-[1.08] animate-fade-up">
             Plan Less.{' '}
             <span className="text-gradient-cyan">Experience</span>
             {' '}More.
           </h1>
-
-          {/* Editorial Subtitle */}
-          <p className="text-slate-400 text-base sm:text-lg font-normal max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-up">
-            Your personalized day-trip companion for Tumkur. From Devarayanadurga’s misty hilltop sunrise to Kyathsandra’s Thatte Idli trails — custom itineraries crafted in seconds.
-          </p>
 
           {/* Attractive Interactive Suggestion Pill */}
           <div className="max-w-xl mx-auto mb-10 animate-fade-up">
