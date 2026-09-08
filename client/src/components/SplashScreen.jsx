@@ -14,12 +14,11 @@ export default function SplashScreen({ onComplete }) {
   const [stepIdx, setStepIdx] = useState(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 400);
-    const t2 = setTimeout(() => setPhase(2), 900);
-    const t3 = setTimeout(() => setPhase(3), 1400);
+    const t1 = setTimeout(() => setPhase(1), 200);
+    const t2 = setTimeout(() => setPhase(2), 500);
+    const t3 = setTimeout(() => setPhase(3), 800);
     return () => [t1, t2, t3].forEach(clearTimeout);
   }, []);
-
 
   useEffect(() => {
     if (phase < 3) return;
@@ -29,7 +28,7 @@ export default function SplashScreen({ onComplete }) {
         clearInterval(interval);
         return prev;
       });
-    }, 650);
+    }, 350);
     return () => clearInterval(interval);
   }, [phase]);
 
@@ -38,12 +37,12 @@ export default function SplashScreen({ onComplete }) {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 600);
+          setTimeout(onComplete, 250);
           return 100;
         }
-        return prev + 2.2;
+        return prev + 2.25;
       });
-    }, 100);
+    }, 50);
     return () => clearInterval(interval);
   }, [onComplete]);
 
