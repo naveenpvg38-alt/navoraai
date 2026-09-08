@@ -88,7 +88,7 @@ export default function SplashScreen({ onComplete }) {
         </div>
 
         <p className="text-slate-400 text-sm sm:text-base font-normal mb-10">
-          Plan Less. Experience Tumkur.
+          Plan Less. Experience More.
         </p>
 
         {/* Progress */}

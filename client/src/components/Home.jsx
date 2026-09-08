@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Sparkles,
   MapPin,
@@ -19,8 +19,44 @@ import {
 } from 'lucide-react';
 import VibeRouletteModal from './VibeRouletteModal';
 
+const EXPERIENCE_TAGS = [
+  { label: 'Thatte Idli', emoji: '🍽️', color: 'cyan' },
+  { label: 'Devarayanadurga', emoji: '⛰️', color: 'violet' },
+  { label: 'Madhugiri Fort', emoji: '🏰', color: 'amber' },
+  { label: 'Kyathsandra Hills', emoji: '🌄', color: 'emerald' },
+  { label: 'Siddaganga Temple', emoji: '🛕', color: 'rose' },
+  { label: 'Amanikere Lake', emoji: '🏞️', color: 'sky' },
+  { label: 'Markonahalli Dam', emoji: '💧', color: 'teal' },
+  { label: 'Goravanahalli Temple', emoji: '✨', color: 'orange' },
+];
+
 export default function Home({ onStartPlanning, onQuickTemplate }) {
   const [showRoulette, setShowRoulette] = useState(false);
+  const [activeTag, setActiveTag] = useState(0);
+  const [typedText, setTypedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const tickRef = useRef(null);
+
+  // Typewriter effect cycling through EXPERIENCE_TAGS labels
+  useEffect(() => {
+    const currentLabel = EXPERIENCE_TAGS[activeTag].label;
+    const speed = isDeleting ? 40 : 80;
+    tickRef.current = setTimeout(() => {
+      if (!isDeleting) {
+        setTypedText(currentLabel.slice(0, typedText.length + 1));
+        if (typedText.length + 1 === currentLabel.length) {
+          setTimeout(() => setIsDeleting(true), 1200);
+        }
+      } else {
+        setTypedText(currentLabel.slice(0, typedText.length - 1));
+        if (typedText.length - 1 === 0) {
+          setIsDeleting(false);
+          setActiveTag((prev) => (prev + 1) % EXPERIENCE_TAGS.length);
+        }
+      }
+    }, speed);
+    return () => clearTimeout(tickRef.current);
+  }, [typedText, isDeleting, activeTag]);
 
   const benefits = [
     {
@@ -165,14 +201,45 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
           <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.08] animate-fade-up">
             Plan Less.{' '}
             <span className="text-gradient-cyan">Experience</span>
-            {' '}Tumkur.
+            {' '}More.
           </h1>
 
-          <p className="text-slate-400 text-lg sm:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up">
-            NAVORA AI crafts your perfect day across Tumkur — from Kyathsandra's legendary{' '}
-            <span className="text-slate-200 font-medium">Thatte Idli</span> and{' '}
-            <span className="text-slate-200 font-medium">Devarayanadurga</span> peak hikes to Hoysala temples and Madhugiri fort treks.
-          </p>
+          {/* Interactive typewriter + clickable destination tags */}
+          <div className="max-w-2xl mx-auto mb-10 animate-fade-up">
+            {/* Typewriter row */}
+            <div className="flex items-center justify-center gap-2 mb-5 text-base sm:text-lg font-light text-slate-400">
+              <span>Discover</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border font-medium text-white min-w-[180px] justify-center"
+                style={{
+                  background: 'rgba(34,211,238,0.07)',
+                  borderColor: 'rgba(34,211,238,0.25)',
+                  boxShadow: '0 0 12px rgba(34,211,238,0.1)',
+                }}>
+                <span>{EXPERIENCE_TAGS[activeTag].emoji}</span>
+                <span style={{ minWidth: '130px' }}>{typedText}<span className="animate-pulse text-cyan-400 font-mono">|</span></span>
+              </span>
+              <span>& more</span>
+            </div>
+
+            {/* Clickable destination pill grid */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {EXPERIENCE_TAGS.map((tag, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActiveTag(i); setTypedText(''); setIsDeleting(false); }}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium border transition-all duration-200 cursor-pointer ${
+                    activeTag === i
+                      ? 'border-cyan-400/50 text-cyan-300 scale-105'
+                      : 'border-white/8 text-slate-400 hover:border-white/20 hover:text-white'
+                  }`}
+                  style={activeTag === i ? { background: 'rgba(34,211,238,0.1)', boxShadow: '0 0 10px rgba(34,211,238,0.12)' } : { background: 'rgba(255,255,255,0.03)' }}
+                >
+                  <span>{tag.emoji}</span>
+                  {tag.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up">
