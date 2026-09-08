@@ -8,6 +8,7 @@ import Planner from './components/Planner';
 import GenerationLoader from './components/GenerationLoader';
 import ItineraryView from './components/ItineraryView';
 import Profile from './components/Profile';
+import Footer from './components/Footer';
 import { api } from './api';
 
 export default function App() {
@@ -206,17 +207,12 @@ export default function App() {
         onSuccess={handleAuthSuccess}
       />
 
-      {/* Footer */}
-      <footer className="border-t border-slate-800/60 py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-400 glass-card">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-display font-bold text-white">✦ NAVORA AI</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">“Plan Less. Experience More.”</span>
-          </div>
-          <div>Website Version • Prepared for Academic Project Submission</div>
-        </div>
-      </footer>
+      {/* Informative Footer */}
+      <Footer
+        setActiveView={setActiveView}
+        onOpenAuth={handleOpenAuth}
+        user={user}
+      />
     </div>
   );
 }
