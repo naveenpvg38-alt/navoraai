@@ -200,3 +200,76 @@
 .grid-overlay {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M0 0h60v1H0zm0 59h60v1H0zM0 0h1v60H0zm59 0h1v60h-1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
+
+/* ── Ambient Background Navigation Mesh ───────────────────────── */
+@keyframes auroraSlow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(45px, 35px) scale(1.08); }
+}
+
+@keyframes auroraSlowRev {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, -30px) scale(1.06); }
+}
+
+@keyframes auroraPulse {
+  0%, 100% { opacity: 0.04; transform: scale(1); }
+  50% { opacity: 0.08; transform: scale(1.12); }
+}
+
+.animate-aurora-slow {
+  animation: auroraSlow 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-slow-rev {
+  animation: auroraSlowRev 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-pulse {
+  animation: auroraPulse 15s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Diagonal ambient light sweep */
+@keyframes ambientScan {
+  0% { transform: translateY(-100%) rotate(25deg); opacity: 0; }
+  15% { opacity: 0.35; }
+  85% { opacity: 0.35; }
+  100% { transform: translateY(220%) rotate(25deg); opacity: 0; }
+}
+
+.ambient-scan-beam {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.25) 50%, transparent 100%);
+  animation: ambientScan 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Floating navigation waypoint dots */
+@keyframes waypointPulse {
+  0%, 100% { transform: scale(1); opacity: 0.25; }
+  50% { transform: scale(1.4); opacity: 0.8; box-shadow: 0 0 8px rgba(34, 211, 238, 0.6); }
+}
+
+.nav-waypoint-1, .nav-waypoint-2, .nav-waypoint-3,
+.nav-waypoint-4, .nav-waypoint-5, .nav-waypoint-6 {
+  position: absolute;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: #22D3EE;
+  pointer-events: none;
+}
+
+.nav-waypoint-1 { animation: waypointPulse 4.2s ease-in-out infinite; }
+.nav-waypoint-2 { animation: waypointPulse 5.5s ease-in-out infinite 1s; background: #818CF8; }
+.nav-waypoint-3 { animation: waypointPulse 6.1s ease-in-out infinite 2.2s; }
+.nav-waypoint-4 { animation: waypointPulse 4.8s ease-in-out infinite 0.5s; background: #A78BFA; }
+.nav-waypoint-5 { animation: waypointPulse 5.2s ease-in-out infinite 1.8s; }
+.nav-waypoint-6 { animation: waypointPulse 6.8s ease-in-out infinite 3s; background: #818CF8; }
