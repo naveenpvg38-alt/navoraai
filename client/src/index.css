@@ -18,6 +18,14 @@
 
   body {
     background-color: var(--color-bg);
+    background-image: 
+      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(34, 211, 238, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 45% at 95% 35%, rgba(124, 58, 237, 0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 45% at 5% 75%, rgba(34, 211, 238, 0.05) 0%, transparent 65%),
+      url("data:image/svg+xml,%3Csvg width='1200' height='1200' viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2322D3EE' stroke-width='1.2' stroke-opacity='0.032'%3E%3Cpath d='M-100,200 Q200,80 500,220 T1100,180 T1500,240'/%3E%3Cpath d='M-100,260 Q180,140 480,270 T1080,240 T1500,290'/%3E%3Cpath d='M-100,320 Q160,200 460,330 T1060,300 T1500,350'/%3E%3Cellipse cx='850' cy='320' rx='160' ry='90'/%3E%3Cellipse cx='850' cy='320' rx='120' ry='65'/%3E%3Cellipse cx='850' cy='320' rx='80' ry='42'/%3E%3Cellipse cx='850' cy='320' rx='40' ry='20'/%3E%3Cpath d='M-100,600 Q300,500 700,680 T1400,620'/%3E%3Cpath d='M-100,680 Q280,580 680,750 T1400,690'/%3E%3Cpath d='M-100,760 Q260,660 660,820 T1400,760'/%3E%3Cellipse cx='280' cy='820' rx='180' ry='100'/%3E%3Cellipse cx='280' cy='820' rx='130' ry='70'/%3E%3Cellipse cx='280' cy='820' rx='80' ry='40'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
     color: #E2E8F0;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     font-size: 15px;
@@ -60,7 +68,7 @@
 
 /* ── Glass Surfaces ─────────────────────────────────────────── */
 .glass-panel {
-  background: rgba(13, 18, 32, 0.7);
+  background: rgba(13, 18, 32, 0.75);
   backdrop-filter: blur(24px) saturate(140%);
   -webkit-backdrop-filter: blur(24px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -68,20 +76,20 @@
 }
 
 .glass-card {
-  background: rgba(13, 18, 32, 0.5);
+  background: rgba(13, 18, 32, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-card);
   box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 20px 40px -15px rgba(0,0,0,0.65);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
-  background: rgba(18, 25, 44, 0.65);
-  border-color: rgba(34, 211, 238, 0.2);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 30px 60px -15px rgba(0,0,0,0.8), 0 0 40px -15px rgba(34,211,238,0.12);
-  transform: translateY(-5px);
+  background: rgba(16, 23, 40, 0.7);
+  border-color: rgba(34, 211, 238, 0.28);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 30px 60px -15px rgba(0,0,0,0.8), 0 0 30px -10px rgba(34,211,238,0.15);
+  transform: translateY(-4px);
 }
 
 /* ── Premium Buttons ────────────────────────────────────────── */
@@ -91,7 +99,7 @@
   gap: 10px;
   padding: 14px 28px;
   border-radius: var(--radius-btn);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -109,7 +117,7 @@
 .btn-primary:hover {
   transform: translateY(-2px);
   filter: brightness(1.12);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 14px 40px -8px rgba(14,165,233,0.55);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 14px 40px -8px rgba(14,165,233,0.6);
 }
 
 .btn-primary:active { transform: translateY(0); }

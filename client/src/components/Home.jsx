@@ -200,13 +200,7 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
     <div className="min-h-screen">
 
       {/* ── HERO ──────────────────────────────────────── */}
-      <section className="relative pt-16 pb-24 px-5 sm:px-8 max-w-7xl mx-auto overflow-hidden">
-        {/* Grid texture */}
-        <div className="absolute inset-0 grid-overlay pointer-events-none opacity-40" />
-        {/* Aurora orbs */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10 animate-aurora" />
-        <div className="absolute top-20 right-1/4 w-[400px] h-[300px] bg-violet-600/10 rounded-full blur-3xl pointer-events-none -z-10 animate-aurora" style={{ animationDelay: '-6s' }} />
-
+      <section className="relative pt-16 pb-24 px-5 sm:px-8 max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Overline badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/4 border border-white/10 mb-8 animate-fade-up">

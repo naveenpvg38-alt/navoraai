@@ -140,7 +140,7 @@ export default function App() {
         {isGenerating ? (
           <GenerationLoader preferences={pendingPreferences} />
         ) : (
-          <>
+          <div key={activeView} className="animate-fade-up">
             {activeView === 'home' && (
               <Home
                 onStartPlanning={handleStartPlanning}
@@ -186,7 +186,7 @@ export default function App() {
                 onOpenPlanner={handleStartPlanning}
               />
             )}
-          </>
+          </div>
         )}
       </main>
 
