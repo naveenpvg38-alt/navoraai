@@ -10,6 +10,7 @@ import ItineraryView from './components/ItineraryView';
 import Profile from './components/Profile';
 import Footer from './components/Footer';
 import ScrollLoadIndicator from './components/ScrollLoadIndicator';
+import LoginPage from './components/LoginPage';
 import { api } from './api';
 
 export default function App() {
@@ -37,10 +38,13 @@ export default function App() {
   }, []);
 
   const [postAuthRedirect, setPostAuthRedirect] = useState(null);
+  const [authMode, setAuthMode] = useState('login');
 
   const handleOpenAuth = (mode = 'login', redirectView = null) => {
     setPostAuthRedirect(redirectView);
-    setAuthModal({ isOpen: true, mode });
+    setAuthMode(mode);
+    setActiveView('login');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCloseAuth = () => {
@@ -50,12 +54,10 @@ export default function App() {
 
   const handleAuthSuccess = (userData) => {
     setUser(userData);
-    if (postAuthRedirect) {
-      const destination = postAuthRedirect;
-      setPostAuthRedirect(null);
-      setActiveView(destination);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    const destination = postAuthRedirect || 'home';
+    setPostAuthRedirect(null);
+    setActiveView(destination);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleGetStarted = () => {
@@ -149,97 +151,103 @@ export default function App() {
       {/* 1. Splash Screen */}
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
 
-      {/* 2. Top Navigation Bar & Cyber Scroll-Load Indicator */}
-      <Navbar
-        activeView={activeView}
-        setActiveView={setActiveView}
-        user={user}
-        onOpenAuth={handleOpenAuth}
-        onLogout={handleLogout}
-        onGetStarted={handleGetStarted}
-      />
-      <ScrollLoadIndicator />
+      {/* 2. Dedicated Login Portal View (Full-page experience) */}
+      {activeView === 'login' ? (
+        <LoginPage
+          initialMode={authMode}
+          onSuccess={handleAuthSuccess}
+          onBack={() => {
+            setActiveView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onExploreAsGuest={handleStartPlanning}
+        />
+      ) : (
+        <>
+          {/* Top Navigation Bar & Cyber Scroll-Load Indicator */}
+          <Navbar
+            activeView={activeView}
+            setActiveView={setActiveView}
+            user={user}
+            onOpenAuth={handleOpenAuth}
+            onLogout={handleLogout}
+            onGetStarted={handleGetStarted}
+          />
+          <ScrollLoadIndicator />
 
-      {/* 3. Main Views */}
-      <main className="flex-grow">
-        {isGenerating ? (
-          <GenerationLoader preferences={pendingPreferences} />
-        ) : (
-          <div key={activeView} className="animate-fade-up">
-            {activeView === 'home' && (
-              <Home
-                user={user}
-                onGetStarted={handleGetStarted}
-                onStartPlanning={handleStartPlanning}
-                onQuickTemplate={handleQuickTemplate}
-              />
+          {/* Main Views */}
+          <main className="flex-grow">
+            {isGenerating ? (
+              <GenerationLoader preferences={pendingPreferences} />
+            ) : (
+              <div key={activeView} className="animate-fade-up">
+                {activeView === 'home' && (
+                  <Home
+                    user={user}
+                    onGetStarted={handleGetStarted}
+                    onStartPlanning={handleStartPlanning}
+                    onQuickTemplate={handleQuickTemplate}
+                  />
+                )}
+
+                {activeView === 'planner' && (
+                  <Planner
+                    onGenerate={handleGeneratePlan}
+                    initialPreferences={plannerInitialPrefs}
+                  />
+                )}
+
+                {activeView === 'itinerary' && (
+                  <ItineraryView
+                    plan={currentPlan}
+                    user={user}
+                    onSave={handleSavePlan}
+                    onToggleFavourite={handleToggleFavourite}
+                    onToggleComplete={handleToggleComplete}
+                    onBack={() => setActiveView('planner')}
+                    onOpenAuth={handleOpenAuth}
+                  />
+                )}
+
+                {activeView === 'profile' && user && (
+                  <Profile
+                    user={user}
+                    onSelectPlan={handleSelectSavedPlan}
+                    onLogout={handleLogout}
+                    defaultTab="saved"
+                    onOpenPlanner={handleStartPlanning}
+                  />
+                )}
+
+                {activeView === 'saved' && user && (
+                  <Profile
+                    user={user}
+                    onSelectPlan={handleSelectSavedPlan}
+                    onLogout={handleLogout}
+                    defaultTab="saved"
+                    onOpenPlanner={handleStartPlanning}
+                  />
+                )}
+              </div>
             )}
+          </main>
 
-            {activeView === 'planner' && (
-              <Planner
-                onGenerate={handleGeneratePlan}
-                initialPreferences={plannerInitialPrefs}
-              />
-            )}
+          {/* Mobile Bottom Navigation */}
+          <MobileNav
+            activeView={activeView}
+            setActiveView={setActiveView}
+            user={user}
+            onOpenAuth={handleOpenAuth}
+          />
 
-            {activeView === 'itinerary' && (
-              <ItineraryView
-                plan={currentPlan}
-                user={user}
-                onSave={handleSavePlan}
-                onToggleFavourite={handleToggleFavourite}
-                onToggleComplete={handleToggleComplete}
-                onBack={() => setActiveView('planner')}
-                onOpenAuth={handleOpenAuth}
-              />
-            )}
-
-            {activeView === 'profile' && user && (
-              <Profile
-                user={user}
-                onSelectPlan={handleSelectSavedPlan}
-                onLogout={handleLogout}
-                defaultTab="saved"
-                onOpenPlanner={handleStartPlanning}
-              />
-            )}
-
-            {activeView === 'saved' && user && (
-              <Profile
-                user={user}
-                onSelectPlan={handleSelectSavedPlan}
-                onLogout={handleLogout}
-                defaultTab="saved"
-                onOpenPlanner={handleStartPlanning}
-              />
-            )}
-          </div>
-        )}
-      </main>
-
-      {/* 4. Mobile Bottom Navigation */}
-      <MobileNav
-        activeView={activeView}
-        setActiveView={setActiveView}
-        user={user}
-        onOpenAuth={handleOpenAuth}
-      />
-
-      {/* 5. Authentication Modal */}
-      <AuthModal
-        key={`${authModal.isOpen}-${authModal.mode}`}
-        isOpen={authModal.isOpen}
-        initialMode={authModal.mode}
-        onClose={handleCloseAuth}
-        onSuccess={handleAuthSuccess}
-      />
-
-      {/* Informative Footer */}
-      <Footer
-        setActiveView={setActiveView}
-        onOpenAuth={handleOpenAuth}
-        user={user}
-      />
+          {/* Informative Footer */}
+          <Footer
+            setActiveView={setActiveView}
+            onOpenAuth={handleOpenAuth}
+            user={user}
+          />
+        </>
+      )}
     </div>
   );
 }
