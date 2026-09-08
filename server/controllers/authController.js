@@ -82,12 +82,12 @@ exports.login = (req, res) => {
     const user = db.prepare('SELECT * FROM users WHERE email = ?').get(cleanEmail);
 
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
+      return res.status(401).json({ error: 'No account found with this email. Please click "Create Account" above to register.' });
     }
 
     const isMatch = bcrypt.compareSync(password, user.password_hash);
     if (!isMatch) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
+      return res.status(401).json({ error: 'Incorrect password. Please check your password or use 1-Click Demo Access.' });
     }
 
     const token = createToken(user);

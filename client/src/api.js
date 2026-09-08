@@ -2,7 +2,13 @@
  * Centralized API client for NAVORA AI
  */
 
-const API_BASE = '/api';
+const API_BASE = (() => {
+  if (typeof window !== 'undefined' && window.location.port && window.location.port !== '5000') {
+    const hostname = window.location.hostname || 'localhost';
+    return `http://${hostname}:5000/api`;
+  }
+  return '/api';
+})();
 
 function getAuthHeader() {
   const token = localStorage.getItem('navora_token');
@@ -10,12 +16,33 @@ function getAuthHeader() {
 }
 
 async function handleResponse(res) {
-  const data = await res.json();
+  let data = null;
+  const contentType = res.headers.get('content-type') || '';
+
+  try {
+    if (contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      const text = await res.text();
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        data = text ? { error: text } : null;
+      }
+    }
+  } catch (err) {
+    data = null;
+  }
+
   if (!res.ok) {
-    const error = (data && data.error) || 'An unexpected error occurred';
+    const error =
+      (data && (data.error || data.message)) ||
+      (res.status === 401
+        ? 'Invalid email or password. If you do not have an account, please click "Create Account".'
+        : `Request failed with status ${res.status}`);
     throw new Error(error);
   }
-  return data;
+  return data || {};
 }
 
 export const api = {

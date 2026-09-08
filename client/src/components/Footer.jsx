@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Compass,
   Home as HomeIcon,
@@ -9,11 +9,41 @@ import {
   FileText,
   X,
   Sparkles,
-  Route
+  Route,
+  Download,
+  CheckCircle2
 } from 'lucide-react';
 
 export default function Footer({ setActiveView, onOpenAuth, user }) {
   const [modalContent, setModalContent] = useState(null); // 'privacy' | 'terms' | 'install' | null
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('appinstalled', () => {
+      setIsInstalled(true);
+      setDeferredPrompt(null);
+    });
+
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleTriggerInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setIsInstalled(true);
+      }
+      setDeferredPrompt(null);
+    }
+  };
 
   const handleNav = (view) => {
     if (setActiveView) {
@@ -179,16 +209,73 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
 
             {modalContent === 'install' && (
               <div>
-                <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                  <Smartphone className="w-5 h-5 text-cyan-400" /> Install NAVORA AI App
-                </h3>
-                <div className="space-y-3 text-xs text-slate-400 leading-relaxed">
-                  <p>You can use NAVORA AI as a standalone web application on your device:</p>
-                  <ul className="list-disc list-inside space-y-1.5 text-slate-300">
-                    <li><strong className="text-white">Android (Chrome):</strong> Tap the browser menu (⋮) and select <em>"Add to Home screen"</em> or <em>"Install App"</em>.</li>
-                    <li><strong className="text-white">iOS (Safari):</strong> Tap the Share button (⎋) and select <em>"Add to Home Screen"</em>.</li>
-                    <li><strong className="text-white">Desktop:</strong> Click the install icon in the URL bar of Chrome/Edge to run as a desktop app.</li>
-                  </ul>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Smartphone className="w-5 h-5 text-cyan-400" /> Install NAVORA AI Mobile App
+                  </h3>
+                  <span className="px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[10px] font-mono text-cyan-300">
+                    PWA v1.0
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                  Install NAVORA AI on your <strong>Android</strong> or <strong>iOS (iPhone/iPad)</strong> device for an app experience with zero browser address bars, instant startup, and offline readiness across Tumkur.
+                </p>
+
+                {/* 1-Tap Android / Chrome Native Install Button */}
+                {deferredPrompt && (
+                  <button
+                    onClick={handleTriggerInstall}
+                    className="btn-primary w-full !py-3 !rounded-xl justify-center mb-4 cursor-pointer shadow-glow-sm hover:shadow-glow-md"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Install NAVORA AI on This Device (1-Tap)</span>
+                  </button>
+                )}
+
+                {isInstalled && (
+                  <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>NAVORA AI is already installed on your device. Launch it directly from your home screen!</span>
+                  </div>
+                )}
+
+                {/* Device-Specific Steps */}
+                <div className="space-y-3 text-xs">
+                  {/* Android Card */}
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/8 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-white flex items-center gap-1.5">
+                        <span>🤖</span> Android (Google Chrome & Edge)
+                      </span>
+                      <span className="text-[10px] font-mono text-cyan-400">Recommended</span>
+                    </div>
+                    <p className="text-slate-400 leading-relaxed">
+                      Tap the top menu <strong className="text-slate-200">(⋮)</strong> in Chrome and select <strong className="text-cyan-300">"Install app"</strong> or <strong className="text-cyan-300">"Add to Home screen"</strong>.
+                    </p>
+                  </div>
+
+                  {/* iOS Card */}
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/8 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-white flex items-center gap-1.5">
+                        <span>🍏</span> Apple iOS (iPhone & iPad Safari)
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-400">Safari</span>
+                    </div>
+                    <p className="text-slate-400 leading-relaxed">
+                      1. Open this website in <strong>Safari</strong>.<br />
+                      2. Tap the <strong>Share</strong> button <strong className="text-cyan-300">⎋</strong> (bottom toolbar).<br />
+                      3. Scroll down and tap <strong className="text-cyan-300">"Add to Home Screen" ➕</strong>.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Features strip */}
+                <div className="mt-4 pt-3 border-t border-white/8 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                  <span>✓ Standalone View</span>
+                  <span>✓ Offline Cache</span>
+                  <span>✓ Touch Optimized</span>
                 </div>
               </div>
             )}

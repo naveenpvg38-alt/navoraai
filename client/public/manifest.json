@@ -1,0 +1,48 @@
+{
+  "name": "NAVORA AI – Tumkur Outing Planner",
+  "short_name": "NAVORA AI",
+  "description": "AI-Powered Personalized Outing Planner for Tumkur District, Karnataka. Plan Less. Experience Tumkur More.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B1120",
+  "theme_color": "#0B1120",
+  "categories": ["travel", "navigation", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Plan New Outing",
+      "short_name": "Plan",
+      "description": "Generate an AI outing plan across Tumkur",
+      "url": "/#planner",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Explore Landmarks",
+      "short_name": "Explore",
+      "description": "Discover Tumkur destinations and food trails",
+      "url": "/#home",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

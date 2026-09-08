@@ -19,12 +19,14 @@ export default function MobileNav({ activeView, setActiveView, user, onOpenAuth 
 
   return (
     <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around px-2 h-16"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around px-2"
       style={{
         background: 'rgba(11, 17, 32, 0.95)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        height: 'calc(3.85rem + env(safe-area-inset-bottom, 0px))',
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}
     >
       {navItems.map((item) => {

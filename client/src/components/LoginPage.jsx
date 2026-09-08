@@ -9,54 +9,60 @@ import {
   ArrowRight,
   ArrowLeft,
   Compass,
-  MapPin,
   Sparkles,
   Shield,
-  CheckCircle2,
   AlertCircle
 } from 'lucide-react';
 import { api } from '../api';
 
-const TUMKUR_WAYPOINTS = [
+const TUMKUR_DISCOVERIES = [
   {
     id: 'ddhills',
     emoji: '⛰️',
-    tag: '1,204m Sunrise Peak',
-    title: 'Devarayanadurga Hills',
-    desc: 'Yoga & Bhoga Narasimha shrines nestled in misty hill contours with 360° horizon views.',
-    coord: '13.3729° N, 77.2114° E',
-    accent: 'from-cyan-500/20 to-blue-600/10',
-    border: 'border-cyan-400/30',
+    title: 'Devarayanadurga Peak Sunrise (1,204m)',
+    shortTitle: 'Devarayanadurga',
   },
   {
     id: 'kyathsandra',
     emoji: '🍽️',
-    tag: 'Iconic Gastronomy',
-    title: 'Kyathsandra Thatte Idli',
-    desc: 'Golden melt butter Thatte Idlis, spiced coconut red chutney, and aromatic filter kaapi.',
-    coord: '13.3289° N, 77.1472° E',
-    accent: 'from-amber-500/20 to-orange-600/10',
-    border: 'border-amber-400/30',
+    title: 'Kyathsandra Thatte Idli Trail',
+    shortTitle: 'Thatte Idli',
   },
   {
     id: 'madhugiri',
     emoji: '🏰',
-    tag: 'Asia’s 2nd Monolith',
     title: 'Madhugiri Rock Fortress',
-    desc: 'Colossal single rock citadel with stone arched gateways and historic hill bastions.',
-    coord: '13.6631° N, 77.2131° E',
-    accent: 'from-violet-500/20 to-purple-600/10',
-    border: 'border-violet-400/30',
+    shortTitle: 'Madhugiri Fort',
   },
   {
     id: 'namada',
     emoji: '🦌',
-    tag: 'Sacred Forest Spring',
     title: 'Namada Chilume Spring',
-    desc: 'Perennial natural rock cleft spring enveloped by medicinal forest trails and deer reserve.',
-    coord: '13.3644° N, 77.1648° E',
-    accent: 'from-emerald-500/20 to-teal-600/10',
-    border: 'border-emerald-400/30',
+    shortTitle: 'Namada Chilume',
+  },
+  {
+    id: 'amanikere',
+    emoji: '🏞️',
+    title: 'Amanikere Lake Promenade',
+    shortTitle: 'Amanikere Lake',
+  },
+  {
+    id: 'siddaganga',
+    emoji: '🛕',
+    title: 'Siddaganga Mutt Kshetra',
+    shortTitle: 'Siddaganga Mutt',
+  },
+  {
+    id: 'kaidala',
+    emoji: '🏛️',
+    title: 'Kaidala Chennakeshava Temple',
+    shortTitle: 'Kaidala Temple',
+  },
+  {
+    id: 'markonahalli',
+    emoji: '🌊',
+    title: 'Markonahalli Siphon Dam',
+    shortTitle: 'Markonahalli Dam',
   },
 ];
 
@@ -73,13 +79,32 @@ export default function LoginPage({
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [activeWaypoint, setActiveWaypoint] = useState(0);
+  const [activeDiscovery, setActiveDiscovery] = useState(0);
+  const [typedText, setTypedText] = useState(TUMKUR_DISCOVERIES[0].title);
 
-  // Auto-cycle waypoint highlight in the left panel
+  // Typewriter moving text animation when active discovery changes
+  useEffect(() => {
+    const fullText = TUMKUR_DISCOVERIES[activeDiscovery].title;
+    let charIndex = 0;
+    setTypedText('');
+
+    const typeInterval = setInterval(() => {
+      charIndex++;
+      if (charIndex <= fullText.length) {
+        setTypedText(fullText.slice(0, charIndex));
+      } else {
+        clearInterval(typeInterval);
+      }
+    }, 28);
+
+    return () => clearInterval(typeInterval);
+  }, [activeDiscovery]);
+
+  // Auto-cycle discovery highlight in the left panel
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveWaypoint((prev) => (prev + 1) % TUMKUR_WAYPOINTS.length);
-    }, 4500);
+      setActiveDiscovery((prev) => (prev + 1) % TUMKUR_DISCOVERIES.length);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
@@ -180,47 +205,82 @@ export default function LoginPage({
               </p>
             </div>
 
-            {/* Interactive Waypoint Showcase Rail */}
-            <div className="space-y-3 pt-2">
-              <span className="text-[11px] font-mono tracking-wider uppercase text-slate-500 block">
-                Featured District Waypoints
-              </span>
-              <div className="grid grid-cols-2 gap-3">
-                {TUMKUR_WAYPOINTS.map((wp, idx) => {
-                  const isActive = idx === activeWaypoint;
-                  return (
-                    <div
-                      key={wp.id}
-                      onClick={() => setActiveWaypoint(idx)}
-                      className={`p-3.5 rounded-2xl border transition-all duration-300 cursor-pointer text-left relative overflow-hidden ${
-                        isActive
-                          ? `${wp.border} bg-white/[0.05] shadow-lg shadow-cyan-500/10 scale-[1.02]`
-                          : 'border-white/6 bg-white/[0.02] hover:border-white/12 hover:bg-white/[0.04]'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-xl">{wp.emoji}</span>
-                        <span className="text-[9px] font-mono text-cyan-400/80 px-1.5 py-0.5 rounded-full bg-cyan-400/10">
-                          {wp.tag}
-                        </span>
-                      </div>
-                      <h4 className="text-white text-xs font-semibold tracking-tight truncate">{wp.title}</h4>
-                      <p className="text-slate-400 text-[11px] line-clamp-2 mt-1 leading-snug">{wp.desc}</p>
-                    </div>
-                  );
-                })}
+            {/* Live Discovery Stream with Moving Animations */}
+            <div className="space-y-3 pt-3 w-full max-w-lg">
+              {/* Top Capsule: Discovering Active Spot with Typewriter Animation */}
+              <div
+                className="w-full rounded-full px-5 py-2.5 sm:px-6 sm:py-3 flex items-center gap-3 transition-all duration-300"
+                style={{
+                  background: 'rgba(10, 16, 31, 0.85)',
+                  border: '1px solid rgba(34, 211, 238, 0.35)',
+                  boxShadow: '0 0 25px rgba(34, 211, 238, 0.12), inset 0 0 15px rgba(34, 211, 238, 0.04)',
+                }}
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse shrink-0" />
+                <span className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.18em] text-slate-400 shrink-0">
+                  DISCOVERING:
+                </span>
+                <div className="flex items-center gap-2 overflow-hidden truncate">
+                  <span className="text-base shrink-0">{TUMKUR_DISCOVERIES[activeDiscovery].emoji}</span>
+                  <span className="text-cyan-300 font-bold text-xs sm:text-sm tracking-tight truncate">
+                    {typedText}
+                  </span>
+                  <span className="text-cyan-400 font-mono animate-pulse shrink-0 text-sm font-light">|</span>
+                </div>
               </div>
-            </div>
 
-            {/* Live Telemetry Pill */}
-            <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/6 flex items-center justify-between text-xs font-mono text-slate-400 max-w-md">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                <span>{TUMKUR_WAYPOINTS[activeWaypoint].coord}</span>
+              {/* Continuous Moving Waypoint Marquee Ticker */}
+              <div className="relative overflow-hidden w-full py-1 group rounded-xl">
+                {/* Left & Right gradient edge fades */}
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0B1120] to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0B1120] to-transparent z-10 pointer-events-none" />
+
+                {/* Continuously gliding track (infinite loop) */}
+                <div className="animate-marquee-track flex items-center gap-2.5 scrollbar-none">
+                  {/* First sequence */}
+                  {TUMKUR_DISCOVERIES.map((spot, idx) => {
+                    const isActive = idx === activeDiscovery;
+                    return (
+                      <button
+                        key={`s1-${spot.id}`}
+                        type="button"
+                        onClick={() => setActiveDiscovery(idx)}
+                        className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0 cursor-pointer ${
+                          isActive
+                            ? 'bg-cyan-500/20 border border-cyan-400/60 text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.25)] scale-[1.03]'
+                            : 'bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white'
+                        }`}
+                      >
+                        <span className="text-sm">{spot.emoji}</span>
+                        <span className="whitespace-nowrap">{spot.shortTitle}</span>
+                      </button>
+                    );
+                  })}
+                  {/* Duplicated sequence for seamless infinite loop */}
+                  {TUMKUR_DISCOVERIES.map((spot, idx) => {
+                    const isActive = idx === activeDiscovery;
+                    return (
+                      <button
+                        key={`s2-${spot.id}`}
+                        type="button"
+                        onClick={() => setActiveDiscovery(idx)}
+                        className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0 cursor-pointer ${
+                          isActive
+                            ? 'bg-cyan-500/20 border border-cyan-400/60 text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.25)] scale-[1.03]'
+                            : 'bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white'
+                        }`}
+                      >
+                        <span className="text-sm">{spot.emoji}</span>
+                        <span className="whitespace-nowrap">{spot.shortTitle}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 text-emerald-400 font-sans text-[11px] font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>100% District Verified</span>
+
+              {/* Animated Moving Laser Telemetry Bar */}
+              <div className="w-full h-[2px] bg-white/[0.06] rounded-full relative overflow-hidden">
+                <div className="animate-laser-sweep w-28 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#22d3ee]" />
               </div>
             </div>
           </div>
@@ -310,11 +370,22 @@ export default function LoginPage({
               {/* Error Alert */}
               {error && (
                 <div
-                  className="mb-4 p-3 rounded-xl flex items-center gap-2.5 text-xs text-rose-300 animate-fade-in"
+                  className="mb-4 p-3 rounded-xl flex items-start sm:items-center gap-2.5 text-xs text-rose-300 animate-fade-in"
                   style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)' }}
                 >
-                  <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400" />
-                  <span>{error}</span>
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400 mt-0.5 sm:mt-0" />
+                  <div className="flex-1 flex flex-wrap items-center justify-between gap-1">
+                    <span>{error}</span>
+                    {error.toLowerCase().includes('create account') && (
+                      <button
+                        type="button"
+                        onClick={() => { setMode('signup'); setError(''); }}
+                        className="text-cyan-300 underline font-semibold hover:text-white cursor-pointer ml-1 text-xs"
+                      >
+                        Click here to register →
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
 
