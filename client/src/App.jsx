@@ -9,6 +9,7 @@ import GenerationLoader from './components/GenerationLoader';
 import ItineraryView from './components/ItineraryView';
 import Profile from './components/Profile';
 import Footer from './components/Footer';
+import ScrollLoadIndicator from './components/ScrollLoadIndicator';
 import { api } from './api';
 
 export default function App() {
@@ -148,7 +149,7 @@ export default function App() {
       {/* 1. Splash Screen */}
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
 
-      {/* 2. Top Navigation Bar */}
+      {/* 2. Top Navigation Bar & Cyber Scroll-Load Indicator */}
       <Navbar
         activeView={activeView}
         setActiveView={setActiveView}
@@ -157,6 +158,7 @@ export default function App() {
         onLogout={handleLogout}
         onGetStarted={handleGetStarted}
       />
+      <ScrollLoadIndicator />
 
       {/* 3. Main Views */}
       <main className="flex-grow">

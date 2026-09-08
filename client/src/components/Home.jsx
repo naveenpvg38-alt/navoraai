@@ -69,7 +69,27 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
     return () => clearTimeout(timer);
   }, [typedText, isDeleting, discIdx]);
 
+  // Scroll-triggered load reveal (activates when scrolling down or up)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-loaded');
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
 
+    const elements = document.querySelectorAll('.scroll-load-reveal');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const benefits = [
     {
@@ -282,7 +302,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
 
       {/* ── BENEFITS ──────────────────────────────────── */}
       <section className="py-20 px-5 sm:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 scroll-load-reveal">
           <p className="label-overline mb-3">Why Choose Navora</p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
             Built for Tumkur Explorers
@@ -293,7 +313,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
           {benefits.map((b, i) => (
             <div
               key={i}
-              className="glass-card p-6 group cursor-default"
+              className={`glass-card p-6 group cursor-default scroll-load-reveal scroll-delay-${(i % 4) + 1}`}
             >
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-5 border ${accentMap[b.accent]} transition-transform group-hover:scale-110`}>
                 {b.icon}
@@ -309,7 +329,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
 
       {/* ── HOW IT WORKS ──────────────────────────────── */}
       <section className="py-20 px-5 sm:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 scroll-load-reveal">
           <p className="label-overline mb-3">The Process</p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
             Four Steps. One Perfect Day.
@@ -318,7 +338,10 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((step, i) => (
-            <div key={i} className="relative p-6 rounded-2xl bg-navora-card border border-white/5 hover:border-white/10 transition-all duration-300 group">
+            <div
+              key={i}
+              className={`relative p-6 rounded-2xl bg-navora-card border border-white/5 hover:border-white/10 transition-all duration-300 group scroll-load-reveal scroll-delay-${(i % 4) + 1}`}
+            >
               {/* Step connector line (desktop) */}
               {i < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-9 -right-2.5 w-5 h-px bg-gradient-to-r from-white/15 to-transparent z-10" />
@@ -341,7 +364,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
       {/* ── READY TO EXPLORE CTA ──────────────────────── */}
       <section className="py-20 px-5 sm:px-8 max-w-5xl mx-auto">
         <div
-          className="relative rounded-3xl p-8 sm:p-14 text-center overflow-hidden"
+          className="relative rounded-3xl p-8 sm:p-14 text-center overflow-hidden scroll-load-reveal"
           style={{
             background: 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(21, 29, 48, 0.9) 100%)',
             border: '1px solid rgba(34, 211, 238, 0.25)',
