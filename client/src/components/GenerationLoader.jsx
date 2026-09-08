@@ -7,7 +7,7 @@ export default function GenerationLoader({ preferences }) {
 
   const steps = [
     `Analyzing vibe: ${preferences.mood || 'Relaxed'} and selected interests...`,
-    `Scanning Tumkur District landmarks in ${preferences.location || 'Tumkur'}...`,
+    `Scanning Tumkur landmarks in ${preferences.location || 'Tumkur'}...`,
     `Optimizing route via ${preferences.transport || 'Two-Wheeler'} to minimize travel time...`,
     `Balancing dwell durations and ${preferences.budget || 'moderate'} budget limits...`,
     `Assembling your personalized itinerary and insider tips...`,
@@ -47,7 +47,7 @@ export default function GenerationLoader({ preferences }) {
         Building Your <span className="text-gradient-cyan">Outing Plan</span>
       </h1>
       <p className="text-slate-600 text-sm font-light text-center max-w-xs mb-10">
-        Evaluating real distances, local food trails, and heritage sites across Tumkur District.
+        Evaluating real distances, local food trails, and heritage sites across Tumkur.
       </p>
 
       {/* Steps card */}

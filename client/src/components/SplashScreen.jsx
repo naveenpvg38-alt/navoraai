@@ -30,23 +30,45 @@ export default function SplashScreen({ onComplete }) {
       {/* Center content */}
       <div className="relative z-10 flex flex-col items-center text-center px-8 max-w-lg">
 
-        {/* Logo mark */}
+        {/* Logo mark — Compass + Route */}
         <div className="relative mb-10">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-violet-600/20 border border-white/10 flex items-center justify-center mb-0 shadow-glow-cyan backdrop-blur-xl">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="18" stroke="#22D3EE" strokeWidth="1.5" strokeDasharray="4 3" className="animate-spin-slow" style={{ animationDuration: '20s' }} />
-              <path d="M20 8L24 18H30L25.5 24L27.5 34L20 29L12.5 34L14.5 24L10 18H16L20 8Z" fill="url(#star-grad)" />
+          <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-glow-cyan backdrop-blur-xl"
+            style={{ background: 'rgba(13,18,36,0.85)', border: '1px solid rgba(34,211,238,0.3)', boxShadow: '0 0 40px rgba(34,211,238,0.2)' }}>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              {/* Outer ring — dashed spinning */}
+              <circle cx="24" cy="24" r="21" stroke="#22D3EE" strokeWidth="1.2" strokeDasharray="5 4" opacity="0.35" className="animate-spin-slow" style={{ animationDuration: '20s' }}/>
+              {/* Compass ring */}
+              <circle cx="24" cy="24" r="16" stroke="url(#sp-ring)" strokeWidth="1.2" opacity="0.6"/>
+              {/* Cardinal ticks */}
+              <line x1="24" y1="8"  x2="24" y2="12" stroke="#22D3EE" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="24" y1="36" x2="24" y2="40" stroke="#7C3AED" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="8"  y1="24" x2="12" y2="24" stroke="#22D3EE" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="36" y1="24" x2="40" y2="24" stroke="#22D3EE" strokeWidth="1.8" strokeLinecap="round"/>
+              {/* North needle (cyan) */}
+              <path d="M24 12L26 22H22L24 12Z" fill="#22D3EE"/>
+              {/* South needle (violet) */}
+              <path d="M24 36L22 26H26L24 36Z" fill="#7C3AED" opacity="0.7"/>
+              {/* Center glow dot */}
+              <circle cx="24" cy="24" r="3" fill="url(#sp-center)"/>
+              {/* Route trail dots (SW corner — Tumkur roads) */}
+              <circle cx="10.5" cy="34.5" r="2" fill="#22D3EE" opacity="0.4"/>
+              <circle cx="14.5" cy="31"   r="1.3" fill="#22D3EE" opacity="0.28"/>
+              <circle cx="18"   cy="28.5" r="0.8" fill="#22D3EE" opacity="0.18"/>
               <defs>
-                <linearGradient id="star-grad" x1="10" y1="8" x2="30" y2="34" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#22D3EE" />
-                  <stop offset="1" stopColor="#7C3AED" />
+                <linearGradient id="sp-ring" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#22D3EE"/>
+                  <stop offset="1" stopColor="#7C3AED"/>
                 </linearGradient>
+                <radialGradient id="sp-center" cx="50%" cy="50%" r="50%">
+                  <stop stopColor="#22D3EE"/>
+                  <stop offset="1" stopColor="#7C3AED"/>
+                </radialGradient>
               </defs>
             </svg>
           </div>
           {/* Orbiting dot */}
           <div className="absolute inset-0 flex items-center justify-center animate-spin-slow" style={{ animationDuration: '8s' }}>
-            <div style={{ transform: 'translateY(-44px)' }} className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-sm" />
+            <div style={{ transform: 'translateY(-50px)' }} className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-sm" />
           </div>
         </div>
 
@@ -59,7 +81,7 @@ export default function SplashScreen({ onComplete }) {
         <div className="flex items-center gap-2 mb-4">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 label-overline text-cyan-300">
             <MapPin className="w-3 h-3 text-cyan-400" />
-            Tumkur District
+            Tumkur
           </span>
           <span className="w-1 h-1 rounded-full bg-slate-600" />
           <span className="label-overline text-slate-400 tracking-widest">Karnataka</span>

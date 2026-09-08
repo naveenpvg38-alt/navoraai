@@ -44,7 +44,7 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
     {
       icon: <Shield className="w-5 h-5 text-violet-400" />,
       title: 'Locally Curated',
-      desc: 'Every location, route, and tip is handcrafted for Tumkur District — no generic results from global databases.',
+      desc: 'Every location, route, and tip is handcrafted for Tumkur — no generic results from global databases.',
       accent: 'violet'
     },
   ];
@@ -158,7 +158,7 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
           {/* Overline badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/4 border border-white/10 mb-8 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
-            <span className="label-overline">Tumkur District · AI-Powered Outing Planner</span>
+            <span className="label-overline">Tumkur · AI-Powered Outing Planner</span>
           </div>
 
           {/* Hero headline — Outfit font */}

@@ -32,16 +32,37 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
           onClick={() => setActiveView('home')}
           className="flex items-center gap-3 group cursor-pointer focus:outline-none"
         >
-          {/* Minimal SVG logo */}
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400/15 to-violet-600/15 border border-white/10 flex items-center justify-center group-hover:border-cyan-400/40 transition-all duration-300 shadow-glow-sm">
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-              <path d="M10 2L12.5 9H19L13.5 13L15.5 20L10 16L4.5 20L6.5 13L1 9H7.5L10 2Z"
-                fill="url(#nb-grad)" />
+          {/* Compass + Route logo — project themed */}
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center group-hover:scale-105 transition-all duration-300"
+            style={{ background: 'rgba(13,18,36,0.9)', border: '1px solid rgba(34,211,238,0.25)', boxShadow: '0 0 16px rgba(34,211,238,0.12)' }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9.5" stroke="url(#nav-ring)" strokeWidth="1" opacity="0.45"/>
+              {/* N tick */}
+              <line x1="12" y1="2.8" x2="12" y2="4.5" stroke="#22D3EE" strokeWidth="1.3" strokeLinecap="round"/>
+              {/* S tick */}
+              <line x1="12" y1="19.5" x2="12" y2="21.2" stroke="#7C3AED" strokeWidth="1.3" strokeLinecap="round"/>
+              {/* E tick */}
+              <line x1="19.5" y1="12" x2="21.2" y2="12" stroke="#22D3EE" strokeWidth="1.3" strokeLinecap="round"/>
+              {/* W tick */}
+              <line x1="2.8" y1="12" x2="4.5" y2="12" stroke="#22D3EE" strokeWidth="1.3" strokeLinecap="round"/>
+              {/* North needle */}
+              <path d="M12 5.5L13.3 11H10.7L12 5.5Z" fill="#22D3EE"/>
+              {/* South needle */}
+              <path d="M12 18.5L10.7 13H13.3L12 18.5Z" fill="#7C3AED" opacity="0.65"/>
+              {/* Center dot */}
+              <circle cx="12" cy="12" r="1.7" fill="url(#nav-center)"/>
+              {/* Route trail dots */}
+              <circle cx="5.2" cy="17.8" r="1.1" fill="#22D3EE" opacity="0.45"/>
+              <circle cx="7.5" cy="15.8" r="0.7" fill="#22D3EE" opacity="0.3"/>
               <defs>
-                <linearGradient id="nb-grad" x1="1" y1="2" x2="19" y2="20" gradientUnits="userSpaceOnUse">
+                <linearGradient id="nav-ring" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
                   <stop stopColor="#22D3EE"/>
                   <stop offset="1" stopColor="#7C3AED"/>
                 </linearGradient>
+                <radialGradient id="nav-center" cx="50%" cy="50%" r="50%">
+                  <stop stopColor="#22D3EE"/>
+                  <stop offset="1" stopColor="#7C3AED"/>
+                </radialGradient>
               </defs>
             </svg>
           </div>
@@ -51,7 +72,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
               NAVORA <span className="text-cyan-400">AI</span>
             </span>
             <span className="hidden sm:block label-overline text-slate-500 mt-0.5">
-              Tumkur District
+              Tumkur
             </span>
           </div>
         </button>

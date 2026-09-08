@@ -157,7 +157,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
           Craft Your <span className="text-gradient-cyan">Ideal Day</span>
         </h1>
         <p className="text-slate-500 text-sm font-light max-w-md mx-auto mb-4">
-          Tell us your vibe and we'll synthesize a route-optimized itinerary across Tumkur District.
+          Tell us your vibe and we'll synthesize a route-optimized itinerary across Tumkur.
         </p>
 
         {/* Quick Shuffle Button */}
