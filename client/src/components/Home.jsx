@@ -20,55 +20,63 @@ import {
 } from 'lucide-react';
 import VibeRouletteModal from './VibeRouletteModal';
 
-const OUTING_PROMPTS = [
+const VIBE_OPTIONS = [
   {
-    label: 'DD Hills',
-    emoji: '⛰️',
-    category: 'Sunrise Trek',
-    title: 'Misty sunrise hike to DD Hills & Namada Chilume spring trail',
+    id: 'hills',
+    label: '⛰️ Sunrise & Hills',
+    route: ['Kyathsandra Thatte Idli', 'Devarayanadurga Peak', 'Namada Chilume Spring'],
     preset: { location: 'Tumkur', duration: 'half', vibe: 'nature', group: 'friends', pace: 'moderate', budget: 'budget' }
   },
   {
-    label: 'Thatte Idli',
-    emoji: '🍽️',
-    category: 'Food Trail',
-    title: 'Kyathsandra hot Thatte Idli trail & Siddaganga cultural heritage',
+    id: 'food',
+    label: '🍽️ Thatte Idli Food Trail',
+    route: ['Sri Prasanna Thatte Idli', 'Pavithra Filter Coffee', 'Siddaganga Mutt'],
     preset: { location: 'Tumkur', duration: 'half', vibe: 'foodie', group: 'family', pace: 'relaxed', budget: 'budget' }
   },
   {
-    label: 'Madhugiri Fort',
-    emoji: '🏰',
-    category: 'Monolith Fort',
-    title: 'Climb Asia’s 2nd largest monolith fort & explore historic bastions',
+    id: 'fort',
+    label: '🏰 Madhugiri Monolith Trek',
+    route: ['Madhugiri Base', 'Granite Bastions Climb', 'Top Fort Viewpoint'],
     preset: { location: 'Tumkur', duration: 'full', vibe: 'adventure', group: 'friends', pace: 'packed', budget: 'budget' }
   },
   {
-    label: 'Amanikere',
-    emoji: '🏞️',
-    category: 'Lake Promenade',
-    title: 'Evening lakefront breeze, walking promenade & pedal boating',
+    id: 'lake',
+    label: '🏞️ Amanikere Lakefront',
+    route: ['Lakeside Promenade', 'Pedal Boating Jetty', 'Sunset Garden Cafe'],
     preset: { location: 'Tumkur', duration: 'quick', vibe: 'chill', group: 'couple', pace: 'relaxed', budget: 'free' }
   },
   {
-    label: 'Markonahalli',
-    emoji: '💧',
-    category: 'Waters & Dam',
-    title: 'Asia’s automatic siphon dam reservoir & peaceful scenic escape',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'nature', group: 'friends', pace: 'moderate', budget: 'budget' }
+    id: 'heritage',
+    label: '🛕 Sacred Heritage Circuit',
+    route: ['Siddaganga Pilgrimage', 'Kaidala Chennakeshava', 'Goravanahalli Shrine'],
+    preset: { location: 'Tumkur', duration: 'half', vibe: 'culture', group: 'family', pace: 'relaxed', budget: 'free' }
   }
 ];
 
 export default function Home({ onStartPlanning, onQuickTemplate }) {
   const [showRoulette, setShowRoulette] = useState(false);
-  const [promptIdx, setPromptIdx] = useState(0);
+  const [selectedVibe, setSelectedVibe] = useState(VIBE_OPTIONS[0]);
+  const [selectedDuration, setSelectedDuration] = useState('Half Day');
+  const [selectedGroup, setSelectedGroup] = useState('With Friends');
 
-  // Smoothly rotate suggested outings
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setPromptIdx((prev) => (prev + 1) % OUTING_PROMPTS.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
+  const handleLaunchOuting = () => {
+    const durationMap = {
+      'Quick (2-3h)': 'quick',
+      'Half Day': 'half',
+      'Full Day': 'full'
+    };
+    const groupMap = {
+      'With Friends': 'friends',
+      'With Family': 'family',
+      'As Couple': 'couple',
+      'Solo': 'solo'
+    };
+    onQuickTemplate({
+      ...selectedVibe.preset,
+      duration: durationMap[selectedDuration] || 'half',
+      group: groupMap[selectedGroup] || 'friends'
+    });
+  };
 
 
   const benefits = [
@@ -217,58 +225,87 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
             {' '}More.
           </h1>
 
-          {/* Attractive Interactive Suggestion Pill */}
-          <div className="max-w-xl mx-auto mb-10 animate-fade-up">
+          {/* Interactive Outing Launcher Bar */}
+          <div className="max-w-2xl mx-auto mb-10 animate-fade-up">
             <div
-              className="group flex items-center justify-between gap-3 px-4 py-3 rounded-2xl border transition-all duration-300"
+              className="p-2 sm:p-2.5 rounded-2xl border transition-all duration-300"
               style={{
-                background: 'rgba(13, 18, 36, 0.75)',
-                borderColor: 'rgba(34, 211, 238, 0.22)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 211, 238, 0.08)',
+                background: 'rgba(10, 14, 26, 0.85)',
+                borderColor: 'rgba(34, 211, 238, 0.25)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.08)',
                 backdropFilter: 'blur(20px)',
               }}
             >
-              {/* Left: Icon + Category + Title */}
-              <div className="flex items-center gap-3 min-w-0 flex-1 text-left">
-                <div className="w-9 h-9 rounded-xl bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center shrink-0 text-base shadow-glow-sm">
-                  {OUTING_PROMPTS[promptIdx].emoji}
+              <div className="flex flex-col sm:flex-row items-center gap-2">
+                {/* Vibe Selector */}
+                <div className="w-full sm:flex-1 relative">
+                  <select
+                    value={selectedVibe.id}
+                    onChange={(e) => setSelectedVibe(VIBE_OPTIONS.find(v => v.id === e.target.value) || VIBE_OPTIONS[0])}
+                    className="w-full bg-white/4 hover:bg-white/8 text-white font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/8 hover:border-cyan-400/40 outline-none transition-all cursor-pointer"
+                  >
+                    {VIBE_OPTIONS.map((v) => (
+                      <option key={v.id} value={v.id} className="bg-[#0A0E1A] text-white">
+                        {v.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                    {OUTING_PROMPTS[promptIdx].category}
-                  </div>
-                  <div className="text-xs sm:text-[13px] text-slate-200 font-medium truncate mt-0.5">
-                    {OUTING_PROMPTS[promptIdx].title}
-                  </div>
+
+                {/* Duration Selector */}
+                <div className="w-full sm:w-36 relative">
+                  <select
+                    value={selectedDuration}
+                    onChange={(e) => setSelectedDuration(e.target.value)}
+                    className="w-full bg-white/4 hover:bg-white/8 text-white font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/8 hover:border-cyan-400/40 outline-none transition-all cursor-pointer"
+                  >
+                    <option value="Half Day" className="bg-[#0A0E1A] text-white">⏱️ Half Day</option>
+                    <option value="Quick (2-3h)" className="bg-[#0A0E1A] text-white">⚡ Quick (2-3h)</option>
+                    <option value="Full Day" className="bg-[#0A0E1A] text-white">☀️ Full Day</option>
+                  </select>
+                </div>
+
+                {/* Group Selector */}
+                <div className="w-full sm:w-36 relative">
+                  <select
+                    value={selectedGroup}
+                    onChange={(e) => setSelectedGroup(e.target.value)}
+                    className="w-full bg-white/4 hover:bg-white/8 text-white font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/8 hover:border-cyan-400/40 outline-none transition-all cursor-pointer"
+                  >
+                    <option value="With Friends" className="bg-[#0A0E1A] text-white">👥 Friends</option>
+                    <option value="With Family" className="bg-[#0A0E1A] text-white">👨‍👩‍👧 Family</option>
+                    <option value="As Couple" className="bg-[#0A0E1A] text-white">❤️ Couple</option>
+                    <option value="Solo" className="bg-[#0A0E1A] text-white">🎒 Solo</option>
+                  </select>
+                </div>
+
+                {/* Launch Action */}
+                <div className="w-full sm:w-auto">
+                  <button
+                    onClick={handleLaunchOuting}
+                    className="w-full sm:w-auto btn-primary !py-2.5 !px-5 !text-xs !rounded-xl !gap-1.5 shadow-glow-sm cursor-pointer whitespace-nowrap"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Plan Route</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
-
-              {/* Right: Quick action */}
-              <button
-                onClick={() => onQuickTemplate(OUTING_PROMPTS[promptIdx].preset)}
-                className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-cyan-500/20 to-violet-500/20 hover:from-cyan-500/30 hover:to-violet-500/30 border border-cyan-400/30 hover:border-cyan-400/50 transition-all cursor-pointer shadow-glow-sm group/btn"
-              >
-                <span>Try this</span>
-                <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover/btn:translate-x-0.5 transition-transform" />
-              </button>
             </div>
 
-            {/* Quick interactive shortcut chips */}
-            <div className="flex items-center justify-center gap-1.5 mt-3 flex-wrap">
-              {OUTING_PROMPTS.map((p, i) => (
-                <button
-                  key={i}
-                  onClick={() => setPromptIdx(i)}
-                  className={`px-3 py-1 rounded-full text-[11px] font-medium transition-all duration-200 cursor-pointer flex items-center gap-1.5 border ${
-                    promptIdx === i
-                      ? 'bg-cyan-500/15 border-cyan-400/40 text-cyan-300 shadow-glow-sm'
-                      : 'bg-white/3 border-white/8 text-slate-500 hover:text-slate-300 hover:border-white/15'
-                  }`}
-                >
-                  <span>{p.emoji}</span>
-                  <span>{p.label}</span>
-                </button>
+            {/* Live Route Trail Preview */}
+            <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-400 flex-wrap px-2">
+              <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                Curated Stops:
+              </span>
+              {selectedVibe.route.map((stop, i) => (
+                <React.Fragment key={i}>
+                  <span className="text-slate-300 font-medium">{stop}</span>
+                  {i < selectedVibe.route.length - 1 && (
+                    <span className="text-cyan-400 font-mono text-[11px]">→</span>
+                  )}
+                </React.Fragment>
               ))}
             </div>
           </div>
