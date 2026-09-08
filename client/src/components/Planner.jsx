@@ -97,9 +97,10 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
   ];
 
   const popularTumkurRegions = [
-    'Tumkur City', 'Devarayanadurga (DD Hills)', 'Kyathsandra',
+    'Tumkur City', 'Devarayanadurga (DD Hills)', 'Kyathsandra Thatte Idli',
     'Namada Chilume', 'Madhugiri Monolith', 'Kaidala Temple',
-    'Kunigal & Markonahalli', 'Gubbi', 'Sira',
+    'Kunigal & Markonahalli', 'Jayamangali Blackbucks', 'Goravanahalli Temple',
+    'Yediyur Siddhalingeshwara', 'Seebi Murals', 'Pavagada Fort', 'Gubbi & Turuvekere'
   ];
 
   const toggleInterest = (name) => {
