@@ -192,8 +192,8 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
             {/* Smooth Continuous Marquee of Tumkur Landmarks */}
             <div className="relative w-full max-w-2xl overflow-hidden pointer-events-none select-none">
               {/* Soft gradient edge fade masks */}
-              <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-[#06080F] to-transparent z-10" />
-              <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#06080F] to-transparent z-10" />
+              <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-[#0B1120] to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#0B1120] to-transparent z-10" />
 
               <div className="flex gap-2.5 animate-marquee whitespace-nowrap py-1">
                 {[...TUMKUR_LANDMARKS, ...TUMKUR_LANDMARKS].map((item, idx) => (

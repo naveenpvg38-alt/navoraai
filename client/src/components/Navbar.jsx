@@ -23,7 +23,7 @@ const NavLink = ({ label, active, onClick, icon }) => (
 export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout }) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] transition-all duration-200"
-      style={{ background: 'rgba(6, 8, 15, 0.85)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
+      style={{ background: 'rgba(11, 17, 32, 0.85)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-[60px] flex items-center justify-between">
 

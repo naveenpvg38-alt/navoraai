@@ -25,7 +25,7 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
   };
 
   return (
-    <footer className="relative font-poppins border-t border-white/10 bg-[#070A16]/95 backdrop-blur-2xl text-slate-300 pt-9 pb-8 px-5 sm:px-8 lg:px-12 text-xs overflow-hidden">
+    <footer className="relative font-poppins border-t border-white/10 bg-[#0B1120]/95 backdrop-blur-2xl text-slate-300 pt-9 pb-8 px-5 sm:px-8 lg:px-12 text-xs overflow-hidden">
       {/* Unique Ambient Glow Line */}
       <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-violet-500 opacity-80" />
 

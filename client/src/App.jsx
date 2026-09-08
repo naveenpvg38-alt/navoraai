@@ -123,7 +123,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#06080F] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#0B1120] text-slate-100 flex flex-col font-sans">
       {/* 1. Splash Screen */}
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
 

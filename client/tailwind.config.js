@@ -9,16 +9,16 @@ export default {
     extend: {
       colors: {
         navora: {
-          bg:       '#06080F',
-          deep:     '#0A0E1A',
-          card:     '#0D1220',
-          surface:  '#141D2F',
-          border:   '#1E2D47',
-          muted:    '#2A3A55',
-          cyan:     '#22D3EE',
+          bg:       '#0B1120',
+          deep:     '#0F172A',
+          card:     '#151D30',
+          surface:  '#1E293B',
+          border:   '#2E3E5B',
+          muted:    '#64748B',
+          cyan:     '#38BDF8',
           blue:     '#3B82F6',
-          violet:   '#7C3AED',
-          purple:   '#9333EA',
+          violet:   '#818CF8',
+          purple:   '#A855F7',
           pink:     '#EC4899',
           amber:    '#F59E0B',
           emerald:  '#10B981',
@@ -26,8 +26,8 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Outfit"', '"Poppins"', 'system-ui', 'sans-serif'],
+        sans:    ['"Poppins"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', 'Menlo', 'monospace'],
         poppins: ['"Poppins"', 'sans-serif'],
       },
