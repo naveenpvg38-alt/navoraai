@@ -383,7 +383,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
             <p className="text-slate-400 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
               {user
                 ? 'Your personalized outing workspace is ready. Hop directly into the planner to discover fresh scenic trails and iconic eats.'
-                : 'Get started in seconds. No complex setup — generate intelligent, zero-backtracking routes tailored exclusively for Tumkur.'}
+                : 'Craft your perfect day in seconds — generate intelligent, zero-backtracking routes tailored exclusively for Tumkur.'}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
               <button
@@ -393,13 +393,13 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
                 {user ? (
                   <>
                     <Compass className="w-4.5 h-4.5 text-cyan-300 group-hover:rotate-45 transition-transform duration-300" />
-                    <span>Discover Website</span>
+                    <span>Explore Tumkur Now</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
-                    <span>Get Started</span>
+                    <Compass className="w-4.5 h-4.5 text-cyan-300 group-hover:rotate-45 transition-transform duration-300" />
+                    <span>Start Exploring</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
