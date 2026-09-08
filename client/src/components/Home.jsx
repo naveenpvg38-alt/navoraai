@@ -20,63 +20,54 @@ import {
 } from 'lucide-react';
 import VibeRouletteModal from './VibeRouletteModal';
 
-const VIBE_OPTIONS = [
-  {
-    id: 'hills',
-    label: '⛰️ Sunrise & Hills',
-    route: ['Kyathsandra Thatte Idli', 'Devarayanadurga Peak', 'Namada Chilume Spring'],
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'nature', group: 'friends', pace: 'moderate', budget: 'budget' }
-  },
-  {
-    id: 'food',
-    label: '🍽️ Thatte Idli Food Trail',
-    route: ['Sri Prasanna Thatte Idli', 'Pavithra Filter Coffee', 'Siddaganga Mutt'],
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'foodie', group: 'family', pace: 'relaxed', budget: 'budget' }
-  },
-  {
-    id: 'fort',
-    label: '🏰 Madhugiri Monolith Trek',
-    route: ['Madhugiri Base', 'Granite Bastions Climb', 'Top Fort Viewpoint'],
-    preset: { location: 'Tumkur', duration: 'full', vibe: 'adventure', group: 'friends', pace: 'packed', budget: 'budget' }
-  },
-  {
-    id: 'lake',
-    label: '🏞️ Amanikere Lakefront',
-    route: ['Lakeside Promenade', 'Pedal Boating Jetty', 'Sunset Garden Cafe'],
-    preset: { location: 'Tumkur', duration: 'quick', vibe: 'chill', group: 'couple', pace: 'relaxed', budget: 'free' }
-  },
-  {
-    id: 'heritage',
-    label: '🛕 Sacred Heritage Circuit',
-    route: ['Siddaganga Pilgrimage', 'Kaidala Chennakeshava', 'Goravanahalli Shrine'],
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'culture', group: 'family', pace: 'relaxed', budget: 'free' }
-  }
+const DISCOVER_ITEMS = [
+  { emoji: '⛰️', text: 'Devarayanadurga Peak Sunrise' },
+  { emoji: '🍽️', text: 'Kyathsandra Thatte Idli Trail' },
+  { emoji: '🏰', text: 'Madhugiri Monolith Fort Trek' },
+  { emoji: '🏞️', text: 'Amanikere Lakefront Sunset & Boating' },
+  { emoji: '🛕', text: 'Historic Siddaganga Mutt & Dasoha' },
+  { emoji: '💧', text: 'Markonahalli Automatic Siphon Dam' },
+  { emoji: '🦌', text: 'Namada Chilume Natural Forest Spring' },
+];
+
+const TUMKUR_LANDMARKS = [
+  { emoji: '⛰️', name: 'Devarayanadurga' },
+  { emoji: '🍽️', name: 'Thatte Idli Trail' },
+  { emoji: '🏰', name: 'Madhugiri Fort' },
+  { emoji: '🏞️', name: 'Amanikere Lake' },
+  { emoji: '🛕', name: 'Siddaganga Mutt' },
+  { emoji: '💧', name: 'Markonahalli Dam' },
+  { emoji: '🦌', name: 'Namada Chilume' },
+  { emoji: '✨', name: 'Goravanahalli' },
+  { emoji: '🧗', name: 'Kyathsandra Boulders' },
 ];
 
 export default function Home({ onStartPlanning, onQuickTemplate }) {
   const [showRoulette, setShowRoulette] = useState(false);
-  const [selectedVibe, setSelectedVibe] = useState(VIBE_OPTIONS[0]);
-  const [selectedDuration, setSelectedDuration] = useState('Half Day');
-  const [selectedGroup, setSelectedGroup] = useState('With Friends');
+  const [discIdx, setDiscIdx] = useState(0);
+  const [typedText, setTypedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleLaunchOuting = () => {
-    const durationMap = {
-      'Quick (2-3h)': 'quick',
-      'Half Day': 'half',
-      'Full Day': 'full'
-    };
-    const groupMap = {
-      'With Friends': 'friends',
-      'With Family': 'family',
-      'As Couple': 'couple',
-      'Solo': 'solo'
-    };
-    onQuickTemplate({
-      ...selectedVibe.preset,
-      duration: durationMap[selectedDuration] || 'half',
-      group: groupMap[selectedGroup] || 'friends'
-    });
-  };
+  // Smooth typewriter loop
+  useEffect(() => {
+    const current = DISCOVER_ITEMS[discIdx].text;
+    const speed = isDeleting ? 30 : 65;
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setTypedText(current.slice(0, typedText.length + 1));
+        if (typedText.length + 1 === current.length) {
+          setTimeout(() => setIsDeleting(true), 2200);
+        }
+      } else {
+        setTypedText(current.slice(0, typedText.length - 1));
+        if (typedText.length - 1 === 0) {
+          setIsDeleting(false);
+          setDiscIdx((prev) => (prev + 1) % DISCOVER_ITEMS.length);
+        }
+      }
+    }, speed);
+    return () => clearTimeout(timer);
+  }, [typedText, isDeleting, discIdx]);
 
 
   const benefits = [
@@ -225,88 +216,66 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
             {' '}More.
           </h1>
 
-          {/* Interactive Outing Launcher Bar */}
-          <div className="max-w-2xl mx-auto mb-10 animate-fade-up">
+          {/* Simple Animated Hero Outing Showcase */}
+          <div className="flex flex-col items-center mb-10 animate-fade-up">
+            <style>{`
+              @keyframes marqueeTrack {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+              .animate-marquee {
+                display: flex;
+                width: max-content;
+                animation: marqueeTrack 28s linear infinite;
+              }
+            `}</style>
+
+            {/* Glowing Live Typewriter Pill */}
             <div
-              className="p-2 sm:p-2.5 rounded-2xl border transition-all duration-300"
+              className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border mb-4 transition-all shadow-glow-sm"
               style={{
-                background: 'rgba(10, 14, 26, 0.85)',
+                background: 'rgba(13, 18, 36, 0.75)',
                 borderColor: 'rgba(34, 211, 238, 0.25)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.08)',
-                backdropFilter: 'blur(20px)',
+                boxShadow: '0 0 20px rgba(34, 211, 238, 0.12)',
+                backdropFilter: 'blur(16px)',
               }}
             >
-              <div className="flex flex-col sm:flex-row items-center gap-2">
-                {/* Vibe Selector */}
-                <div className="w-full sm:flex-1 relative">
-                  <select
-                    value={selectedVibe.id}
-                    onChange={(e) => setSelectedVibe(VIBE_OPTIONS.find(v => v.id === e.target.value) || VIBE_OPTIONS[0])}
-                    className="w-full bg-white/4 hover:bg-white/8 text-white font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/8 hover:border-cyan-400/40 outline-none transition-all cursor-pointer"
-                  >
-                    {VIBE_OPTIONS.map((v) => (
-                      <option key={v.id} value={v.id} className="bg-[#0A0E1A] text-white">
-                        {v.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Duration Selector */}
-                <div className="w-full sm:w-36 relative">
-                  <select
-                    value={selectedDuration}
-                    onChange={(e) => setSelectedDuration(e.target.value)}
-                    className="w-full bg-white/4 hover:bg-white/8 text-white font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/8 hover:border-cyan-400/40 outline-none transition-all cursor-pointer"
-                  >
-                    <option value="Half Day" className="bg-[#0A0E1A] text-white">⏱️ Half Day</option>
-                    <option value="Quick (2-3h)" className="bg-[#0A0E1A] text-white">⚡ Quick (2-3h)</option>
-                    <option value="Full Day" className="bg-[#0A0E1A] text-white">☀️ Full Day</option>
-                  </select>
-                </div>
-
-                {/* Group Selector */}
-                <div className="w-full sm:w-36 relative">
-                  <select
-                    value={selectedGroup}
-                    onChange={(e) => setSelectedGroup(e.target.value)}
-                    className="w-full bg-white/4 hover:bg-white/8 text-white font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/8 hover:border-cyan-400/40 outline-none transition-all cursor-pointer"
-                  >
-                    <option value="With Friends" className="bg-[#0A0E1A] text-white">👥 Friends</option>
-                    <option value="With Family" className="bg-[#0A0E1A] text-white">👨‍👩‍👧 Family</option>
-                    <option value="As Couple" className="bg-[#0A0E1A] text-white">❤️ Couple</option>
-                    <option value="Solo" className="bg-[#0A0E1A] text-white">🎒 Solo</option>
-                  </select>
-                </div>
-
-                {/* Launch Action */}
-                <div className="w-full sm:w-auto">
-                  <button
-                    onClick={handleLaunchOuting}
-                    className="w-full sm:w-auto btn-primary !py-2.5 !px-5 !text-xs !rounded-xl !gap-1.5 shadow-glow-sm cursor-pointer whitespace-nowrap"
-                  >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Plan Route</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+              </span>
+              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">
+                Discovering:
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-white flex items-center gap-1.5 min-w-[200px] sm:min-w-[250px] text-left">
+                <span>{DISCOVER_ITEMS[discIdx].emoji}</span>
+                <span className="text-cyan-300">{typedText}</span>
+                <span className="text-cyan-400 font-mono animate-pulse">|</span>
+              </span>
             </div>
 
-            {/* Live Route Trail Preview */}
-            <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-400 flex-wrap px-2">
-              <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                Curated Stops:
-              </span>
-              {selectedVibe.route.map((stop, i) => (
-                <React.Fragment key={i}>
-                  <span className="text-slate-300 font-medium">{stop}</span>
-                  {i < selectedVibe.route.length - 1 && (
-                    <span className="text-cyan-400 font-mono text-[11px]">→</span>
-                  )}
-                </React.Fragment>
-              ))}
+            {/* Smooth Continuous Marquee of Tumkur Landmarks */}
+            <div className="relative w-full max-w-2xl overflow-hidden pointer-events-none select-none">
+              {/* Soft gradient edge fade masks */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-[#06080F] to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#06080F] to-transparent z-10" />
+
+              <div className="flex gap-2.5 animate-marquee whitespace-nowrap py-1">
+                {[...TUMKUR_LANDMARKS, ...TUMKUR_LANDMARKS].map((item, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium border text-slate-300 shrink-0"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      borderColor: 'rgba(255, 255, 255, 0.08)',
+                      backdropFilter: 'blur(8px)',
+                    }}
+                  >
+                    <span>{item.emoji}</span>
+                    <span>{item.name}</span>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
