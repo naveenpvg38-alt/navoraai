@@ -24,42 +24,26 @@ const DISCOVER_ITEMS = [
   { emoji: '⛰️', text: 'Devarayanadurga Peak Sunrise (1,204m)' },
   { emoji: '🍽️', text: 'Kyathsandra Iconic Thatte Idli Trail' },
   { emoji: '🏰', text: 'Madhugiri Asia’s 2nd Monolith Fort Trek' },
-  { emoji: '🦌', text: 'Jayamangali Blackbuck Sanctuary Grasslands' },
+  { emoji: '🦌', text: 'Namada Chilume Forest Spring & Deer Park' },
   { emoji: '🏞️', text: 'Amanikere Lakefront Sunset & Boating' },
   { emoji: '🛕', text: 'Historic Siddaganga Kshetra & Dasoha' },
-  { emoji: '🏛️', text: 'Kaidala Masterpiece Hoysala Sculpture' },
+  { emoji: '🏛️', text: 'Kaidala Masterpiece Hoysala Temple' },
   { emoji: '💧', text: 'Markonahalli Automatic Siphon Dam' },
-  { emoji: '🌲', text: 'Namada Chilume Forest Spring & Deer Park' },
-  { emoji: '🎨', text: 'Seebi Narasimha 18th-Century Murals' },
+  { emoji: '🦌', text: 'Jayamangali Blackbuck Wildlife Sanctuary' },
   { emoji: '✨', text: 'Goravanahalli Mahalakshmi Shrine' },
-  { emoji: '🛡️', text: 'Channarayana Durga 7-Tiered Hill Fort' },
-  { emoji: '🐎', text: 'Kunigal Historic Stud Farm & Lake' },
-  { emoji: '🪨', text: 'Pavagada Boulder Fort & Cliffside Trails' },
-  { emoji: '🛕', text: 'Yediyur Siddhalingeshwara Pilgrimage' },
-  { emoji: '🏛️', text: 'Aralaguppe 13th-Century Carved Ceilings' },
 ];
 
 const TUMKUR_LANDMARKS = [
-  { emoji: '⛰️', name: 'Devarayanadurga (DD Hills)' },
+  { emoji: '⛰️', name: 'Devarayanadurga' },
   { emoji: '🍽️', name: 'Kyathsandra Thatte Idli' },
-  { emoji: '🏰', name: 'Madhugiri Monolith Fort' },
-  { emoji: '🦌', name: 'Jayamangali Blackbucks' },
-  { emoji: '🏞️', name: 'Amanikere Lakefront' },
+  { emoji: '🏰', name: 'Madhugiri Fort' },
+  { emoji: '🦌', name: 'Namada Chilume' },
+  { emoji: '🏞️', name: 'Amanikere Lake' },
   { emoji: '🛕', name: 'Siddaganga Mutt' },
-  { emoji: '🏛️', name: 'Kaidala Chennakeshava' },
-  { emoji: '💧', name: 'Markonahalli Siphon Dam' },
-  { emoji: '🌲', name: 'Namada Chilume Spring' },
-  { emoji: '🎨', name: 'Seebi Narasimha Frescoes' },
-  { emoji: '✨', name: 'Goravanahalli Temple' },
-  { emoji: '🛡️', name: 'Channarayana Durga' },
-  { emoji: '🐎', name: 'Kunigal Stud Farm' },
-  { emoji: '🪨', name: 'Pavagada Fort' },
-  { emoji: '🛕', name: 'Yediyur Siddhalingeshwara' },
-  { emoji: '🧗', name: 'Kyathsandra Boulders' },
-  { emoji: '🏛️', name: 'Aralaguppe Sculptures' },
-  { emoji: '🌿', name: 'Thimmalapura Forest' },
-  { emoji: '🌊', name: 'Theetha Reservoir' },
-  { emoji: '🛕', name: 'Gubbi Channabasaveshwara' },
+  { emoji: '🏛️', name: 'Kaidala Temple' },
+  { emoji: '💧', name: 'Markonahalli Dam' },
+  { emoji: '🦌', name: 'Jayamangali Blackbucks' },
+  { emoji: '✨', name: 'Goravanahalli Shrine' },
 ];
 
 export default function Home({ onStartPlanning, onQuickTemplate }) {
@@ -68,15 +52,15 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
   const [typedText, setTypedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Smooth typewriter loop
+  // Smooth medium-speed typewriter loop
   useEffect(() => {
     const current = DISCOVER_ITEMS[discIdx].text;
-    const speed = isDeleting ? 30 : 65;
+    const speed = isDeleting ? 25 : 50;
     const timer = setTimeout(() => {
       if (!isDeleting) {
         setTypedText(current.slice(0, typedText.length + 1));
         if (typedText.length + 1 === current.length) {
-          setTimeout(() => setIsDeleting(true), 2200);
+          setTimeout(() => setIsDeleting(true), 1800);
         }
       } else {
         setTypedText(current.slice(0, typedText.length - 1));
@@ -88,6 +72,7 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
     }, speed);
     return () => clearTimeout(timer);
   }, [typedText, isDeleting, discIdx]);
+
 
 
   const benefits = [
@@ -246,7 +231,7 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
               .animate-marquee {
                 display: flex;
                 width: max-content;
-                animation: marqueeTrack 28s linear infinite;
+                animation: marqueeTrack 18s linear infinite;
               }
             `}</style>
 
