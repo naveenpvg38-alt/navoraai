@@ -29,6 +29,7 @@ export default {
         display: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', 'Menlo', 'monospace'],
+        poppins: ['"Poppins"', 'sans-serif'],
       },
       fontSize: {
         'hero':  ['clamp(3.5rem, 9vw, 8rem)', { lineHeight: '0.92', letterSpacing: '-0.02em' }],
