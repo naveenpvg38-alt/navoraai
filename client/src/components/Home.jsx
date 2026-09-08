@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Sparkles,
+  Compass,
   MapPin,
   Clock,
   Wallet,
@@ -41,7 +42,7 @@ const TUMKUR_LANDMARKS = [
   { emoji: '✨', name: 'Goravanahalli Shrine' },
 ];
 
-export default function Home({ onStartPlanning, onQuickTemplate }) {
+export default function Home({ user, onGetStarted, onStartPlanning, onQuickTemplate }) {
   const [showRoulette, setShowRoulette] = useState(false);
   const [discIdx, setDiscIdx] = useState(0);
   const [typedText, setTypedText] = useState('');
@@ -216,10 +217,23 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up">
-            <button onClick={onStartPlanning} className="btn-primary text-[15px] !py-3.5 !px-8 !rounded-2xl">
-              <Sparkles className="w-4 h-4" />
-              Plan My Outing
-              <ArrowRight className="w-4 h-4" />
+            <button
+              onClick={onGetStarted || onStartPlanning}
+              className="btn-primary text-[15px] !py-3.5 !px-8 !rounded-2xl cursor-pointer group shadow-glow-sm hover:shadow-glow-md transition-all"
+            >
+              {user ? (
+                <>
+                  <Compass className="w-4.5 h-4.5 text-cyan-300 group-hover:rotate-45 transition-transform duration-300" />
+                  <span>Discover Website</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
+                  <span>Get Started</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </button>
             <button
               onClick={() => setShowRoulette(true)}
@@ -228,6 +242,21 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
               <Dices className="w-4 h-4 text-cyan-400 group-hover:rotate-180 transition-transform duration-500" />
               <span>🎲 Surprise Vibe Roulette</span>
             </button>
+          </div>
+
+          {/* User Pathway Status Indicator */}
+          <div className="mt-4 text-[12px] flex items-center justify-center gap-2 animate-fade-up">
+            {user ? (
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Logged in as <strong className="text-white font-medium">{user.name || user.email}</strong> · Direct access to AI Outing Planner</span>
+              </div>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/4 border border-white/8 text-slate-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
+                <span>Press <strong className="text-white font-medium">Get Started</strong> to join & discover Tumkur · 1-click demo available</span>
+              </div>
+            )}
           </div>
 
           {/* Stats row */}
@@ -307,7 +336,55 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
         </div>
       </section>
 
+      <div className="divider-gradient mx-auto max-w-5xl" />
 
+      {/* ── READY TO EXPLORE CTA ──────────────────────── */}
+      <section className="py-20 px-5 sm:px-8 max-w-5xl mx-auto">
+        <div
+          className="relative rounded-3xl p-8 sm:p-14 text-center overflow-hidden"
+          style={{
+            background: 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(21, 29, 48, 0.9) 100%)',
+            border: '1px solid rgba(34, 211, 238, 0.25)',
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(34, 211, 238, 0.08) inset',
+          }}
+        >
+          {/* Ambient decorative glow */}
+          <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <span className="label-overline text-cyan-400 mb-2 block">Tumkur Outing Intelligence</span>
+            <h3 className="text-3xl sm:text-5xl font-bold text-white mb-4 tracking-tight">
+              Ready to Discover Tumkur with AI?
+            </h3>
+            <p className="text-slate-400 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+              {user
+                ? 'Your personalized outing workspace is ready. Hop directly into the planner to discover fresh scenic trails and iconic eats.'
+                : 'Get started in seconds. No complex setup — generate intelligent, zero-backtracking routes tailored exclusively for Tumkur.'}
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <button
+                onClick={onGetStarted || onStartPlanning}
+                className="btn-primary text-[15px] !py-3.5 !px-8 !rounded-2xl cursor-pointer group shadow-glow-sm hover:shadow-glow-md transition-all"
+              >
+                {user ? (
+                  <>
+                    <Compass className="w-4.5 h-4.5 text-cyan-300 group-hover:rotate-45 transition-transform duration-300" />
+                    <span>Discover Website</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
+                    <span>Get Started</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Vibe Roulette Modal */}
       <VibeRouletteModal

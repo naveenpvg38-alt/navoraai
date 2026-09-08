@@ -35,16 +35,37 @@ export default function App() {
     }
   }, []);
 
-  const handleOpenAuth = (mode = 'login') => {
+  const [postAuthRedirect, setPostAuthRedirect] = useState(null);
+
+  const handleOpenAuth = (mode = 'login', redirectView = null) => {
+    setPostAuthRedirect(redirectView);
     setAuthModal({ isOpen: true, mode });
   };
 
   const handleCloseAuth = () => {
     setAuthModal({ isOpen: false, mode: 'login' });
+    setPostAuthRedirect(null);
   };
 
   const handleAuthSuccess = (userData) => {
     setUser(userData);
+    if (postAuthRedirect) {
+      const destination = postAuthRedirect;
+      setPostAuthRedirect(null);
+      setActiveView(destination);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleGetStarted = () => {
+    if (user) {
+      // If user is already logged in -> directly discover the website
+      setActiveView('planner');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If user didn't login -> prompt login/signup, then automatically redirect to discover website
+      handleOpenAuth('signup', 'planner');
+    }
   };
 
   const handleLogout = () => {
@@ -134,6 +155,7 @@ export default function App() {
         user={user}
         onOpenAuth={handleOpenAuth}
         onLogout={handleLogout}
+        onGetStarted={handleGetStarted}
       />
 
       {/* 3. Main Views */}
@@ -144,6 +166,8 @@ export default function App() {
           <div key={activeView} className="animate-fade-up">
             {activeView === 'home' && (
               <Home
+                user={user}
+                onGetStarted={handleGetStarted}
                 onStartPlanning={handleStartPlanning}
                 onQuickTemplate={handleQuickTemplate}
               />
@@ -201,6 +225,7 @@ export default function App() {
 
       {/* 5. Authentication Modal */}
       <AuthModal
+        key={`${authModal.isOpen}-${authModal.mode}`}
         isOpen={authModal.isOpen}
         initialMode={authModal.mode}
         onClose={handleCloseAuth}

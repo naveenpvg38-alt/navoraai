@@ -20,7 +20,7 @@ const NavLink = ({ label, active, onClick, icon }) => (
   </button>
 );
 
-export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout }) {
+export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout, onGetStarted }) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] transition-all duration-200"
       style={{ background: 'rgba(11, 17, 32, 0.85)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
@@ -130,8 +130,8 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
                 Log In
               </button>
               <button
-                onClick={() => onOpenAuth('signup')}
-                className="btn-primary !py-2 !px-5 !text-[13px] !rounded-xl !gap-0"
+                onClick={onGetStarted ? onGetStarted : () => onOpenAuth('signup')}
+                className="btn-primary !py-2 !px-5 !text-[13px] !rounded-xl !gap-0 cursor-pointer"
               >
                 Get Started
               </button>

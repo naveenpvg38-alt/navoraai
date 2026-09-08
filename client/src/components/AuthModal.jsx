@@ -31,6 +31,11 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState('');
 
+  React.useEffect(() => {
+    setMode(initialMode);
+    setError('');
+  }, [initialMode, isOpen]);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
@@ -131,12 +136,12 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
 
           {/* Heading */}
           <h2 className="text-2xl font-bold text-white tracking-tight mb-1">
-            {mode === 'signup' ? 'Create an account' : 'Welcome back'}
+            {mode === 'signup' ? 'Get Started with NAVORA AI' : 'Welcome back'}
           </h2>
-          <p className="text-slate-500 text-sm mb-6">
+          <p className="text-slate-400 text-sm mb-6">
             {mode === 'signup'
-              ? 'Join to save and personalise your outing plans.'
-              : 'Sign in to access your saved itineraries.'}
+              ? 'Join to discover personalized itineraries and explore Tumkur District.'
+              : 'Sign in to access your saved itineraries and personalized routes.'}
           </p>
 
           {/* Demo Login */}
