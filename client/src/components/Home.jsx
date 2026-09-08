@@ -20,148 +20,56 @@ import {
 } from 'lucide-react';
 import VibeRouletteModal from './VibeRouletteModal';
 
-const EXPERIENCE_TAGS = [
+const OUTING_PROMPTS = [
   {
-    id: 'madhugiri',
-    label: 'Madhugiri Fort',
-    category: 'Asia’s 2nd Largest Monolith',
-    vibe: 'Trek & Adventure',
-    emoji: '🏰',
-    distance: '43 km',
-    duration: '3–4 hrs',
-    tagColor: 'amber',
-    badge: 'Legendary Fort',
-    highlight: 'Steep rock climb with multi-tier historic gateways & 360° panoramic hill vistas.',
-    tip: 'Start your climb before 8:00 AM before the granite rock warms up.',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'adventure', group: 'friends', pace: 'packed', budget: 'budget' }
-  },
-  {
-    id: 'thatte-idli',
-    label: 'Kyathsandra Thatte Idli',
-    category: 'Iconic Food Trail',
-    vibe: 'Breakfast Heritage',
-    emoji: '🍽️',
-    distance: '8 km',
-    duration: '1–2 hrs',
-    tagColor: 'cyan',
-    badge: 'Culinary Must',
-    highlight: 'Fluffy plate-sized steamed idlis served with dollops of fresh white butter & spiced sagu.',
-    tip: 'Pair with piping filter coffee at legendary Sri Prasanna or Pavithra on Old NH4.',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'foodie', group: 'friends', pace: 'relaxed', budget: 'budget' }
-  },
-  {
-    id: 'dd-hills',
-    label: 'Devarayanadurga Hills',
-    category: '1,204m Altitude Peak',
-    vibe: 'Sunrise & Forest',
+    label: 'DD Hills',
     emoji: '⛰️',
-    distance: '15 km',
-    duration: '3–4 hrs',
-    tagColor: 'violet',
-    badge: 'Hilltop Vantage',
-    highlight: 'Yoga Narasimha temple perched on green rocky peaks and Namada Chilume spring nearby.',
-    tip: 'Catch the misty morning sunrise from the upper viewpoint for great photography.',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'nature', group: 'family', pace: 'moderate', budget: 'budget' }
+    category: 'Sunrise Trek',
+    title: 'Misty sunrise hike to DD Hills & Namada Chilume spring trail',
+    preset: { location: 'Tumkur', duration: 'half', vibe: 'nature', group: 'friends', pace: 'moderate', budget: 'budget' }
   },
   {
-    id: 'amanikere',
-    label: 'Amanikere Lakefront',
-    category: 'Karnataka’s Largest Tank',
-    vibe: 'Sunset Promenade',
+    label: 'Thatte Idli',
+    emoji: '🍽️',
+    category: 'Food Trail',
+    title: 'Kyathsandra hot Thatte Idli trail & Siddaganga cultural heritage',
+    preset: { location: 'Tumkur', duration: 'half', vibe: 'foodie', group: 'family', pace: 'relaxed', budget: 'budget' }
+  },
+  {
+    label: 'Madhugiri Fort',
+    emoji: '🏰',
+    category: 'Monolith Fort',
+    title: 'Climb Asia’s 2nd largest monolith fort & explore historic bastions',
+    preset: { location: 'Tumkur', duration: 'full', vibe: 'adventure', group: 'friends', pace: 'packed', budget: 'budget' }
+  },
+  {
+    label: 'Amanikere',
     emoji: '🏞️',
-    distance: '2 km',
-    duration: '1–2 hrs',
-    tagColor: 'sky',
-    badge: 'City Waterfront',
-    highlight: 'Expansive lakeside walking track, pedal boating jetty, musical fountains, and fresh breeze.',
-    tip: 'Golden hour (5:30–6:30 PM) is the ideal time for breezy lakeside strolls.',
+    category: 'Lake Promenade',
+    title: 'Evening lakefront breeze, walking promenade & pedal boating',
     preset: { location: 'Tumkur', duration: 'quick', vibe: 'chill', group: 'couple', pace: 'relaxed', budget: 'free' }
   },
   {
-    id: 'siddaganga',
-    label: 'Siddaganga Mutt',
-    category: 'Sacred Spiritual Center',
-    vibe: 'Peace & Philanthropy',
-    emoji: '🛕',
-    distance: '6 km',
-    duration: '2 hrs',
-    tagColor: 'rose',
-    badge: 'Heritage Mutt',
-    highlight: 'Centuries-old pilgrimage seat known for Trividha Dasoha (food, education, and shelter).',
-    tip: 'Visit the divine shrine on the hilltop steps and experience the peaceful atmosphere.',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'culture', group: 'family', pace: 'relaxed', budget: 'free' }
-  },
-  {
-    id: 'markonahalli',
-    label: 'Markonahalli Dam',
-    category: 'Engineering Wonder',
-    vibe: 'Scenic Waters',
+    label: 'Markonahalli',
     emoji: '💧',
-    distance: '55 km',
-    duration: '3–4 hrs',
-    tagColor: 'teal',
-    badge: 'Siphon Dam',
-    highlight: 'Asia’s first dam built with automatic siphons, located peacefully across Shimsha river.',
-    tip: 'Quiet picnic getaway; watch the roaring waters during post-monsoon seasons.',
-    preset: { location: 'Tumkur', duration: 'full', vibe: 'nature', group: 'friends', pace: 'moderate', budget: 'budget' }
-  },
-  {
-    id: 'kyathsandra-hills',
-    label: 'Kyathsandra Boulders',
-    category: 'Granite Trails & Cliffs',
-    vibe: 'Adventure & Bouldering',
-    emoji: '🌄',
-    distance: '10 km',
-    duration: '2–3 hrs',
-    tagColor: 'emerald',
-    badge: 'Hidden Trails',
-    highlight: 'Natural boulder trails, rocky climbs, and uncrowded nature vistas close to town.',
-    tip: 'Great for afternoon bouldering and quiet weekend photography with friends.',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'adventure', group: 'solo', pace: 'moderate', budget: 'free' }
-  },
-  {
-    id: 'goravanahalli',
-    label: 'Goravanahalli Temple',
-    category: 'Theetha Reservoir Shrine',
-    vibe: 'Devotion & Calm',
-    emoji: '✨',
-    distance: '32 km',
-    duration: '2–3 hrs',
-    tagColor: 'orange',
-    badge: 'Lakshmi Shrine',
-    highlight: 'Famous Mahalakshmi shrine set amidst tranquil rural Karnataka countryside.',
-    tip: 'Combine your visit with the scenic Theetha reservoir located just 3 km away.',
-    preset: { location: 'Tumkur', duration: 'half', vibe: 'culture', group: 'family', pace: 'relaxed', budget: 'budget' }
-  },
+    category: 'Waters & Dam',
+    title: 'Asia’s automatic siphon dam reservoir & peaceful scenic escape',
+    preset: { location: 'Tumkur', duration: 'half', vibe: 'nature', group: 'friends', pace: 'moderate', budget: 'budget' }
+  }
 ];
 
 export default function Home({ onStartPlanning, onQuickTemplate }) {
   const [showRoulette, setShowRoulette] = useState(false);
-  const [activeTag, setActiveTag] = useState(0);
-  const [typedText, setTypedText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const tickRef = useRef(null);
+  const [promptIdx, setPromptIdx] = useState(0);
 
-  // Typewriter effect cycling through EXPERIENCE_TAGS labels
+  // Smoothly rotate suggested outings
   useEffect(() => {
-    const currentLabel = EXPERIENCE_TAGS[activeTag].label;
-    const speed = isDeleting ? 35 : 70;
-    tickRef.current = setTimeout(() => {
-      if (!isDeleting) {
-        setTypedText(currentLabel.slice(0, typedText.length + 1));
-        if (typedText.length + 1 === currentLabel.length) {
-          setTimeout(() => setIsDeleting(true), 2400);
-        }
-      } else {
-        setTypedText(currentLabel.slice(0, typedText.length - 1));
-        if (typedText.length - 1 === 0) {
-          setIsDeleting(false);
-          setActiveTag((prev) => (prev + 1) % EXPERIENCE_TAGS.length);
-        }
-      }
-    }, speed);
-    return () => clearTimeout(tickRef.current);
-  }, [typedText, isDeleting, activeTag]);
+    const timer = setInterval(() => {
+      setPromptIdx((prev) => (prev + 1) % OUTING_PROMPTS.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
 
   const benefits = [
     {
@@ -309,163 +217,65 @@ export default function Home({ onStartPlanning, onQuickTemplate }) {
             {' '}More.
           </h1>
 
-          {/* Unique AI Outing Radar & Interactive Discovery HUD */}
-          <div className="max-w-3xl mx-auto mb-10 animate-fade-up">
-            {/* Top Radar Bar */}
+          {/* Editorial Subtitle */}
+          <p className="text-slate-400 text-base sm:text-lg font-normal max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-up">
+            Your personalized day-trip companion for Tumkur. From Devarayanadurga’s misty hilltop sunrise to Kyathsandra’s Thatte Idli trails — custom itineraries crafted in seconds.
+          </p>
+
+          {/* Attractive Interactive Suggestion Pill */}
+          <div className="max-w-xl mx-auto mb-10 animate-fade-up">
             <div
-              className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-2xl border mb-3 text-xs"
+              className="group flex items-center justify-between gap-3 px-4 py-3 rounded-2xl border transition-all duration-300"
               style={{
-                background: 'rgba(10, 14, 26, 0.75)',
-                borderColor: 'rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(16px)',
+                background: 'rgba(13, 18, 36, 0.75)',
+                borderColor: 'rgba(34, 211, 238, 0.22)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 211, 238, 0.08)',
+                backdropFilter: 'blur(20px)',
               }}
             >
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
-                </span>
-                <span className="font-mono uppercase tracking-widest text-cyan-400 text-[11px] font-semibold flex items-center gap-1.5">
-                  <Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" style={{ animationDuration: '16s' }} />
-                  TUMKUR RADAR
-                </span>
-              </div>
-
-              {/* Typewriter target inside radar display */}
-              <div className="flex items-center gap-2 font-medium text-slate-300">
-                <span className="text-slate-500 font-normal hidden sm:inline">Exploring:</span>
-                <span className="px-2.5 py-1 rounded-lg border font-semibold flex items-center gap-1.5 text-white"
-                  style={{
-                    background: 'rgba(34,211,238,0.08)',
-                    borderColor: 'rgba(34,211,238,0.25)',
-                    boxShadow: '0 0 14px rgba(34,211,238,0.12)',
-                  }}>
-                  <span>{EXPERIENCE_TAGS[activeTag].emoji}</span>
-                  <span className="text-cyan-300">{typedText}</span>
-                  <span className="animate-pulse text-cyan-400 font-mono">|</span>
-                </span>
-              </div>
-
-              <div className="hidden md:flex items-center gap-1.5 text-[11px] text-slate-500 font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                LIVE DESTINATIONS
-              </div>
-            </div>
-
-            {/* Interactive Destination Capsule Dock */}
-            <div
-              className="flex flex-wrap justify-center gap-2 p-3 rounded-2xl border mb-3"
-              style={{
-                background: 'rgba(13, 18, 36, 0.55)',
-                borderColor: 'rgba(255, 255, 255, 0.06)',
-                backdropFilter: 'blur(12px)',
-              }}
-            >
-              {EXPERIENCE_TAGS.map((tag, i) => {
-                const isActive = activeTag === i;
-                return (
-                  <button
-                    key={tag.id}
-                    onClick={() => {
-                      setActiveTag(i);
-                      setTypedText(tag.label);
-                      setIsDeleting(false);
-                    }}
-                    className={`relative group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium border transition-all duration-300 cursor-pointer ${
-                      isActive
-                        ? 'text-white scale-[1.03]'
-                        : 'text-slate-400 hover:text-slate-200 hover:scale-[1.01]'
-                    }`}
-                    style={{
-                      background: isActive
-                        ? 'linear-gradient(135deg, rgba(34,211,238,0.16) 0%, rgba(124,58,237,0.16) 100%)'
-                        : 'rgba(255, 255, 255, 0.03)',
-                      borderColor: isActive
-                        ? 'rgba(34,211,238,0.5)'
-                        : 'rgba(255, 255, 255, 0.07)',
-                      boxShadow: isActive ? '0 0 16px rgba(34,211,238,0.2)' : 'none',
-                    }}
-                  >
-                    {/* Active micro top bar */}
-                    {isActive && (
-                      <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-[2px] rounded-full bg-cyan-400 shadow-glow-sm" />
-                    )}
-                    <span className="text-sm transition-transform group-hover:scale-110">{tag.emoji}</span>
-                    <span className={isActive ? 'text-white font-semibold' : ''}>{tag.label}</span>
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Dynamic Live Spotlight HUD Card */}
-            {EXPERIENCE_TAGS[activeTag] && (
-              <div
-                className="p-4 sm:p-5 rounded-2xl border text-left transition-all duration-300 relative overflow-hidden"
-                style={{
-                  background: 'rgba(10, 14, 26, 0.88)',
-                  borderColor: 'rgba(34, 211, 238, 0.28)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(34, 211, 238, 0.09)',
-                  backdropFilter: 'blur(20px)',
-                }}
-              >
-                {/* Background neon ambient highlight */}
-                <div className="absolute top-0 right-0 w-64 h-32 bg-gradient-to-bl from-cyan-500/10 via-violet-500/5 to-transparent pointer-events-none blur-2xl" />
-
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
-                  {/* Left: Info */}
-                  <div className="space-y-2 max-w-xl">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider bg-cyan-400/10 border border-cyan-400/25 text-cyan-300 font-semibold">
-                        <Sparkles className="w-3 h-3 text-cyan-400" />
-                        {EXPERIENCE_TAGS[activeTag].badge}
-                      </span>
-                      <span className="text-slate-600 text-xs">•</span>
-                      <span className="text-slate-300 text-xs font-medium">
-                        {EXPERIENCE_TAGS[activeTag].category}
-                      </span>
-                      <span className="text-slate-600 text-xs">•</span>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-violet-300 bg-violet-500/10 px-2 py-0.5 rounded-md border border-violet-500/20">
-                        <MapPin className="w-3 h-3 text-violet-400" />
-                        {EXPERIENCE_TAGS[activeTag].distance}
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
-                        <Clock className="w-3 h-3 text-emerald-400" />
-                        {EXPERIENCE_TAGS[activeTag].duration}
-                      </span>
-                    </div>
-
-                    {/* Highlight & Local Tip */}
-                    <p className="text-white text-sm font-normal leading-relaxed">
-                      {EXPERIENCE_TAGS[activeTag].highlight}
-                    </p>
-                    <p className="text-slate-400 text-xs leading-relaxed flex items-center gap-1.5">
-                      <span className="text-amber-400 font-semibold shrink-0">💡 Local Tip:</span>
-                      <span>{EXPERIENCE_TAGS[activeTag].tip}</span>
-                    </p>
+              {/* Left: Icon + Category + Title */}
+              <div className="flex items-center gap-3 min-w-0 flex-1 text-left">
+                <div className="w-9 h-9 rounded-xl bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center shrink-0 text-base shadow-glow-sm">
+                  {OUTING_PROMPTS[promptIdx].emoji}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    {OUTING_PROMPTS[promptIdx].category}
                   </div>
-
-                  {/* Right: Quick Plan action */}
-                  <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2 shrink-0 border-t sm:border-t-0 border-white/8 pt-3 sm:pt-0">
-                    <button
-                      onClick={() => onQuickTemplate(EXPERIENCE_TAGS[activeTag].preset)}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white transition-all duration-200 cursor-pointer group"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(34,211,238,0.2) 0%, rgba(124,58,237,0.25) 100%)',
-                        border: '1px solid rgba(34,211,238,0.4)',
-                        boxShadow: '0 0 16px rgba(34,211,238,0.15)',
-                      }}
-                    >
-                      <span>Plan Outing Here</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                    <span className="text-[10px] font-mono text-slate-500">1-click AI itinerary</span>
+                  <div className="text-xs sm:text-[13px] text-slate-200 font-medium truncate mt-0.5">
+                    {OUTING_PROMPTS[promptIdx].title}
                   </div>
                 </div>
               </div>
-            )}
+
+              {/* Right: Quick action */}
+              <button
+                onClick={() => onQuickTemplate(OUTING_PROMPTS[promptIdx].preset)}
+                className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-cyan-500/20 to-violet-500/20 hover:from-cyan-500/30 hover:to-violet-500/30 border border-cyan-400/30 hover:border-cyan-400/50 transition-all cursor-pointer shadow-glow-sm group/btn"
+              >
+                <span>Try this</span>
+                <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover/btn:translate-x-0.5 transition-transform" />
+              </button>
+            </div>
+
+            {/* Quick interactive shortcut chips */}
+            <div className="flex items-center justify-center gap-1.5 mt-3 flex-wrap">
+              {OUTING_PROMPTS.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPromptIdx(i)}
+                  className={`px-3 py-1 rounded-full text-[11px] font-medium transition-all duration-200 cursor-pointer flex items-center gap-1.5 border ${
+                    promptIdx === i
+                      ? 'bg-cyan-500/15 border-cyan-400/40 text-cyan-300 shadow-glow-sm'
+                      : 'bg-white/3 border-white/8 text-slate-500 hover:text-slate-300 hover:border-white/15'
+                  }`}
+                >
+                  <span>{p.emoji}</span>
+                  <span>{p.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}
