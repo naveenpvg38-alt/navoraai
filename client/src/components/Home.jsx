@@ -157,16 +157,16 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
     <div className="min-h-screen">
 
       {/* ── HERO ──────────────────────────────────────── */}
-      <section className="relative pt-16 pb-24 px-5 sm:px-8 max-w-7xl mx-auto">
+      <section className="relative pt-10 sm:pt-16 pb-16 sm:pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Overline badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/4 border border-white/10 mb-8 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/4 border border-white/10 mb-6 sm:mb-8 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
             <span className="label-overline">Tumkur · AI-Powered Outing Planner</span>
           </div>
 
-          {/* Hero headline — Outfit font */}
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-8 tracking-tight leading-[1.08] animate-fade-up">
+          {/* Hero headline */}
+          <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1] animate-fade-up">
             Plan Less.{' '}
             <span className="text-gradient-cyan">Experience</span>
             {' '}More.
@@ -236,18 +236,18 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up">
             <button
               onClick={onGetStarted || onStartPlanning}
-              className="btn-primary text-[15px] !py-3.5 !px-8 !rounded-2xl cursor-pointer group shadow-glow-sm hover:shadow-glow-md transition-all"
+              className="btn-primary w-full sm:w-auto text-[14px] sm:text-[15px] !py-3.5 !px-7 !rounded-2xl cursor-pointer group"
             >
-              <Sparkles className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
+              <Sparkles className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => setShowRoulette(true)}
-              className="btn-secondary text-[15px] !py-3.5 !px-6 !rounded-2xl !gap-2 cursor-pointer hover:border-cyan-400/40 transition-all group"
+              className="btn-secondary w-full sm:w-auto text-[14px] sm:text-[15px] !py-3.5 !px-6 !rounded-2xl !gap-2 cursor-pointer hover:border-cyan-400/40 transition-all group"
             >
               <Dices className="w-4 h-4 text-cyan-400 group-hover:rotate-180 transition-transform duration-500" />
               <span>🎲 Surprise Vibe Roulette</span>
@@ -255,18 +255,18 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mt-16 pt-10 border-t border-white/6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/6">
             {[
-              { val: '99%',      label: 'Match Accuracy',    color: 'text-cyan-400' },
-              { val: '4×',       label: 'Faster Planning',   color: 'text-violet-400' },
-              { val: '₹0+',      label: 'Flexible Budget',   color: 'text-emerald-400' },
-              { val: '100%',     label: 'Tumkur Exclusive',  color: 'text-amber-400' },
+              { val: '99%',  label: 'Match Accuracy',   color: 'text-cyan-400' },
+              { val: '4×',   label: 'Faster Planning',  color: 'text-violet-400' },
+              { val: '₹0+',  label: 'Flexible Budget',  color: 'text-emerald-400' },
+              { val: '100%', label: 'Tumkur Exclusive', color: 'text-amber-400' },
             ].map((s, i) => (
-              <div key={i} className="stat-card text-center group">
-                <div className={`font-mono text-2xl sm:text-3xl font-bold ${s.color} mb-1 group-hover:scale-105 transition-transform`}>
+              <div key={i} className="stat-card text-center !p-3 sm:!p-5">
+                <div className={`font-mono text-xl sm:text-3xl font-bold ${s.color} mb-1`}>
                   {s.val}
                 </div>
-                <div className="text-slate-500 text-[11px] font-medium tracking-wide uppercase">{s.label}</div>
+                <div className="text-slate-500 text-[10px] sm:text-[11px] font-medium tracking-wide uppercase">{s.label}</div>
               </div>
             ))}
           </div>
@@ -276,10 +276,10 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
       <div className="divider-gradient mx-auto max-w-5xl" />
 
       {/* ── BENEFITS ──────────────────────────────────── */}
-      <section className="py-20 px-5 sm:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-12 scroll-load-reveal">
+      <section className="py-12 sm:py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 scroll-load-reveal">
           <p className="label-overline mb-3">Why Choose Navora</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
             Built for Tumkur Explorers
           </h2>
         </div>

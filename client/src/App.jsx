@@ -180,7 +180,7 @@ export default function App() {
             {isGenerating ? (
               <GenerationLoader preferences={pendingPreferences} />
             ) : (
-              <div key={activeView} className="animate-fade-up">
+              <div key={activeView} className="animate-fade-up md:pb-0 pb-24">
                 {activeView === 'home' && (
                   <Home
                     user={user}

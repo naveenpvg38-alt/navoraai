@@ -10,22 +10,40 @@
   --color-cyan:    #38BDF8;
   --radius-card:   20px;
   --radius-btn:    12px;
+  /* iOS safe-area */
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
 }
 
-/* ── Base Typography ────────────────────────────────────────── */
+/* ── Base Reset & Typography ────────────────────────────────── */
 @layer base {
-  html { scroll-behavior: smooth; }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Prevent iOS rubber-band bounce causing layout shifts */
+    overflow-x: hidden;
+  }
 
   body {
+    overflow-x: hidden;
     background-color: var(--color-bg);
-    background-image: 
+    background-image:
       radial-gradient(ellipse 90% 55% at 50% -10%, rgba(56, 189, 248, 0.14) 0%, transparent 70%),
       radial-gradient(ellipse 70% 50% at 95% 35%, rgba(129, 140, 248, 0.12) 0%, transparent 65%),
       radial-gradient(ellipse 70% 50% at 5% 75%, rgba(56, 189, 248, 0.1) 0%, transparent 65%),
       url("data:image/svg+xml,%3Csvg width='1200' height='1200' viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2338BDF8' stroke-width='1.2' stroke-opacity='0.055'%3E%3Cpath d='M-100,200 Q200,80 500,220 T1100,180 T1500,240'/%3E%3Cpath d='M-100,260 Q180,140 480,270 T1080,240 T1500,290'/%3E%3Cpath d='M-100,320 Q160,200 460,330 T1060,300 T1500,350'/%3E%3Cellipse cx='850' cy='320' rx='160' ry='90'/%3E%3Cellipse cx='850' cy='320' rx='120' ry='65'/%3E%3Cellipse cx='850' cy='320' rx='80' ry='42'/%3E%3Cellipse cx='850' cy='320' rx='40' ry='20'/%3E%3Cpath d='M-100,600 Q300,500 700,680 T1400,620'/%3E%3Cpath d='M-100,680 Q280,580 680,750 T1400,690'/%3E%3Cpath d='M-100,760 Q260,660 660,820 T1400,760'/%3E%3Cellipse cx='280' cy='820' rx='180' ry='100'/%3E%3Cellipse cx='280' cy='820' rx='130' ry='70'/%3E%3Cellipse cx='280' cy='820' rx='80' ry='40'/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: repeat;
     background-position: center top;
-    background-attachment: fixed;
+    /* Remove fixed attachment on mobile — causes rendering bugs on iOS */
+    background-attachment: scroll;
     color: #F1F5F9;
     font-family: 'Poppins', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     font-size: 15px;
@@ -33,9 +51,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
+    /* Extra bottom padding for mobile nav bar (Android & iOS home indicator) */
+    padding-bottom: 0;
   }
 
-  /* Outfit + Poppins for display headings — modern, high-tech, confident geometric */
   .font-display,
   h1.display, h2.display {
     font-family: 'Outfit', 'Poppins', sans-serif !important;
@@ -44,7 +63,6 @@
     line-height: 1.05;
   }
 
-  /* Headings use Outfit + Poppins bold with crisp tracking */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', 'Poppins', sans-serif;
     font-weight: 700;
@@ -52,44 +70,40 @@
     line-height: 1.25;
   }
 
-  /* Numeric/code elements */
   .font-mono { font-family: 'JetBrains Mono', monospace !important; }
 
-  /* iOS Safari & WebKit Optimizations */
-  * {
-    -webkit-tap-highlight-color: transparent;
+  /* Instant touch feedback — no 300ms delay */
+  button, a, [role="button"], input[type="submit"] {
+    touch-action: manipulation;
   }
 
-  html {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+  /* Prevent iOS Safari auto-zoom on input focus (needs font-size ≥ 16px) */
+  input, select, textarea {
+    font-size: 16px;
   }
 
-  /* Prevent iOS Safari from auto-zooming in on input focus on iPhone/iPad */
-  @media screen and (max-width: 768px) {
+  /* On desktop keep smaller text */
+  @media (min-width: 768px) {
     input, select, textarea {
-      font-size: 16px !important;
+      font-size: 14px;
     }
   }
 
-  /* Instant tap feedback without 300ms touch delay on iOS */
-  button, a, [role="button"] {
-    touch-action: manipulation;
+  /* Smooth momentum scrolling on iOS */
+  * {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-/* ── iOS Safe Area Insets Helpers ────────────────────────────── */
-.pt-safe {
-  padding-top: env(safe-area-inset-top, 0px);
-}
-.pb-safe {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-.pl-safe {
-  padding-left: env(safe-area-inset-left, 0px);
-}
-.pr-safe {
-  padding-right: env(safe-area-inset-right, 0px);
+/* ── iOS/Android Safe Area Insets ────────────────────────────── */
+.pt-safe { padding-top: var(--sat); }
+.pb-safe { padding-bottom: var(--sab); }
+.pl-safe { padding-left: var(--sal); }
+.pr-safe { padding-right: var(--sar); }
+
+/* Mobile bottom content needs extra space for the fixed nav bar */
+.mobile-scroll-pad {
+  padding-bottom: calc(4rem + var(--sab));
 }
 
 /* ── Overline Label  ────────────────────────────────────────── */
@@ -121,17 +135,21 @@
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.glass-card:hover {
-  background: rgba(27, 38, 62, 0.85);
-  border-color: rgba(56, 189, 248, 0.38);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.12), 0 30px 60px -15px rgba(0,0,0,0.55), 0 0 30px -10px rgba(56, 189, 248, 0.25);
-  transform: translateY(-4px);
+/* Only animate hover on non-touch devices */
+@media (hover: hover) {
+  .glass-card:hover {
+    background: rgba(27, 38, 62, 0.85);
+    border-color: rgba(56, 189, 248, 0.38);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.12), 0 30px 60px -15px rgba(0,0,0,0.55), 0 0 30px -10px rgba(56, 189, 248, 0.25);
+    transform: translateY(-4px);
+  }
 }
 
 /* ── Premium Buttons ────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 14px 28px;
   border-radius: var(--radius-btn);
@@ -148,19 +166,24 @@
   animation: shimmer 4s linear infinite;
   box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 8px 30px -8px rgba(14,165,233,0.5);
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  /* Ensure minimum touch target size */
+  min-height: 44px;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.12);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 14px 40px -8px rgba(14,165,233,0.6);
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 14px 40px -8px rgba(14,165,233,0.6);
+  }
 }
 
-.btn-primary:active { transform: translateY(0); }
+.btn-primary:active { transform: translateY(0); filter: brightness(0.95); }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 22px;
   border-radius: var(--radius-btn);
@@ -172,12 +195,15 @@
   border: 1px solid rgba(255,255,255,0.12);
   cursor: pointer;
   transition: all 0.25s ease;
+  min-height: 44px;
 }
 
-.btn-secondary:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(56, 189, 248, 0.4);
+@media (hover: hover) {
+  .btn-secondary:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(56, 189, 248, 0.4);
+  }
 }
 
 /* ── Gradient Text ──────────────────────────────────────────── */
@@ -204,9 +230,11 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stat-card:hover {
-  border-color: rgba(56, 189, 248, 0.35);
-  box-shadow: 0 8px 30px -10px rgba(56, 189, 248, 0.2);
+@media (hover: hover) {
+  .stat-card:hover {
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow: 0 8px 30px -10px rgba(56, 189, 248, 0.2);
+  }
 }
 
 /* ── Section Dividers ───────────────────────────────────────── */
@@ -216,7 +244,7 @@
 }
 
 /* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #0B1120; }
 ::-webkit-scrollbar-thumb { background: #2A3854; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
@@ -248,11 +276,11 @@
 /* ── Scroll Load Reveal Animation ──────────────────────────── */
 .scroll-load-reveal {
   opacity: 0;
-  transform: translateY(32px) scale(0.98);
-  filter: blur(4px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px) scale(0.99);
+  filter: blur(3px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform, filter;
 }
 
@@ -262,46 +290,10 @@
   filter: blur(0);
 }
 
-.scroll-delay-1 { transition-delay: 0.08s; }
-.scroll-delay-2 { transition-delay: 0.16s; }
-.scroll-delay-3 { transition-delay: 0.24s; }
-.scroll-delay-4 { transition-delay: 0.32s; }
-
-/* ── Android & iOS Mobile Optimizations ────────────────────── */
-:root {
-  --sat: env(safe-area-inset-top, 0px);
-  --sab: env(safe-area-inset-bottom, 0px);
-  --sal: env(safe-area-inset-left, 0px);
-  --sar: env(safe-area-inset-right, 0px);
-}
-
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Prevent iOS Safari from auto-zooming into inputs when focused */
-@media screen and (max-width: 768px) {
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="number"],
-  input[type="tel"],
-  select,
-  textarea {
-    font-size: 16px !important;
-  }
-}
-
-/* Smooth inertia touch scrolling */
-.scroll-touch {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Safe area padding utilities for notch & home indicator */
-.pt-safe { padding-top: var(--sat); }
-.pb-safe { padding-bottom: var(--sab); }
-.pl-safe { padding-left: var(--sal); }
-.pr-safe { padding-right: var(--sar); }
+.scroll-delay-1 { transition-delay: 0.06s; }
+.scroll-delay-2 { transition-delay: 0.12s; }
+.scroll-delay-3 { transition-delay: 0.18s; }
+.scroll-delay-4 { transition-delay: 0.24s; }
 
 /* ── Custom Scrollbar Hiding ────────────────────────────────── */
 .scrollbar-none {
@@ -316,12 +308,8 @@
 
 /* ── Continuous Waypoint Marquee ────────────────────────────── */
 @keyframes marqueeScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee-track {
@@ -337,12 +325,8 @@
 
 /* ── Laser Sweep Scanner Animation ──────────────────────────── */
 @keyframes laserSweep {
-  0% {
-    left: -35%;
-  }
-  100% {
-    left: 100%;
-  }
+  0%   { left: -35%; }
+  100% { left: 100%; }
 }
 
 .animate-laser-sweep {
@@ -365,15 +349,11 @@
   cursor: pointer;
 }
 
-.budget-slider:hover {
-  filter: brightness(1.1);
-}
-
 .budget-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #22d3ee;
   border: 2.5px solid #0b1120;
@@ -382,19 +362,14 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.budget-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 15px #22d3ee;
-}
-
 .budget-slider::-webkit-slider-thumb:active {
-  transform: scale(1.05);
+  transform: scale(1.1);
   box-shadow: 0 0 18px #38bdf8;
 }
 
 .budget-slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #22d3ee;
   border: 2.5px solid #0b1120;
@@ -403,8 +378,35 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.budget-slider::-moz-range-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 15px #22d3ee;
+/* ── Mobile-First Layout Helpers ─────────────────────────────── */
+
+/* All main page content needs bottom padding for mobile nav bar */
+@media (max-width: 767px) {
+  main > div {
+    padding-bottom: calc(5rem + var(--sab));
+  }
+
+  /* Remove fixed background attachment — iOS doesn't handle it well */
+  body {
+    background-attachment: scroll;
+  }
+
+  /* Ensure nothing overflows horizontally */
+  .max-w-7xl, section, div {
+    max-width: 100vw;
+  }
 }
 
+/* Touch target size — all interactive elements at least 44×44px */
+@media (max-width: 767px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* ── Shimmer Keyframes ───────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

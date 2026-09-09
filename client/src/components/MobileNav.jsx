@@ -19,14 +19,15 @@ export default function MobileNav({ activeView, setActiveView, user, onOpenAuth 
 
   return (
     <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around px-2"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-stretch justify-around"
       style={{
-        background: 'rgba(11, 17, 32, 0.95)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-        height: 'calc(3.85rem + env(safe-area-inset-bottom, 0px))',
+        background: 'rgba(9, 14, 28, 0.97)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.07)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        paddingLeft: 'env(safe-area-inset-left, 0px)',
+        paddingRight: 'env(safe-area-inset-right, 0px)',
       }}
     >
       {navItems.map((item) => {
@@ -36,25 +37,30 @@ export default function MobileNav({ activeView, setActiveView, user, onOpenAuth 
           <button
             key={item.id}
             onClick={() => handleTap(item)}
-            className="flex flex-col items-center justify-center gap-1 flex-1 py-2 cursor-pointer focus:outline-none group"
+            className="flex flex-col items-center justify-center gap-1 flex-1 py-3 cursor-pointer focus:outline-none relative"
+            style={{ minHeight: '56px' }}
           >
-            <div className="relative">
+            {/* Active glow background */}
+            {active && (
+              <span
+                className="absolute inset-x-2 inset-y-1 rounded-xl"
+                style={{ background: 'rgba(34,211,238,0.08)' }}
+              />
+            )}
+
+            <div className="relative z-10">
               <Icon
                 className={`w-5 h-5 transition-all duration-200 ${
-                  active ? 'text-white' : 'text-slate-600 group-hover:text-slate-400'
+                  active ? 'text-cyan-400' : 'text-slate-600'
                 }`}
               />
+              {/* Planner pulse dot */}
               {item.id === 'planner' && !active && (
-                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
+                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               )}
             </div>
 
-            {/* Active indicator bar */}
-            <div className={`h-0.5 rounded-full transition-all duration-200 ${
-              active ? 'w-5 bg-cyan-400' : 'w-0 bg-transparent'
-            }`} />
-
-            <span className={`text-[9px] font-mono tracking-widest transition-colors duration-200 ${
+            <span className={`text-[9px] font-mono tracking-widest z-10 transition-colors duration-200 ${
               active ? 'text-cyan-400' : 'text-slate-700'
             }`}>
               {item.label}
