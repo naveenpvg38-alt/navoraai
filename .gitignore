@@ -1,22 +1,70 @@
-# Dependencies
+# ─────────────────────────────────────────
+#  NAVORA AI — .gitignore
+# ─────────────────────────────────────────
+
+# === Dependencies ===
 node_modules/
 client/node_modules/
-client - Copy/
+server/node_modules/
 
-# Build artifacts
+# === Build Artifacts ===
 client/dist/
+client/build/
+dist/
+build/
 
-# Environment
+# === Environment & Secrets ===
 .env
+.env.local
+.env.*.local
+*.pem
+*.key
 
-# Database
-*.db*
+# === Database ===
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
 
-# Logs
+# === Logs ===
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# OS Files
+# === OS Files ===
 .DS_Store
 Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# === Editor / IDE ===
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# === Backup Folders ===
+client - Copy/
+*- Copy/
+*_backup/
+*_old/
+
+# === Vite Cache ===
+.vite/
+
+# === Capacitor / Native ===
+android/
+ios/
+.gradle/
+
+# === Temp / Misc ===
+*.tmp
+*.bak
+*.orig
