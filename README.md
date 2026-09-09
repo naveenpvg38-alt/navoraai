@@ -1,5 +1,5 @@
 # ✦ NAVORA AI — AI-Powered Personalized Outing Planner
-> *“Plan Less. Experience More.”*
+> *“Plan less, Experience more.”*
 
 An academic project submission for a full-stack, AI-assisted outing and itinerary planning web platform.
 

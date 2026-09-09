@@ -26,7 +26,7 @@ app.get('/api/health', (req, res) => {
     status: 'online',
     app: 'NAVORA AI',
     version: '1.0.0',
-    tagline: 'Plan Less. Experience More.',
+    tagline: 'Plan less, Experience more.',
     timestamp: new Date().toISOString()
   });
 });

@@ -167,9 +167,9 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
 
           {/* Hero headline */}
           <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1] animate-fade-up">
-            Plan Less.{' '}
+            Plan less,{' '}
             <span className="text-gradient-cyan">Experience</span>
-            {' '}More.
+            {' '}more.
           </h1>
 
           {/* Simple Animated Hero Outing Showcase */}
