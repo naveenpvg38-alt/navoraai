@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Zap, Mail, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
 import { api } from '../api';
+import NavoraLogo from './NavoraLogo';
 
 const InputField = ({ icon: Icon, type, placeholder, value, onChange, required }) => (
   <div className="relative">
@@ -101,31 +102,7 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
 
           {/* Brand mark */}
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{ background: 'rgba(13,18,36,0.9)', border: '1px solid rgba(34,211,238,0.3)', boxShadow: '0 0 14px rgba(34,211,238,0.15)' }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="9.5" stroke="url(#am-ring)" strokeWidth="1" opacity="0.45"/>
-                <line x1="12" y1="2.8" x2="12" y2="4.5" stroke="#22D3EE" strokeWidth="1.3" strokeLinecap="round"/>
-                <line x1="12" y1="19.5" x2="12" y2="21.2" stroke="#7C3AED" strokeWidth="1.3" strokeLinecap="round"/>
-                <line x1="2.8" y1="12" x2="4.5" y2="12" stroke="#22D3EE" strokeWidth="1.3" strokeLinecap="round"/>
-                <line x1="19.5" y1="12" x2="21.2" y2="12" stroke="#22D3EE" strokeWidth="1.3" strokeLinecap="round"/>
-                <path d="M12 5.5L13.3 11H10.7L12 5.5Z" fill="#22D3EE"/>
-                <path d="M12 18.5L10.7 13H13.3L12 18.5Z" fill="#7C3AED" opacity="0.65"/>
-                <circle cx="12" cy="12" r="1.7" fill="url(#am-center)"/>
-                <circle cx="5.2" cy="17.8" r="1.1" fill="#22D3EE" opacity="0.45"/>
-                <circle cx="7.5" cy="15.8" r="0.7" fill="#22D3EE" opacity="0.3"/>
-                <defs>
-                  <linearGradient id="am-ring" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#22D3EE"/>
-                    <stop offset="1" stopColor="#7C3AED"/>
-                  </linearGradient>
-                  <radialGradient id="am-center" cx="50%" cy="50%" r="50%">
-                    <stop stopColor="#22D3EE"/>
-                    <stop offset="1" stopColor="#7C3AED"/>
-                  </radialGradient>
-                </defs>
-              </svg>
-            </div>
+            <NavoraLogo size={36} withGlow={true} />
             <div>
               <span className="font-display font-extrabold text-xl text-white tracking-tight">
                 NAVORA <span className="text-cyan-400">AI</span>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Sparkles } from 'lucide-react';
+import NavoraLogo from './NavoraLogo';
 
 const STEPS = [
   { icon: '🗺️', text: 'Loading Tumkur map data…' },
@@ -120,46 +121,8 @@ export default function SplashScreen({ onComplete }) {
       <div className="relative z-10 flex flex-col items-center text-center px-8 max-w-lg">
 
         {/* Logo mark */}
-        <div className="relative mb-8" style={{ opacity: 1 }}>
-          {/* Glow halo */}
-          <div className="absolute inset-0 rounded-2xl opacity-50 blur-2xl" style={{ background: 'rgba(34,211,238,0.3)', transform: 'scale(1.6)' }} />
-
-          <div className="relative w-24 h-24 rounded-2xl flex items-center justify-center"
-            style={{ background: 'rgba(13,18,36,0.9)', border: '1px solid rgba(34,211,238,0.38)', boxShadow: '0 0 50px rgba(34,211,238,0.3)' }}>
-            <svg width="56" height="56" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="21" stroke="#22D3EE" strokeWidth="1" strokeDasharray="5 4" opacity="0.3" className="spin-cw"/>
-              <circle cx="24" cy="24" r="16" stroke="url(#sp-ring)" strokeWidth="1.2" opacity="0.55" className="spin-ccw"/>
-              <line x1="24" y1="8"  x2="24" y2="13" stroke="#22D3EE" strokeWidth="2.2" strokeLinecap="round"/>
-              <line x1="24" y1="35" x2="24" y2="40" stroke="#7C3AED" strokeWidth="2.2" strokeLinecap="round"/>
-              <line x1="8"  y1="24" x2="13" y2="24" stroke="#22D3EE" strokeWidth="2.2" strokeLinecap="round"/>
-              <line x1="35" y1="24" x2="40" y2="24" stroke="#22D3EE" strokeWidth="2.2" strokeLinecap="round"/>
-              <path d="M24 11L26.5 22H21.5L24 11Z" fill="#22D3EE"/>
-              <path d="M24 37L21.5 26H26.5L24 37Z" fill="#7C3AED" opacity="0.75"/>
-              <circle cx="24" cy="24" r="3.5" fill="url(#sp-center)"/>
-              <circle cx="24" cy="24" r="1.5" fill="white" opacity="0.9"/>
-              <circle cx="10.5" cy="34.5" r="2"   fill="#22D3EE" opacity="0.45"/>
-              <circle cx="14.5" cy="31"   r="1.4"  fill="#22D3EE" opacity="0.28"/>
-              <circle cx="18"   cy="28.5" r="0.8"  fill="#22D3EE" opacity="0.16"/>
-              <defs>
-                <linearGradient id="sp-ring" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#22D3EE"/>
-                  <stop offset="1" stopColor="#7C3AED"/>
-                </linearGradient>
-                <radialGradient id="sp-center">
-                  <stop stopColor="#22D3EE"/>
-                  <stop offset="1" stopColor="#7C3AED"/>
-                </radialGradient>
-              </defs>
-            </svg>
-          </div>
-
-          {/* Dual orbiting dots */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="orbit-a w-3 h-3 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 8px #22D3EE' }} />
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="orbit-b w-2 h-2 rounded-full bg-violet-400" style={{ boxShadow: '0 0 6px #7C3AED' }} />
-          </div>
+        <div className="relative mb-8 flex items-center justify-center">
+          <NavoraLogo size={96} withGlow={true} />
         </div>
 
         {/* Word mark */}

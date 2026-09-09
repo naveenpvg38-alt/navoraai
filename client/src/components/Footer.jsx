@@ -13,6 +13,7 @@ import {
   Download,
   CheckCircle2
 } from 'lucide-react';
+import NavoraLogo from './NavoraLogo';
 
 export default function Footer({ setActiveView, onOpenAuth, user }) {
   const [modalContent, setModalContent] = useState(null); // 'privacy' | 'terms' | 'install' | null
@@ -62,17 +63,9 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
         {/* ── TOP TIER: Brand & Navigation ────────────────────── */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-white/8">
           
-          {/* Brand Left: Glowing Icon + Title + Live Telemetry */}
+          {/* Brand Left: Glowing Hexagonal Tech Shield + Title + Live Telemetry */}
           <div className="flex items-center gap-3.5 text-center sm:text-left">
-            <div className="relative group/icon shrink-0">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500/20 via-white/5 to-violet-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-transform group-hover/icon:scale-105">
-                <Compass className="w-5 h-5 text-cyan-300 animate-spin-slow" />
-              </div>
-              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400" />
-              </span>
-            </div>
+            <NavoraLogo size={42} withGlow={true} />
 
             <div className="text-left">
               <div className="flex items-center gap-2">

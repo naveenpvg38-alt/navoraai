@@ -14,6 +14,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { api } from '../api';
+import NavoraLogo from './NavoraLogo';
 
 const TUMKUR_DISCOVERIES = [
   {
@@ -186,16 +187,7 @@ export default function LoginPage({
 
         {/* Brand identity badge */}
         <div className="flex items-center gap-2.5">
-          <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{
-              background: 'rgba(13,18,36,0.9)',
-              border: '1px solid rgba(34,211,238,0.3)',
-              boxShadow: '0 0 14px rgba(34,211,238,0.15)',
-            }}
-          >
-            <Compass className="w-4 h-4 text-cyan-400 animate-spin-slow" />
-          </div>
+          <NavoraLogo size={32} withGlow={true} />
           <span className="font-display font-extrabold text-lg text-white tracking-tight">
             NAVORA <span className="text-cyan-400">AI</span>
           </span>
