@@ -975,176 +975,51 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
 
         {/* 7. Location */}
         <SectionCard>
-          {(() => {
-            const isGpsActive = Boolean(gpsCoords || location.toLowerCase().includes('current location') || location.toLowerCase().includes('gps'));
+          <SectionHeader step="07" title="Location" desc="Where in Tumkur do you want to explore?" />
 
-            return (
-              <div>
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center gap-2.5 mb-1">
-                      <span className="font-mono text-xs font-bold text-slate-700">07</span>
-                      <h2 className="text-white font-semibold text-base">Target Information</h2>
-                    </div>
-                    <p className="text-slate-500 text-xs">Set your starting departure point or explore zone in Tumkur.</p>
-                  </div>
-                  {isGpsActive ? (
-                    <span
-                      className="font-mono text-[10px] text-emerald-400 px-2.5 py-1 rounded-full flex items-center gap-1.5 shrink-0 ml-2"
-                      style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                      GPS CONNECTED
-                    </span>
-                  ) : (
-                    <span
-                      className="font-mono text-[10px] text-cyan-400 px-2.5 py-1 rounded-full shrink-0 ml-2"
-                      style={{ background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.2)' }}
-                    >
-                      TUMKUR READY
-                    </span>
-                  )}
-                </div>
+          <div className="relative">
+            <MapPin className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
+            <input
+              type="text"
+              required
+              value={location}
+              onChange={(e) => { setLocation(e.target.value); setGpsCoords(null); }}
+              placeholder="e.g. Tumkur City, DD Hills, Madhugiri..."
+              className="w-full pl-10 pr-24 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition-all rounded-xl"
+              style={inputStyle}
+              onFocus={(e) => { e.target.style.borderColor = 'rgba(34,211,238,0.45)'; }}
+              onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+            />
+            {/* GPS Button inside input */}
+            <button
+              type="button"
+              onClick={handleDetectLocation}
+              disabled={detectingLocation}
+              title="Detect my location"
+              className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+              style={{
+                background: gpsCoords
+                  ? 'rgba(16,185,129,0.15)'
+                  : 'rgba(34,211,238,0.1)',
+                border: gpsCoords
+                  ? '1px solid rgba(16,185,129,0.35)'
+                  : '1px solid rgba(34,211,238,0.25)',
+                color: gpsCoords ? '#34d399' : '#22d3ee',
+              }}
+            >
+              <LocateFixed className={`w-3.5 h-3.5 ${detectingLocation ? 'animate-spin' : ''}`} />
+              <span>{detectingLocation ? 'Finding...' : gpsCoords ? 'GPS ✓' : 'GPS'}</span>
+            </button>
+          </div>
 
-                {/* Prominent Current Location Access Button */}
-                <button
-                  type="button"
-                  onClick={handleDetectLocation}
-                  disabled={detectingLocation}
-                  className="w-full p-3.5 sm:p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all group mb-3 relative overflow-hidden text-left"
-                  style={{
-                    background: detectingLocation
-                      ? 'linear-gradient(135deg, rgba(34,211,238,0.15) 0%, rgba(13,18,32,0.9) 100%)'
-                      : isGpsActive
-                        ? 'linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(13,18,32,0.9) 100%)'
-                        : 'linear-gradient(135deg, rgba(34,211,238,0.06) 0%, rgba(13,18,32,0.85) 100%)',
-                    borderColor: isGpsActive
-                      ? 'rgba(16,185,129,0.4)'
-                      : 'rgba(34,211,238,0.3)',
-                    boxShadow: isGpsActive
-                      ? '0 0 20px -4px rgba(16,185,129,0.2)'
-                      : '0 0 15px -4px rgba(34,211,238,0.08)'
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${
-                        detectingLocation
-                          ? 'bg-cyan-500/20 text-cyan-300 animate-pulse'
-                          : isGpsActive
-                            ? 'bg-emerald-500/20 text-emerald-400'
-                            : 'bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500/20 group-hover:scale-105'
-                      }`}
-                      style={{ border: '1px solid rgba(34,211,238,0.25)' }}
-                    >
-                      <LocateFixed className={`w-5 h-5 ${detectingLocation ? 'animate-spin' : ''}`} />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-white tracking-tight">
-                          {detectingLocation ? 'Acquiring Satellite GPS...' : 'Use Current Location'}
-                        </span>
-                        <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${
-                          isGpsActive
-                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                            : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
-                        }`}>
-                          {isGpsActive ? 'CONNECTED' : '1-TAP GPS'}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-slate-400 mt-0.5">
-                        {detectingLocation
-                          ? 'Pinpointing your real-time coordinates...'
-                          : isGpsActive
-                            ? 'Route will automatically calculate starting from your exact device location'
-                            : 'Auto-detect your live coordinates for precision route planning'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="shrink-0 ml-3">
-                    {detectingLocation ? (
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs font-mono">
-                        <Radio className="w-3.5 h-3.5 animate-pulse" />
-                        <span className="hidden sm:inline">SCANNING</span>
-                      </div>
-                    ) : isGpsActive ? (
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-mono font-bold">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                        <span>ACTIVE</span>
-                      </div>
-                    ) : (
-                      <div className="px-3 py-1.5 rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500 text-cyan-300 group-hover:text-black text-xs font-bold transition-all flex items-center gap-1">
-                        <span>Access</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </div>
-                    )}
-                  </div>
-                </button>
-
-                {/* Divider */}
-                <div className="relative flex py-1.5 items-center mb-2.5">
-                  <div className="flex-grow border-t border-white/5"></div>
-                  <span className="flex-shrink mx-3 text-[10px] font-mono uppercase tracking-widest text-slate-600">
-                    or enter location manually
-                  </span>
-                  <div className="flex-grow border-t border-white/5"></div>
-                </div>
-
-                {/* Input Field */}
-                <div className="relative mb-2.5">
-                  <MapPin className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    type="text"
-                    required
-                    value={location}
-                    onChange={(e) => {
-                      setLocation(e.target.value);
-                      setGpsCoords(null);
-                    }}
-                    placeholder="e.g. Tumkur City, Kyathsandra, DD Hills, Madhugiri..."
-                    className="w-full pl-10 pr-10 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition-all rounded-xl"
-                    style={inputStyle}
-                    onFocus={(e) => { e.target.style.borderColor = 'rgba(34,211,238,0.45)'; }}
-                    onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
-                  />
-                  {location && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setLocation('');
-                        setGpsCoords(null);
-                      }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white p-1 cursor-pointer transition-colors text-xs font-mono"
-                      title="Clear location"
-                    >
-                      ✕
-                    </button>
-                  )}
-                </div>
-
-                {/* Telemetry Status Footer */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-2.5 rounded-xl border border-white/5 bg-black/30 text-[11px] font-mono text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
-                    <span>Target Origin: <strong className="text-white">{location || 'Tumkur, Karnataka'}</strong></span>
-                  </div>
-                  {gpsCoords ? (
-                    <div className="text-emerald-400 text-[10px] flex items-center gap-1.5 shrink-0">
-                      <span>Lat {gpsCoords.lat.toFixed(4)}°, Lng {gpsCoords.lng.toFixed(4)}°</span>
-                      <span className="text-slate-600">·</span>
-                      <span>±{gpsCoords.accuracy}m accuracy</span>
-                    </div>
-                  ) : (
-                    <div className="text-slate-500 text-[10px] shrink-0">
-                      Tumkur District Optimized Route
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })()}
+          {/* Show coords only when GPS is active */}
+          {gpsCoords && (
+            <p className="text-[11px] text-emerald-400 font-mono mt-2 pl-1">
+              📍 {gpsCoords.lat.toFixed(4)}°, {gpsCoords.lng.toFixed(4)}° · ±{gpsCoords.accuracy}m
+            </p>
+          )}
         </SectionCard>
+
 
         {/* Submit */}
         <div className="pt-2">
