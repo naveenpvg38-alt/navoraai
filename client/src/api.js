@@ -3,6 +3,11 @@
  */
 
 const API_BASE = (() => {
+  // If a Render/production backend URL is configured via env var, use it
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  // Local dev: if running on Vite port (not 5000), proxy to localhost:5000
   if (typeof window !== 'undefined' && window.location.port && window.location.port !== '5000') {
     const hostname = window.location.hostname || 'localhost';
     return `http://${hostname}:5000/api`;
