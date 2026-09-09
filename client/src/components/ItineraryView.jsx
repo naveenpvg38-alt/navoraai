@@ -3,10 +3,11 @@ import {
   Sparkles, Clock, Wallet, MapPin, Heart,
   Bookmark, CheckCircle, Share2, Printer,
   ArrowLeft, Route, Compass, Lightbulb, Check, Train,
-  Navigation, ExternalLink
+  Navigation, ExternalLink, ChevronRight
 } from 'lucide-react';
 import LeafletMap from './LeafletMap';
 import OutingToolkit from './OutingToolkit';
+import ActiveTripHud from './ActiveTripHud';
 
 const actionBtn = {
   base:     { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px' },
@@ -29,6 +30,7 @@ const buildGoogleMapsUrl = (items = []) => {
 export default function ItineraryView({ plan, user, onSave, onToggleFavourite, onToggleComplete, onBack, onOpenAuth }) {
   const [copied, setCopied]         = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [showHud, setShowHud]       = useState(false);
 
   if (!plan) return null;
 
@@ -60,6 +62,20 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
         </button>
 
         <div className="flex items-center gap-2">
+          {/* Active Trip HUD Trigger */}
+          <button
+            onClick={() => setShowHud(true)}
+            className="p-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+            style={{
+              background: 'linear-gradient(135deg, #0284C7 0%, #4F46E5 100%)',
+              border: '1px solid rgba(56, 189, 248, 0.4)'
+            }}
+            title="Launch In-Car / Bike Active Trip Cockpit HUD"
+          >
+            <span className="w-2 h-2 rounded-full bg-cyan-300 animate-ping" />
+            <Navigation className="w-3.5 h-3.5 text-cyan-200" />
+            <span>Active HUD</span>
+          </button>
           {/* Google Maps Multi-Stop Navigation */}
           {googleMapsUrl && (
             <a
@@ -148,6 +164,19 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
 
             <h1 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mb-3">{plan.title}</h1>
             <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light max-w-2xl">{plan.description}</p>
+
+            {/* Start Live Journey CTA */}
+            <div className="mt-5 flex items-center gap-3">
+              <button
+                onClick={() => setShowHud(true)}
+                className="btn-primary !py-3 !px-6 !rounded-2xl !text-sm cursor-pointer shadow-[0_0_30px_rgba(14,165,233,0.35)] group"
+              >
+                <span className="w-2 h-2 rounded-full bg-cyan-300 animate-ping" />
+                <Navigation className="w-4 h-4 text-white group-hover:rotate-45 transition-transform" />
+                <span>Start Live Journey (Cockpit HUD)</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </div>
 
           {/* Metrics */}
@@ -285,6 +314,15 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
           </div>
         </div>
       </div>
+
+      {/* Active Trip Cockpit HUD Overlay */}
+      {showHud && (
+        <ActiveTripHud
+          plan={plan}
+          onClose={() => setShowHud(false)}
+          onCompleteTrip={onToggleComplete}
+        />
+      )}
     </div>
   );
 }
