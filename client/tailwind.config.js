@@ -26,8 +26,9 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Syne"', '"Outfit"', '"Poppins"', 'system-ui', 'sans-serif'],
-        syne:    ['"Syne"', 'sans-serif'],
+        display: ['"Space Grotesk"', '"Urbanist"', '"Outfit"', 'system-ui', 'sans-serif'],
+        space:   ['"Space Grotesk"', 'sans-serif'],
+        urbanist:['"Urbanist"', 'sans-serif'],
         sans:    ['"Poppins"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', 'Menlo', 'monospace'],
         poppins: ['"Poppins"', 'sans-serif'],
