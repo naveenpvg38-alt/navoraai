@@ -76,8 +76,8 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
                   Tumkur Circuit Engine
                 </span>
               </div>
-              <p className="text-slate-400 text-xs mt-0.5 font-normal">
-                Plan less, Experience more.
+              <p className="text-slate-400 text-xs mt-0.5 font-medium">
+                Your Mood, Your Move.
               </p>
             </div>
           </div>

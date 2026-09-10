@@ -25,8 +25,9 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
     app: 'NAVORA AI',
-    version: '1.0.0',
-    tagline: 'Plan less, Experience more.',
+    version: '2.0.0',
+    tagline: 'Your Mood, Your Move.',
+    district: 'Tumkur (Tumakuru), Karnataka',
     timestamp: new Date().toISOString()
   });
 });

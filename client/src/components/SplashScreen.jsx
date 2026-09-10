@@ -151,8 +151,8 @@ export default function SplashScreen({ onComplete }) {
               AI Planner
             </span>
           </div>
-          <p className="text-slate-500 text-sm font-light tracking-wide">
-            Plan less, <span className="text-cyan-300 font-medium">Experience more.</span>
+          <p className="text-slate-400 text-sm font-medium tracking-wide">
+            Your Mood, <span className="text-cyan-300 font-semibold">Your Move.</span>
           </p>
         </div>
 
