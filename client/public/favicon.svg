@@ -1,61 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <linearGradient id="shield-rim" x1="10" y1="6" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+    <linearGradient id="n-left-grad" x1="11" y1="8" x2="25" y2="56" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stopColor="#38BDF8" />
-      <stop offset="50%" stopColor="#818CF8" />
-      <stop offset="100%" stopColor="#C084FC" />
+      <stop offset="60%" stopColor="#0284C7" />
+      <stop offset="100%" stopColor="#0369A1" />
     </linearGradient>
-    <linearGradient id="shield-bg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#131D36" />
-      <stop offset="100%" stopColor="#0B1120" />
-    </linearGradient>
-    <linearGradient id="n-left" x1="20" y1="18" x2="25" y2="46" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#38BDF8" />
-      <stop offset="100%" stopColor="#0284C7" />
-    </linearGradient>
-    <linearGradient id="n-diag" x1="22" y1="18" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#67E8F9" />
-      <stop offset="45%" stopColor="#38BDF8" />
-      <stop offset="85%" stopColor="#818CF8" />
-      <stop offset="100%" stopColor="#A855F7" />
-    </linearGradient>
-    <linearGradient id="n-right" x1="39" y1="18" x2="44" y2="46" gradientUnits="userSpaceOnUse">
+
+    <linearGradient id="n-right-grad" x1="39" y1="8" x2="53" y2="56" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stopColor="#C084FC" />
-      <stop offset="100%" stopColor="#6366F1" />
+      <stop offset="50%" stopColor="#818CF8" />
+      <stop offset="100%" stopColor="#4F46E5" />
+    </linearGradient>
+
+    <linearGradient id="n-diag-grad" x1="11" y1="8" x2="53" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#22D3EE" />
+      <stop offset="35%" stopColor="#38BDF8" />
+      <stop offset="70%" stopColor="#818CF8" />
+      <stop offset="100%" stopColor="#A855F7" />
     </linearGradient>
   </defs>
 
-  <!-- Hexagonal Shield Base -->
-  <polygon
-    points="32,6 54,18.5 54,45.5 32,58 10,45.5 10,18.5"
-    fill="url(#shield-bg)"
-    stroke="url(#shield-rim)"
-    stroke-width="2.5"
-    stroke-linejoin="round"
+  <!-- Left Vertical Stem -->
+  <rect x="11" y="8" width="14" height="48" rx="4.5" fill="url(#n-left-grad)" />
+
+  <!-- Right Vertical Stem -->
+  <rect x="39" y="8" width="14" height="48" rx="4.5" fill="url(#n-right-grad)" />
+
+  <!-- Diagonal Fold Ribbon -->
+  <path
+    d="M 11 12.5 C 11 10 13 8 15.5 8 L 24.5 8 C 25.8 8 27.2 8.8 28 9.9 L 52.5 50.8 C 53.5 52.4 52.6 54.6 50.7 55.4 C 49.9 55.8 49 56 48.2 56 L 39.5 56 C 38.2 56 36.8 55.2 36 54.1 L 11.5 13.2 C 11.2 12.8 11 12.2 11 11.5 Z"
+    fill="url(#n-diag-grad)"
   />
 
-  <!-- Inner Circuit Inset -->
-  <polygon
-    points="32,10.5 49.5,20.5 49.5,43.5 32,53.5 14.5,43.5 14.5,20.5"
-    fill="none"
-    stroke="#38BDF8"
-    stroke-opacity="0.25"
-    stroke-width="1"
-    stroke-dasharray="3 2"
-    stroke-linejoin="round"
-  />
-
-  <!-- 'N' Left Pillar -->
-  <path d="M 20 21 L 25 18 L 25 43 L 20 46 Z" fill="url(#n-left)" />
-
-  <!-- 'N' Right Pillar -->
-  <path d="M 39 18 L 44 21 L 44 46 L 39 43 Z" fill="url(#n-right)" />
-
-  <!-- 'N' Diagonal Slash -->
-  <path d="M 20.5 20.5 L 26 18 L 43.5 43.5 L 38 46 Z" fill="url(#n-diag)" />
-
-  <!-- Route Nodes -->
-  <circle cx="20.5" cy="20.5" r="2" fill="#FFFFFF" />
-  <circle cx="43.5" cy="43.5" r="2" fill="#FFFFFF" />
+  <!-- Origin & Route Nodes -->
+  <circle cx="18" cy="14" r="2.5" fill="#FFFFFF" />
+  <circle cx="46" cy="50" r="2.5" fill="#FFFFFF" />
   <polygon points="32,29.5 34.5,32 32,34.5 29.5,32" fill="#FFFFFF" />
 </svg>

@@ -2,8 +2,8 @@ import React from 'react';
 
 /**
  * NAVORA AI — Official Brand Mark
- * Style: Hexagonal Tech Shield & Monogram
- * A faceted geometric 'N' monogram embedded inside an obsidian cyber shield.
+ * Style: Futuristic Gradient 'N' Emblem
+ * A pure, bold, dimensional letter 'N' with origami folds, cyber lighting, and glowing route sparks.
  */
 export default function NavoraLogo({ size = 'md', className = '', withGlow = true }) {
   // Map size tokens to pixel dimensions
@@ -13,7 +13,7 @@ export default function NavoraLogo({ size = 'md', className = '', withGlow = tru
     md: 36,
     lg: 48,
     xl: 64,
-    '2xl': 80
+    '2xl': 84
   };
 
   const dim = typeof size === 'number' ? size : (pixelSizes[size] || 36);
@@ -26,9 +26,9 @@ export default function NavoraLogo({ size = 'md', className = '', withGlow = tru
       {/* Outer ambient glow */}
       {withGlow && (
         <div
-          className="absolute inset-0 rounded-2xl opacity-40 blur-md pointer-events-none transition-opacity duration-300"
+          className="absolute inset-0 rounded-2xl opacity-45 blur-lg pointer-events-none transition-opacity duration-300"
           style={{
-            background: 'radial-gradient(circle, rgba(34,211,238,0.5) 0%, rgba(129,140,248,0.3) 50%, transparent 70%)'
+            background: 'radial-gradient(circle, rgba(34,211,238,0.6) 0%, rgba(129,140,248,0.4) 50%, transparent 75%)'
           }}
         />
       )}
@@ -42,113 +42,83 @@ export default function NavoraLogo({ size = 'md', className = '', withGlow = tru
         className="relative z-10 transition-transform duration-300 group-hover:scale-105"
       >
         <defs>
-          {/* Hexagon shield rim gradient */}
-          <linearGradient id="shield-rim" x1="10" y1="6" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+          {/* Left vertical pillar — Deep Cyan to Ocean Blue */}
+          <linearGradient id="n-left-grad" x1="11" y1="8" x2="25" y2="56" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#38BDF8" />
+            <stop offset="60%" stopColor="#0284C7" />
+            <stop offset="100%" stopColor="#0369A1" />
+          </linearGradient>
+
+          {/* Right vertical pillar — Electric Indigo to Violet */}
+          <linearGradient id="n-right-grad" x1="39" y1="8" x2="53" y2="56" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#C084FC" />
             <stop offset="50%" stopColor="#818CF8" />
-            <stop offset="100%" stopColor="#C084FC" />
+            <stop offset="100%" stopColor="#4F46E5" />
           </linearGradient>
 
-          {/* Hexagon dark obsidian body */}
-          <linearGradient id="shield-bg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#131D36" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#0B1120" stopOpacity="0.98" />
-          </linearGradient>
-
-          {/* Left pillar gradient */}
-          <linearGradient id="n-left" x1="20" y1="18" x2="25" y2="46" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#38BDF8" />
-            <stop offset="100%" stopColor="#0284C7" />
-          </linearGradient>
-
-          {/* Diagonal blade gradient */}
-          <linearGradient id="n-diag" x1="22" y1="18" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#67E8F9" />
-            <stop offset="45%" stopColor="#38BDF8" />
-            <stop offset="85%" stopColor="#818CF8" />
+          {/* Diagonal Slash Ribbon — Radiant Cyan to Violet Neon */}
+          <linearGradient id="n-diag-grad" x1="11" y1="8" x2="53" y2="56" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#22D3EE" />
+            <stop offset="35%" stopColor="#38BDF8" />
+            <stop offset="70%" stopColor="#818CF8" />
             <stop offset="100%" stopColor="#A855F7" />
           </linearGradient>
 
-          {/* Right pillar gradient */}
-          <linearGradient id="n-right" x1="39" y1="18" x2="44" y2="46" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#C084FC" />
-            <stop offset="100%" stopColor="#6366F1" />
-          </linearGradient>
-
-          {/* Specular edge sheen */}
-          <linearGradient id="n-sheen" x1="24" y1="18" x2="40" y2="34" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+          {/* Specular sheen highlight */}
+          <linearGradient id="n-sheen-grad" x1="11" y1="8" x2="35" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.85" />
             <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
           </linearGradient>
 
-          {/* Soft neon core glow filter */}
-          <filter id="core-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
+          {/* Drop shadow under diagonal ribbon fold */}
+          <filter id="n-ribbon-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="-2" dy="2" stdDeviation="3" floodColor="#050B17" floodOpacity="0.75" />
           </filter>
         </defs>
 
-        {/* 1. Hexagonal Shield Base */}
-        <polygon
-          points="32,6 54,18.5 54,45.5 32,58 10,45.5 10,18.5"
-          fill="url(#shield-bg)"
-          stroke="url(#shield-rim)"
-          strokeWidth="2.2"
-          strokeLinejoin="round"
+        {/* 1. Left Vertical Stem */}
+        <rect
+          x="11"
+          y="8"
+          width="14"
+          height="48"
+          rx="4.5"
+          fill="url(#n-left-grad)"
         />
 
-        {/* 2. Inner Shield Circuit Inset */}
-        <polygon
-          points="32,10.5 49.5,20.5 49.5,43.5 32,53.5 14.5,43.5 14.5,20.5"
-          fill="none"
-          stroke="rgba(56, 189, 248, 0.18)"
-          strokeWidth="1"
-          strokeDasharray="3 2"
-          strokeLinejoin="round"
+        {/* 2. Right Vertical Stem */}
+        <rect
+          x="39"
+          y="8"
+          width="14"
+          height="48"
+          rx="4.5"
+          fill="url(#n-right-grad)"
         />
 
-        {/* 3. Tech Monogram 'N' — Left Pillar */}
+        {/* 3. Diagonal Fold Ribbon (Overlays Pillars) */}
         <path
-          d="M 20 21 L 25 18 L 25 43 L 20 46 Z"
-          fill="url(#n-left)"
-          stroke="rgba(56, 189, 248, 0.4)"
-          strokeWidth="0.5"
+          d="M 11 12.5 C 11 10 13 8 15.5 8 L 24.5 8 C 25.8 8 27.2 8.8 28 9.9 L 52.5 50.8 C 53.5 52.4 52.6 54.6 50.7 55.4 C 49.9 55.8 49 56 48.2 56 L 39.5 56 C 38.2 56 36.8 55.2 36 54.1 L 11.5 13.2 C 11.2 12.8 11 12.2 11 11.5 Z"
+          fill="url(#n-diag-grad)"
+          filter="url(#n-ribbon-shadow)"
         />
 
-        {/* 4. Tech Monogram 'N' — Right Pillar */}
+        {/* 4. Specular Highlight Blade Edge */}
         <path
-          d="M 39 18 L 44 21 L 44 46 L 39 43 Z"
-          fill="url(#n-right)"
-          stroke="rgba(192, 132, 252, 0.4)"
-          strokeWidth="0.5"
+          d="M 12 11 C 12 9.5 13.5 8.5 15.5 8.5 L 23 8.5 L 34 25 L 28 26 Z"
+          fill="url(#n-sheen-grad)"
+          opacity="0.8"
         />
 
-        {/* 5. Tech Monogram 'N' — Dynamic Diagonal Blade */}
-        <path
-          d="M 20.5 20.5 L 26 18 L 43.5 43.5 L 38 46 Z"
-          fill="url(#n-diag)"
-          filter="url(#core-glow)"
-        />
+        {/* 5. Top-Left Origin Node (AI spark) */}
+        <circle cx="18" cy="14" r="2.2" fill="#FFFFFF" />
+        <circle cx="18" cy="14" r="4.5" fill="#38BDF8" opacity="0.35" />
 
-        {/* 6. Specular Highlight Blade Crest */}
-        <path
-          d="M 21.5 20.8 L 26 18.2 L 35 30 L 32 31 Z"
-          fill="url(#n-sheen)"
-          opacity="0.75"
-        />
+        {/* 6. Bottom-Right Destination Node (Route end) */}
+        <circle cx="46" cy="50" r="2.2" fill="#FFFFFF" />
+        <circle cx="46" cy="50" r="4.5" fill="#C084FC" opacity="0.35" />
 
-        {/* 7. Apex North/AI Star Compass Spark (top-left vertex) */}
-        <circle cx="20.5" cy="20.5" r="1.8" fill="#FFFFFF" />
-        <circle cx="20.5" cy="20.5" r="3.2" fill="#38BDF8" opacity="0.4" />
-
-        {/* 8. Destination Route Node (bottom-right vertex) */}
-        <circle cx="43.5" cy="43.5" r="1.8" fill="#FFFFFF" />
-        <circle cx="43.5" cy="43.5" r="3.2" fill="#C084FC" opacity="0.4" />
-
-        {/* 9. Central Navigation Crossroads Node */}
+        {/* 7. Center Crossroads Navigation Diamond */}
         <polygon
           points="32,29.5 34.5,32 32,34.5 29.5,32"
           fill="#FFFFFF"
