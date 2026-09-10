@@ -128,7 +128,7 @@ export default function SplashScreen({ onComplete }) {
           <div className="absolute inset-0 blur-3xl opacity-35 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 pointer-events-none -z-10" />
 
           <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
-            <h1 className="font-space font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.18)]">
+            <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.18)]">
               NAVORA
             </h1>
             <span className="font-mono text-2xl sm:text-4xl md:text-5xl font-black px-3 sm:px-4 py-1 sm:py-1.5 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 shadow-[0_0_35px_rgba(34,211,238,0.4)]">

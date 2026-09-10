@@ -102,7 +102,7 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
           {/* Brand wordmark */}
           <div className="flex items-center gap-2 mb-8">
             <div className="flex items-baseline gap-1.5">
-              <span className="font-space font-black text-2xl text-white tracking-tight">
+              <span className="font-display font-extrabold text-2xl text-white tracking-tight">
                 NAVORA
               </span>
               <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">

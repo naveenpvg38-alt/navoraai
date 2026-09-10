@@ -40,7 +40,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
           className="flex items-center gap-2 group cursor-pointer focus:outline-none select-none"
         >
           <div className="flex items-baseline gap-1.5">
-            <span className="font-space font-black text-xl sm:text-2xl tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.1)]">
+            <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.1)]">
               NAVORA
             </span>
             <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)] group-hover:shadow-[0_0_18px_rgba(34,211,238,0.45)] transition-all">

@@ -26,7 +26,8 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Space Grotesk"', '"Urbanist"', '"Outfit"', 'system-ui', 'sans-serif'],
+        display: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        outfit:  ['"Outfit"', 'sans-serif'],
         space:   ['"Space Grotesk"', 'sans-serif'],
         urbanist:['"Urbanist"', 'sans-serif'],
         sans:    ['"Poppins"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
