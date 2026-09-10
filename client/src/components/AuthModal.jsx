@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { X, Zap, Mail, Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
 import { api } from '../api';
-import NavoraLogo from './NavoraLogo';
 
 const InputField = ({ icon: Icon, type, placeholder, value, onChange, required }) => (
   <div className="relative">
@@ -100,15 +99,17 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
             <X className="w-4 h-4" />
           </button>
 
-          {/* Brand mark */}
-          <div className="flex items-center gap-3 mb-8">
-            <NavoraLogo size={36} withGlow={true} />
-            <div>
-              <span className="font-display font-extrabold text-xl text-white tracking-tight">
-                NAVORA <span className="text-cyan-400">AI</span>
+          {/* Brand wordmark */}
+          <div className="flex items-center gap-2 mb-8">
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-space font-black text-2xl text-white tracking-tight">
+                NAVORA
               </span>
-              <span className="block label-overline text-slate-500 mt-0.5">Tumkur</span>
+              <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">
+                AI
+              </span>
             </div>
+            <span className="label-overline text-slate-500 ml-1 pl-2 border-l border-white/10">Tumkur</span>
           </div>
 
           {/* Heading */}

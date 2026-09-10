@@ -13,7 +13,6 @@ import {
   Download,
   CheckCircle2
 } from 'lucide-react';
-import NavoraLogo from './NavoraLogo';
 
 export default function Footer({ setActiveView, onOpenAuth, user }) {
   const [modalContent, setModalContent] = useState(null); // 'privacy' | 'terms' | 'install' | null
@@ -63,20 +62,21 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
         {/* ── TOP TIER: Brand & Navigation ────────────────────── */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-white/8">
           
-          {/* Brand Left: Glowing Hexagonal Tech Shield + Title + Live Telemetry */}
-          <div className="flex items-center gap-3.5 text-center sm:text-left">
-            <NavoraLogo size={42} withGlow={true} />
-
+          {/* Brand Left: Typographic Wordmark + District Tag */}
+          <div className="flex items-center gap-3 text-center sm:text-left">
             <div className="text-left">
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-white text-base tracking-tight leading-tight">
-                  NAVORA <span className="text-gradient-cyan">AI</span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-space font-black text-xl text-white tracking-tight leading-tight">
+                  NAVORA
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 hidden sm:inline-block">
+                <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">
+                  AI
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 hidden sm:inline-block ml-2">
                   Tumkur Circuit Engine
                 </span>
               </div>
-              <p className="text-slate-400 text-xs mt-0.5 font-medium">
+              <p className="text-slate-400 text-xs mt-1 font-medium">
                 Plan less, Experience more.
               </p>
             </div>

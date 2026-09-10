@@ -1,24 +1,17 @@
-<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#6366f1"/>
+    <linearGradient id="nGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#818CF8"/>
     </linearGradient>
-    <linearGradient id="w" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.4"/>
-    </linearGradient>
-    <clipPath id="nc">
-      <path d="M6,4 L6,56 L16,56 L16,22 L44,56 L54,56 L54,4 L44,4 L44,38 L16,4 Z"/>
-    </clipPath>
   </defs>
-  <!-- N body -->
-  <path d="M6,4 L6,56 L16,56 L16,22 L44,56 L54,56 L54,4 L44,4 L44,38 L16,4 Z" fill="url(#g)"/>
-  <!-- Wave overlay clipped to N -->
-  <g clip-path="url(#nc)">
-    <path d="M0,34 C15,26 30,42 45,34 C52,30 57,34 60,34 L60,60 L0,60 Z" fill="url(#w)" opacity="0.55"/>
-    <path d="M0,40 C15,32 30,48 45,40 C52,36 57,40 60,40 L60,60 L0,60 Z" fill="#a5f3fc" opacity="0.25"/>
-  </g>
-  <!-- shine -->
-  <path d="M8,4 L8,12 L18,4 Z" fill="white" opacity="0.22"/>
+  <!-- Background rounded square -->
+  <rect width="64" height="64" rx="16" fill="#0B1120"/>
+  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="rgba(56,189,248,0.3)" stroke-width="1.5"/>
+  
+  <!-- Clean Typographic N -->
+  <path d="M16 14 L16 50 L25 50 L25 28 L39 50 L48 50 L48 14 L39 14 L39 36 L25 14 Z" fill="url(#nGrad)"/>
+  
+  <!-- Glowing AI Spark Dot -->
+  <circle cx="48" cy="14" r="3.5" fill="#38BDF8"/>
 </svg>

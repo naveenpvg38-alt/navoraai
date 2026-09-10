@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sparkles, Bookmark, LogOut } from 'lucide-react';
-import NavoraLogo from './NavoraLogo';
 
 const NavLink = ({ label, active, onClick, icon }) => (
   <button
@@ -35,21 +34,22 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-[60px] flex items-center justify-between">
 
-        {/* Brand mark */}
+        {/* Brand wordmark logo */}
         <button
           onClick={() => setActiveView('home')}
-          className="flex items-center gap-2 sm:gap-3 group cursor-pointer focus:outline-none"
+          className="flex items-center gap-2 group cursor-pointer focus:outline-none select-none"
         >
-          <NavoraLogo size={36} withGlow={true} />
-
-          <div className="leading-none">
-            <span className="font-display font-extrabold text-base sm:text-xl tracking-tight text-white group-hover:text-cyan-300 transition-colors">
-              NAVORA <span className="text-cyan-400">AI</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-space font-black text-xl sm:text-2xl tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.1)]">
+              NAVORA
             </span>
-            <span className="hidden sm:block label-overline text-slate-500 mt-0.5">
-              Tumkur
+            <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)] group-hover:shadow-[0_0_18px_rgba(34,211,238,0.45)] transition-all">
+              AI
             </span>
           </div>
+          <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-slate-500 uppercase ml-1 pl-2 border-l border-white/10">
+            Tumkur
+          </span>
         </button>
 
         {/* Center nav — desktop only */}

@@ -4,17 +4,15 @@ import {
   Lock,
   User,
   Eye,
-  EyeOff,
   Zap,
   ArrowRight,
   ArrowLeft,
   Compass,
   Sparkles,
-  Shield,
-  AlertCircle
+  ShieldCheck,
+  CheckCircle2
 } from 'lucide-react';
 import { api } from '../api';
-import NavoraLogo from './NavoraLogo';
 
 const TUMKUR_DISCOVERIES = [
   {
@@ -186,12 +184,18 @@ export default function LoginPage({
         </button>
 
         {/* Brand identity badge */}
-        <div className="flex items-center gap-2.5">
-          <NavoraLogo size={32} withGlow={true} />
-          <span className="font-display font-extrabold text-lg text-white tracking-tight">
-            NAVORA <span className="text-cyan-400">AI</span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-space font-black text-xl text-white tracking-tight">
+              NAVORA
+            </span>
+            <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">
+              AI
+            </span>
+          </div>
+          <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-slate-500 uppercase ml-1 pl-2 border-l border-white/10">
+            Tumkur
           </span>
-          <span className="label-overline text-slate-500 hidden sm:inline">Tumkur</span>
         </div>
 
         {/* Guest shortcut */}

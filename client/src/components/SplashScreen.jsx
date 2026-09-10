@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Sparkles } from 'lucide-react';
-import NavoraLogo from './NavoraLogo';
 
 const STEPS = [
   { icon: '🗺️', text: 'Loading Tumkur map data…' },
@@ -120,18 +119,23 @@ export default function SplashScreen({ onComplete }) {
       {/* Center content */}
       <div className="relative z-10 flex flex-col items-center text-center px-8 max-w-lg">
 
-        {/* Logo mark */}
-        <div className="relative mb-8 flex items-center justify-center">
-          <NavoraLogo size={96} withGlow={true} />
-        </div>
-
-        {/* Word mark */}
-        <h1
-          className="font-display text-5xl sm:text-7xl font-extrabold tracking-tight text-white mb-2 transition-all duration-700"
-          style={{ opacity: phase >= 1 ? 1 : 0, transform: phase >= 1 ? 'translateY(0)' : 'translateY(18px)' }}
+        {/* Designed NAVORA AI Wordmark Centerpiece */}
+        <div
+          className="relative mb-8 transition-all duration-700 select-none"
+          style={{ opacity: phase >= 1 ? 1 : 0, transform: phase >= 1 ? 'translateY(0)' : 'translateY(20px)' }}
         >
-          NAVORA <span className="text-gradient-cyan">AI</span>
-        </h1>
+          {/* Ambient Backlight Aura */}
+          <div className="absolute inset-0 blur-3xl opacity-35 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 pointer-events-none -z-10" />
+
+          <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+            <h1 className="font-space font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.18)]">
+              NAVORA
+            </h1>
+            <span className="font-mono text-2xl sm:text-4xl md:text-5xl font-black px-3 sm:px-4 py-1 sm:py-1.5 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 shadow-[0_0_35px_rgba(34,211,238,0.4)]">
+              AI
+            </span>
+          </div>
+        </div>
 
         {/* Chips + tagline */}
         <div
