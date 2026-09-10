@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAVORA AI — 4 Brand Logo Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background-color: #070B14;
+      color: #F1F5F9;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    /* Subtle glow filters */
+    .glow-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glow-card:hover {
+      background: rgba(21, 31, 56, 0.85);
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(56, 189, 248, 0.25);
+    }
+
+    /* Ambient pulse animations */
+    @keyframes starPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(56,189,248,0.5)); }
+      50%      { transform: scale(1.05); filter: drop-shadow(0 0 24px rgba(56,189,248,0.85)); }
+    }
+    .anim-star { animation: starPulse 3s ease-in-out infinite; }
+
+    @keyframes wingHover {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
+    }
+    .anim-falcon { animation: wingHover 2.6s ease-in-out infinite; }
+
+    @keyframes ribbonSpin {
+      0%   { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 240; }
+    }
+    .anim-ribbon {
+      stroke-dasharray: 60 20;
+      animation: ribbonSpin 6s linear infinite;
+    }
+
+    @keyframes prismShimmer {
+      0%, 100% { opacity: 0.75; }
+      50%      { opacity: 1; filter: drop-shadow(0 0 20px rgba(129, 140, 248, 0.6)); }
+    }
+    .anim-prism { animation: prismShimmer 3.2s ease-in-out infinite; }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4 sm:px-8 selection:bg-cyan-500 selection:text-black">
+
+  {/* Header */}
+  <header class="max-w-5xl mx-auto text-center mb-12">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-mono mb-4">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+      <span>BRAND IDENTITY EXPLORATION</span>
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-3">
+      Choose Your Logo Style
+    </h1>
+    <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+      Here are 4 completely fresh, distinct brand concepts created for <strong class="text-white">NAVORA AI</strong>. Hover over each card to preview animations.
+    </p>
+  </header>
+
+  {/* 4 Cards Grid */}
+  <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+    {/* ── OPTION 1: ✦ Guiding North Star (Polestar) ── */}
+    <div class="glow-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between group">
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-mono text-xs font-bold text-cyan-400 tracking-wider">CONCEPT 01</span>
+          <span class="px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-[11px] font-mono">
+            Navigation Intelligence
+          </span>
+        </div>
+
+        {/* Large Logo Render */}
+        <div class="h-44 rounded-2xl bg-[#090E1A] border border-white/5 flex items-center justify-center mb-6 relative overflow-hidden group-hover:border-cyan-500/30 transition-colors">
+          <div class="absolute inset-0 bg-radial from-cyan-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
+          {/* SVG 1: North Star */}
+          <svg class="w-24 h-24 anim-star transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="starGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#6366F1"/>
+              </linearGradient>
+              <linearGradient id="starGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7DD3FC"/>
+                <stop offset="100%" stop-color="#A855F7"/>
+              </linearGradient>
+              <filter id="starGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+            </defs>
+            {/* Outer Orbit Halo */}
+            <circle cx="50" cy="50" r="38" stroke="url(#starGrad1)" stroke-width="1" stroke-dasharray="4 6" opacity="0.4"/>
+            {/* Diagonal secondary rays */}
+            <path d="M50 24 L56 44 L76 50 L56 56 L50 76 L44 56 L24 50 L44 44 Z" fill="url(#starGrad2)" opacity="0.5"/>
+            {/* Primary 4-pointed radiant beacon */}
+            <path d="M50 8 L54 44 L90 50 L54 56 L50 92 L46 56 L10 50 L46 44 Z" fill="url(#starGrad1)" filter="url(#starGlow)"/>
+            {/* Inner diamond facet highlights */}
+            <path d="M50 8 L54 44 L50 50 Z" fill="#BAE6FD" opacity="0.8"/>
+            <path d="M90 50 L54 56 L50 50 Z" fill="#818CF8" opacity="0.6"/>
+            <path d="M50 92 L46 56 L50 50 Z" fill="#6366F1" opacity="0.8"/>
+            <path d="M10 50 L46 44 L50 50 Z" fill="#38BDF8" opacity="0.6"/>
+            {/* Center Core Spark */}
+            <circle cx="50" cy="50" r="4" fill="#FFFFFF"/>
+            <circle cx="50" cy="50" r="8" fill="#38BDF8" opacity="0.3"/>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+          <span>✦</span> Guiding North Star (Polestar)
+        </h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          A minimalist 4-pointed radiant travel intelligence star with faceted geometric light-shards and an orbital satellite ring. Symbolizes clear direction, effortless discovery, and guidance through Tumkur.
+        </p>
+      </div>
+
+      <div class="pt-4 border-t border-white/6 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-mono text-slate-400">Navbar preview:</span>
+          <div class="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 100 100" fill="none">
+              <path d="M50 8 L54 44 L90 50 L54 56 L50 92 L46 56 L10 50 L46 44 Z" fill="#38BDF8"/>
+              <circle cx="50" cy="50" r="5" fill="#FFF"/>
+            </svg>
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-cyan-400 font-mono">OPTION 1</span>
+      </div>
+    </div>
+
+
+    {/* ── OPTION 2: 🦅 Geometric Cyber Falcon in Flight ── */}
+    <div class="glow-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between group">
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-mono text-xs font-bold text-violet-400 tracking-wider">CONCEPT 02</span>
+          <span class="px-2.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/25 text-violet-300 text-[11px] font-mono">
+            Speed & Exploration
+          </span>
+        </div>
+
+        {/* Large Logo Render */}
+        <div class="h-44 rounded-2xl bg-[#090E1A] border border-white/5 flex items-center justify-center mb-6 relative overflow-hidden group-hover:border-violet-500/30 transition-colors">
+          <div class="absolute inset-0 bg-radial from-violet-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          {/* SVG 2: Origami Falcon */}
+          <svg class="w-24 h-24 anim-falcon transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="falconWingL" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#2563EB"/>
+              </linearGradient>
+              <linearGradient id="falconWingR" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#818CF8"/>
+                <stop offset="100%" stop-color="#A855F7"/>
+              </linearGradient>
+              <linearGradient id="falconBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="100%" stop-color="#38BDF8"/>
+              </linearGradient>
+            </defs>
+            {/* Left Wing Facets forming left stroke of 'N' */}
+            <path d="M14 62 L38 22 L44 48 Z" fill="url(#falconWingL)" opacity="0.85"/>
+            <path d="M14 62 L44 48 L32 74 Z" fill="#1E40AF" opacity="0.9"/>
+            
+            {/* Central Diagonal Body forming diagonal of 'N' */}
+            <path d="M38 22 L62 74 L50 78 L32 74 Z" fill="url(#falconBody)"/>
+            <path d="M38 22 L50 20 L62 74 Z" fill="#60A5FA" opacity="0.75"/>
+
+            {/* Right Wing Facets forming right stroke of 'N' */}
+            <path d="M62 74 L86 34 L56 50 Z" fill="url(#falconWingR)"/>
+            <path d="M86 34 L72 18 L56 50 Z" fill="#C084FC" opacity="0.85"/>
+
+            {/* Glowing Falcon Eye Spark */}
+            <circle cx="50" cy="20" r="2.5" fill="#FFF"/>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+          <span>🦅</span> Geometric Cyber Falcon
+        </h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          A low-poly geometric falcon taking flight whose angular wings subtly outline the letter <strong>N</strong>. Symbolizes swift AI planning, panoramic summit views, and soaring across Tumkur's terrain.
+        </p>
+      </div>
+
+      <div class="pt-4 border-t border-white/6 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-mono text-slate-400">Navbar preview:</span>
+          <div class="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 100 100" fill="none">
+              <path d="M14 62 L38 22 L44 48 Z" fill="#38BDF8"/>
+              <path d="M38 22 L62 74 L50 78 Z" fill="#FFF"/>
+              <path d="M62 74 L86 34 L56 50 Z" fill="#818CF8"/>
+            </svg>
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-violet-400 font-mono">OPTION 2</span>
+      </div>
+    </div>
+
+
+    {/* ── OPTION 3: ♾️ Interlocking Ribbon Orbit (Infinity Knot) ── */}
+    <div class="glow-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between group">
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-mono text-xs font-bold text-emerald-400 tracking-wider">CONCEPT 03</span>
+          <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-[11px] font-mono">
+            Circuit Loops & Zero Backtracking
+          </span>
+        </div>
+
+        {/* Large Logo Render */}
+        <div class="h-44 rounded-2xl bg-[#090E1A] border border-white/5 flex items-center justify-center mb-6 relative overflow-hidden group-hover:border-emerald-500/30 transition-colors">
+          <div class="absolute inset-0 bg-radial from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          {/* SVG 3: Infinity Ribbon */}
+          <svg class="w-24 h-24 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="50%" stop-color="#10B981"/>
+                <stop offset="100%" stop-color="#6366F1"/>
+              </linearGradient>
+            </defs>
+            {/* Background trace glow */}
+            <path d="M28 32 C14 32 14 68 28 68 C42 68 58 32 72 32 C86 32 86 68 72 68 C58 68 42 32 28 32 Z" 
+                  stroke="url(#ribbonGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+            {/* Animated foreground pulse stroke */}
+            <path class="anim-ribbon" d="M28 32 C14 32 14 68 28 68 C42 68 58 32 72 32 C86 32 86 68 72 68 C58 68 42 32 28 32 Z" 
+                  stroke="url(#ribbonGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            {/* Central intersection highlight dot */}
+            <circle cx="50" cy="50" r="5" fill="#FFFFFF" opacity="0.9"/>
+            <circle cx="50" cy="50" r="9" fill="#10B981" opacity="0.3"/>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+          <span>♾️</span> Interlocking Ribbon Orbit
+        </h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          A continuous glowing Möbius ribbon loop tracing an infinite figure-8 path whose center crossover forms an <strong>N</strong> junction. Symbolizes zero-backtracking routing and endless fluid travel adventures.
+        </p>
+      </div>
+
+      <div class="pt-4 border-t border-white/6 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-mono text-slate-400">Navbar preview:</span>
+          <div class="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 100 100" fill="none">
+              <path d="M28 32 C14 32 14 68 28 68 C42 68 58 32 72 32 C86 32 86 68 72 68 C58 68 42 32 28 32 Z" 
+                    stroke="#10B981" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="50" cy="50" r="4" fill="#FFF"/>
+            </svg>
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-emerald-400 font-mono">OPTION 3</span>
+      </div>
+    </div>
+
+
+    {/* ── OPTION 4: 💎 Minimalist Cut-Diamond Prism ── */}
+    <div class="glow-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between group">
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-mono text-xs font-bold text-pink-400 tracking-wider">CONCEPT 04</span>
+          <span class="px-2.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/25 text-pink-300 text-[11px] font-mono">
+            Linear / Apple Luxury Aesthetic
+          </span>
+        </div>
+
+        {/* Large Logo Render */}
+        <div class="h-44 rounded-2xl bg-[#090E1A] border border-white/5 flex items-center justify-center mb-6 relative overflow-hidden group-hover:border-pink-500/30 transition-colors">
+          <div class="absolute inset-0 bg-radial from-pink-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          {/* SVG 4: Diamond Prism */}
+          <svg class="w-24 h-24 anim-prism transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="prism1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#818CF8"/>
+              </linearGradient>
+              <linearGradient id="prism2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#C084FC"/>
+                <stop offset="100%" stop-color="#EC4899"/>
+              </linearGradient>
+            </defs>
+            {/* Top Crown Facet */}
+            <polygon points="50,14 78,32 50,50 22,32" fill="url(#prism1)" opacity="0.95"/>
+            {/* Left Lower Facet */}
+            <polygon points="22,32 50,50 50,86 16,56" fill="#1E293B" stroke="url(#prism1)" stroke-width="1.5"/>
+            {/* Right Lower Facet */}
+            <polygon points="78,32 84,56 50,86 50,50" fill="url(#prism2)" opacity="0.85"/>
+            {/* Bottom Point Refraction */}
+            <polygon points="50,50 50,86 38,64" fill="#38BDF8" opacity="0.6"/>
+            {/* Specular White Shimmer Line */}
+            <line x1="50" y1="14" x2="50" y2="86" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="50" cy="50" r="3" fill="#FFFFFF"/>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+          <span>💎</span> Minimalist Cut-Diamond Prism
+        </h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          A sharp hexagonal crystal gem with clean geometric light-refracting facets. Clean Apple/Linear aesthetic symbolizing precision itinerary algorithms and handcrafted district quality.
+        </p>
+      </div>
+
+      <div class="pt-4 border-t border-white/6 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-mono text-slate-400">Navbar preview:</span>
+          <div class="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 100 100" fill="none">
+              <polygon points="50,14 78,32 50,50 22,32" fill="#38BDF8"/>
+              <polygon points="78,32 84,56 50,86 50,50" fill="#EC4899" opacity="0.8"/>
+            </svg>
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-pink-400 font-mono">OPTION 4</span>
+      </div>
+    </div>
+
+  </main>
+
+  {/* Comparison Table / Summary */}
+  <footer class="max-w-5xl mx-auto p-6 rounded-2xl bg-slate-900/50 border border-white/8 text-center text-xs text-slate-400">
+    <p>💡 Just tell me which number you like best (e.g. <strong>"I like Option 1"</strong> or <strong>"I want Option 2"</strong>), and I will immediately activate it across the entire site and favicon!</p>
+  </footer>
+
+</body>
+</html>
