@@ -127,11 +127,16 @@ export default function SplashScreen({ onComplete }) {
           {/* Ambient Backlight Aura */}
           <div className="absolute inset-0 blur-3xl opacity-35 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 pointer-events-none -z-10" />
 
-          <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
             <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.18)]">
               NAVORA
             </h1>
-            <span className="font-mono text-2xl sm:text-4xl md:text-5xl font-black px-3 sm:px-4 py-1 sm:py-1.5 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 shadow-[0_0_35px_rgba(34,211,238,0.4)]">
+            {/* Pulsing Neon Beacon Dot */}
+            <span className="relative flex h-3.5 sm:h-5 w-3.5 sm:w-5 mx-1 sm:mx-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3.5 sm:h-5 w-3.5 sm:w-5 bg-cyan-400 shadow-[0_0_20px_#22d3ee]"></span>
+            </span>
+            <span className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-gradient-cyan drop-shadow-[0_4px_30px_rgba(34,211,238,0.3)]">
               AI
             </span>
           </div>

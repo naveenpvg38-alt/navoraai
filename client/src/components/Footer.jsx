@@ -65,11 +65,15 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
           {/* Brand Left: Typographic Wordmark + District Tag */}
           <div className="flex items-center gap-3 text-center sm:text-left">
             <div className="text-left">
-              <div className="flex items-baseline gap-1.5">
+              <div className="flex items-center gap-1.5">
                 <span className="font-display font-extrabold text-xl text-white tracking-tight leading-tight">
                   NAVORA
                 </span>
-                <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">
+                <span className="relative flex h-1.5 w-1.5 mx-0.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400 shadow-[0_0_6px_#22d3ee]"></span>
+                </span>
+                <span className="font-display font-extrabold text-xl tracking-tight text-gradient-cyan leading-tight">
                   AI
                 </span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 hidden sm:inline-block ml-2">

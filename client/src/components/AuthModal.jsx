@@ -99,13 +99,17 @@ export default function AuthModal({ isOpen, initialMode = 'login', onClose, onSu
             <X className="w-4 h-4" />
           </button>
 
-          {/* Brand wordmark */}
+          {/* Brand wordmark: NAVORA · AI */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="flex items-baseline gap-1.5">
+            <div className="flex items-center gap-1.5">
               <span className="font-display font-extrabold text-2xl text-white tracking-tight">
                 NAVORA
               </span>
-              <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">
+              <span className="relative flex h-2 w-2 mx-0.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+              </span>
+              <span className="font-display font-extrabold text-2xl tracking-tight text-gradient-cyan">
                 AI
               </span>
             </div>

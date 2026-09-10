@@ -34,16 +34,21 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-[60px] flex items-center justify-between">
 
-        {/* Brand wordmark logo */}
+        {/* Brand wordmark: NAVORA · AI with pulsing neon beacon dot */}
         <button
           onClick={() => setActiveView('home')}
           className="flex items-center gap-2 group cursor-pointer focus:outline-none select-none"
         >
-          <div className="flex items-baseline gap-1.5">
+          <div className="flex items-center gap-1.5">
             <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.1)]">
               NAVORA
             </span>
-            <span className="font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)] group-hover:shadow-[0_0_18px_rgba(34,211,238,0.45)] transition-all">
+            {/* Pulsing Neon Beacon Dot */}
+            <span className="relative flex h-2 w-2 mx-0.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+            </span>
+            <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-gradient-cyan">
               AI
             </span>
           </div>
