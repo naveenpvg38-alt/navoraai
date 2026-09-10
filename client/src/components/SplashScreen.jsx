@@ -1,227 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Sparkles } from 'lucide-react';
-
-const STEPS = [
-  { icon: '🗺️', text: 'Loading Tumkur map data…' },
-  { icon: '🤖', text: 'Warming up AI planner…' },
-  { icon: '📍', text: 'Pinning local destinations…' },
-  { icon: '✨', text: 'Ready to explore!' },
-];
 
 export default function SplashScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState(0);
-  const [stepIdx, setStepIdx] = useState(0);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 200);
-    const t2 = setTimeout(() => setPhase(2), 500);
-    const t3 = setTimeout(() => setPhase(3), 800);
-    return () => [t1, t2, t3].forEach(clearTimeout);
-  }, []);
-
-  useEffect(() => {
-    if (phase < 3) return;
-    const interval = setInterval(() => {
-      setStepIdx(prev => {
-        if (prev < STEPS.length - 1) return prev + 1;
-        clearInterval(interval);
-        return prev;
-      });
-    }, 350);
-    return () => clearInterval(interval);
-  }, [phase]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 250);
+          setTimeout(onComplete, 200);
           return 100;
         }
-        return prev + 2.25;
+        return prev + 2.5;
       });
-    }, 50);
+    }, 40);
+
     return () => clearInterval(interval);
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#06080F] overflow-hidden select-none">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#070B14] overflow-hidden select-none px-6">
+      {/* Soft, minimal ambient background glow */}
+      <div className="absolute w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute w-[400px] h-[400px] rounded-full bg-indigo-600/10 blur-[130px] pointer-events-none -z-10 translate-x-20 translate-y-20" />
 
-      <style>{`
-        @keyframes orbitA {
-          from { transform: rotate(0deg) translateY(-58px) rotate(0deg); }
-          to   { transform: rotate(360deg) translateY(-58px) rotate(-360deg); }
-        }
-        @keyframes orbitB {
-          from { transform: rotate(0deg) translateY(-58px) rotate(0deg); }
-          to   { transform: rotate(-360deg) translateY(-58px) rotate(360deg); }
-        }
-        .orbit-a { animation: orbitA 7s linear infinite; }
-        .orbit-b { animation: orbitB 13s linear infinite; }
-        @keyframes spinCW  { to { transform: rotate(360deg); } }
-        @keyframes spinCCW { to { transform: rotate(-360deg); } }
-        .spin-cw  { animation: spinCW  20s linear infinite; transform-origin: 24px 24px; }
-        .spin-ccw { animation: spinCCW 12s linear infinite; transform-origin: 24px 24px; }
+      {/* Main Minimalist Center Container */}
+      <div className="flex flex-col items-center text-center max-w-sm w-full animate-fade-up">
 
-        /* Smooth diagonal scan beam */
-        @keyframes scanBeam {
-          0%   { transform: translateX(-110%) skewX(-18deg); opacity: 0; }
-          15%  { opacity: 0.6; }
-          85%  { opacity: 0.6; }
-          100% { transform: translateX(210%) skewX(-18deg); opacity: 0; }
-        }
-        .scan-beam {
-          animation: scanBeam 3.5s cubic-bezier(0.4,0,0.2,1) infinite;
-        }
-        .scan-beam-2 {
-          animation: scanBeam 3.5s cubic-bezier(0.4,0,0.2,1) infinite 1.75s;
-        }
+        {/* 1. Single-Line Brandmark: NAVORA · AI */}
+        <div className="flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap mb-3">
+          <span className="font-display font-extrabold text-4xl sm:text-6xl tracking-tight text-white drop-shadow-[0_2px_20px_rgba(255,255,255,0.15)]">
+            NAVORA
+          </span>
 
-        /* Floating ambient dots */
-        @keyframes floatDot {
-          0%,100% { transform: translateY(0px);   opacity: 0.4; }
-          50%      { transform: translateY(-14px); opacity: 0.9; }
-        }
-        .dot-float-1 { animation: floatDot 3.2s ease-in-out infinite; }
-        .dot-float-2 { animation: floatDot 4.1s ease-in-out infinite 0.8s; }
-        .dot-float-3 { animation: floatDot 2.8s ease-in-out infinite 1.5s; }
-        .dot-float-4 { animation: floatDot 3.7s ease-in-out infinite 0.4s; }
-        .dot-float-5 { animation: floatDot 5.0s ease-in-out infinite 2.1s; }
-        .dot-float-6 { animation: floatDot 3.5s ease-in-out infinite 1.2s; }
-      `}</style>
+          {/* Pulsing Neon Beacon Dot */}
+          <span className="relative flex h-2.5 sm:h-3 w-2.5 sm:w-3 mx-0.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 sm:h-3 w-2.5 sm:w-3 bg-cyan-400 shadow-[0_0_12px_#22d3ee]"></span>
+          </span>
 
-      {/* Ambient blobs */}
-      <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-cyan-500/10 animate-aurora blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-violet-600/12 animate-aurora blur-3xl pointer-events-none" style={{ animationDelay: '-8s' }} />
-      <div className="absolute inset-0 grid-overlay pointer-events-none opacity-30" />
-
-      {/* Smooth diagonal scan beams */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="scan-beam absolute top-0 left-0 w-[2px] h-full"
-          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(34,211,238,0.5) 40%, rgba(124,58,237,0.5) 60%, transparent 100%)' }} />
-        <div className="scan-beam-2 absolute top-0 left-0 w-[1px] h-full"
-          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(34,211,238,0.3) 50%, transparent 100%)' }} />
-      </div>
-
-      {/* Floating glowing dots — scattered across screen */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="dot-float-1 absolute w-1.5 h-1.5 rounded-full bg-cyan-400/60"   style={{ top: '20%', left: '12%',  boxShadow: '0 0 8px #22D3EE' }} />
-        <div className="dot-float-2 absolute w-1   h-1   rounded-full bg-violet-400/50" style={{ top: '35%', right: '10%', boxShadow: '0 0 6px #7C3AED' }} />
-        <div className="dot-float-3 absolute w-2   h-2   rounded-full bg-cyan-300/30"   style={{ bottom: '28%', left: '8%' }} />
-        <div className="dot-float-4 absolute w-1.5 h-1.5 rounded-full bg-violet-300/40" style={{ bottom: '22%', right: '12%', boxShadow: '0 0 6px #7C3AED' }} />
-        <div className="dot-float-5 absolute w-1   h-1   rounded-full bg-cyan-400/50"   style={{ top: '60%', left: '18%',  boxShadow: '0 0 5px #22D3EE' }} />
-        <div className="dot-float-6 absolute w-1.5 h-1.5 rounded-full bg-violet-400/35" style={{ top: '15%', right: '22%' }} />
-      </div>
-
-
-      {/* Center content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-8 max-w-lg">
-
-        {/* Designed NAVORA AI Wordmark Centerpiece */}
-        <div
-          className="relative mb-8 transition-all duration-700 select-none"
-          style={{ opacity: phase >= 1 ? 1 : 0, transform: phase >= 1 ? 'translateY(0)' : 'translateY(20px)' }}
-        >
-          {/* Ambient Backlight Aura */}
-          <div className="absolute inset-0 blur-3xl opacity-35 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 pointer-events-none -z-10" />
-
-          <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
-            <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.18)]">
-              NAVORA
-            </h1>
-            {/* Pulsing Neon Beacon Dot */}
-            <span className="relative flex h-3.5 sm:h-5 w-3.5 sm:w-5 mx-1 sm:mx-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3.5 sm:h-5 w-3.5 sm:w-5 bg-cyan-400 shadow-[0_0_20px_#22d3ee]"></span>
-            </span>
-            <span className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-gradient-cyan drop-shadow-[0_4px_30px_rgba(34,211,238,0.3)]">
-              AI
-            </span>
-          </div>
+          <span className="font-display font-extrabold text-4xl sm:text-6xl tracking-tight text-gradient-cyan drop-shadow-[0_2px_20px_rgba(34,211,238,0.3)]">
+            AI
+          </span>
         </div>
 
-        {/* Chips + tagline */}
-        <div
-          className="flex flex-col items-center gap-2.5 mb-6 transition-all duration-700"
-          style={{ opacity: phase >= 2 ? 1 : 0, transform: phase >= 2 ? 'translateY(0)' : 'translateY(12px)' }}
-        >
-          <div className="flex items-center gap-2 flex-wrap justify-center">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 label-overline text-cyan-300">
-              <MapPin className="w-3 h-3 text-cyan-400" />
-              Tumkur
-            </span>
-            <span className="w-1 h-1 rounded-full bg-slate-600" />
-            <span className="label-overline text-slate-400 tracking-widest">Karnataka</span>
-            <span className="w-1 h-1 rounded-full bg-slate-600" />
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 label-overline text-violet-300">
-              <Sparkles className="w-3 h-3" />
-              AI Planner
-            </span>
-          </div>
-          <p className="text-slate-400 text-sm font-medium tracking-wide">
-            Plan less, <span className="text-cyan-300 font-semibold">Experience more.</span>
-          </p>
-        </div>
+        {/* 2. Tagline */}
+        <p className="text-slate-400 text-sm sm:text-base font-normal tracking-wide mb-8">
+          Plan less, <span className="text-cyan-300 font-medium">Experience more.</span>
+        </p>
 
-        {/* Animated loading steps */}
-        <div
-          className="w-full max-w-[280px] mb-6 transition-all duration-700"
-          style={{ opacity: phase >= 3 ? 1 : 0, transform: phase >= 3 ? 'translateY(0)' : 'translateY(10px)' }}
-        >
-          <div className="space-y-1.5">
-            {STEPS.map((step, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-500"
-                style={{
-                  background: i === stepIdx ? 'rgba(34,211,238,0.07)' : 'transparent',
-                  border: i === stepIdx ? '1px solid rgba(34,211,238,0.2)' : '1px solid transparent',
-                  opacity: i <= stepIdx ? 1 : 0.2,
-                  transform: i === stepIdx ? 'scale(1.02)' : 'scale(1)',
-                }}
-              >
-                <span className="text-sm">{step.icon}</span>
-                <span className={`text-[11px] font-mono tracking-wide flex-1 text-left ${
-                  i === stepIdx ? 'text-cyan-300' : i < stepIdx ? 'text-slate-500' : 'text-slate-700'
-                }`}>
-                  {step.text}
-                </span>
-                {i < stepIdx && <span className="text-emerald-400 text-xs">✓</span>}
-                {i === stepIdx && (
-                  <span className="flex gap-0.5">
-                    {[0,1,2].map(d => (
-                      <span key={d} className="w-1 h-1 rounded-full bg-cyan-400 animate-bounce"
-                        style={{ animationDelay: `${d * 0.15}s` }} />
-                    ))}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Progress bar + counter */}
-        <div
-          className="w-56 transition-all duration-700"
-          style={{ opacity: phase >= 2 ? 1 : 0 }}
-        >
-          <div className="w-full h-[3px] bg-white/6 rounded-full overflow-hidden">
+        {/* 3. Ultra-Clean Minimalist Progress Line */}
+        <div className="w-48 sm:w-56">
+          <div className="w-full h-[2.5px] bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full rounded-full transition-all duration-150 ease-linear"
+              className="h-full rounded-full transition-all duration-100 ease-linear"
               style={{
                 width: `${progress}%`,
-                background: 'linear-gradient(90deg, #22D3EE 0%, #7C3AED 100%)',
-                boxShadow: '0 0 8px rgba(34,211,238,0.5)',
+                background: 'linear-gradient(90deg, #22D3EE 0%, #6366F1 100%)',
+                boxShadow: '0 0 10px rgba(34,211,238,0.6)',
               }}
             />
           </div>
-          <div className="flex justify-between mt-1.5">
-            <span className="text-[10px] font-mono text-slate-700 tracking-widest uppercase">Initializing</span>
-            <span className="text-[10px] font-mono text-cyan-500">{Math.min(100, Math.round(progress))}%</span>
-          </div>
         </div>
+
       </div>
     </div>
   );
