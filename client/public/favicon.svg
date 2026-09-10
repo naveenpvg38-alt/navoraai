@@ -1,39 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <linearGradient id="n-left-grad" x1="11" y1="8" x2="25" y2="56" gradientUnits="userSpaceOnUse">
+    <linearGradient id="fav-gyro-ring" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stopColor="#38BDF8" />
-      <stop offset="60%" stopColor="#0284C7" />
-      <stop offset="100%" stopColor="#0369A1" />
-    </linearGradient>
-
-    <linearGradient id="n-right-grad" x1="39" y1="8" x2="53" y2="56" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#C084FC" />
       <stop offset="50%" stopColor="#818CF8" />
-      <stop offset="100%" stopColor="#4F46E5" />
+      <stop offset="100%" stopColor="#C084FC" />
     </linearGradient>
 
-    <linearGradient id="n-diag-grad" x1="11" y1="8" x2="53" y2="56" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#22D3EE" />
-      <stop offset="35%" stopColor="#38BDF8" />
-      <stop offset="70%" stopColor="#818CF8" />
-      <stop offset="100%" stopColor="#A855F7" />
+    <linearGradient id="fav-needle-north" x1="32" y1="10" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="30%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#0284C7" />
     </linearGradient>
+
+    <linearGradient id="fav-needle-south" x1="32" y1="32" x2="32" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#4F46E5" />
+      <stop offset="70%" stopColor="#818CF8" />
+      <stop offset="100%" stopColor="#C084FC" />
+    </linearGradient>
+
+    <radialGradient id="fav-center" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="60%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#0284C7" />
+    </radialGradient>
   </defs>
 
-  <!-- Left Vertical Stem -->
-  <rect x="11" y="8" width="14" height="48" rx="4.5" fill="url(#n-left-grad)" />
+  <!-- Background Base -->
+  <rect width="64" height="64" rx="16" fill="#0B1120" stroke="rgba(56, 189, 248, 0.35)" stroke-width="2" />
 
-  <!-- Right Vertical Stem -->
-  <rect x="39" y="8" width="14" height="48" rx="4.5" fill="url(#n-right-grad)" />
+  <!-- Outer Ring -->
+  <circle cx="32" cy="32" r="23" stroke="url(#fav-gyro-ring)" stroke-width="1.5" opacity="0.6" />
 
-  <!-- Diagonal Fold Ribbon -->
-  <path
-    d="M 11 12.5 C 11 10 13 8 15.5 8 L 24.5 8 C 25.8 8 27.2 8.8 28 9.9 L 52.5 50.8 C 53.5 52.4 52.6 54.6 50.7 55.4 C 49.9 55.8 49 56 48.2 56 L 39.5 56 C 38.2 56 36.8 55.2 36 54.1 L 11.5 13.2 C 11.2 12.8 11 12.2 11 11.5 Z"
-    fill="url(#n-diag-grad)"
-  />
+  <!-- Mid Dashed Gyro Ring -->
+  <circle cx="32" cy="32" r="18" stroke="#22D3EE" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.75" />
 
-  <!-- Origin & Route Nodes -->
-  <circle cx="18" cy="14" r="2.5" fill="#FFFFFF" />
-  <circle cx="46" cy="50" r="2.5" fill="#FFFFFF" />
-  <polygon points="32,29.5 34.5,32 32,34.5 29.5,32" fill="#FFFFFF" />
+  <!-- Cardinal Ticks -->
+  <line x1="32" y1="9" x2="32" y2="13" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+  <line x1="32" y1="51" x2="32" y2="55" stroke="#818CF8" stroke-width="2" stroke-linecap="round" />
+  <line x1="9" y1="32" x2="13" y2="32" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+  <line x1="51" y1="32" x2="55" y2="32" stroke="#818CF8" stroke-width="2" stroke-linecap="round" />
+
+  <!-- North Needle Blade -->
+  <polygon points="32,12 35.5,30 32,32 28.5,30" fill="url(#fav-needle-north)" />
+
+  <!-- South Needle Blade -->
+  <polygon points="32,52 28.5,34 32,32 35.5,34" fill="url(#fav-needle-south)" />
+
+  <!-- Center Pivot -->
+  <circle cx="32" cy="32" r="4" fill="#0B1120" stroke="#38BDF8" stroke-width="1.5" />
+  <circle cx="32" cy="32" r="2" fill="url(#fav-center)" />
 </svg>
