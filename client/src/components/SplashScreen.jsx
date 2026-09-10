@@ -152,7 +152,7 @@ export default function SplashScreen({ onComplete }) {
             </span>
           </div>
           <p className="text-slate-500 text-sm font-light tracking-wide">
-            Plan Less.{' '}<span className="text-cyan-300 font-medium">Experience More.</span>
+            Plan less, <span className="text-cyan-300 font-medium">Experience more.</span>
           </p>
         </div>
 
