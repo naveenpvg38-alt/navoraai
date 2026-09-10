@@ -1,52 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="fav-gyro-ring" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#38BDF8" />
-      <stop offset="50%" stopColor="#818CF8" />
-      <stop offset="100%" stopColor="#C084FC" />
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
     </linearGradient>
-
-    <linearGradient id="fav-needle-north" x1="32" y1="10" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#FFFFFF" />
-      <stop offset="30%" stopColor="#38BDF8" />
-      <stop offset="100%" stopColor="#0284C7" />
+    <linearGradient id="w" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.4"/>
     </linearGradient>
-
-    <linearGradient id="fav-needle-south" x1="32" y1="32" x2="32" y2="54" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#4F46E5" />
-      <stop offset="70%" stopColor="#818CF8" />
-      <stop offset="100%" stopColor="#C084FC" />
-    </linearGradient>
-
-    <radialGradient id="fav-center" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stopColor="#FFFFFF" />
-      <stop offset="60%" stopColor="#38BDF8" />
-      <stop offset="100%" stopColor="#0284C7" />
-    </radialGradient>
+    <clipPath id="nc">
+      <path d="M6,4 L6,56 L16,56 L16,22 L44,56 L54,56 L54,4 L44,4 L44,38 L16,4 Z"/>
+    </clipPath>
   </defs>
-
-  <!-- Background Base -->
-  <rect width="64" height="64" rx="16" fill="#0B1120" stroke="rgba(56, 189, 248, 0.35)" stroke-width="2" />
-
-  <!-- Outer Ring -->
-  <circle cx="32" cy="32" r="23" stroke="url(#fav-gyro-ring)" stroke-width="1.5" opacity="0.6" />
-
-  <!-- Mid Dashed Gyro Ring -->
-  <circle cx="32" cy="32" r="18" stroke="#22D3EE" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.75" />
-
-  <!-- Cardinal Ticks -->
-  <line x1="32" y1="9" x2="32" y2="13" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
-  <line x1="32" y1="51" x2="32" y2="55" stroke="#818CF8" stroke-width="2" stroke-linecap="round" />
-  <line x1="9" y1="32" x2="13" y2="32" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
-  <line x1="51" y1="32" x2="55" y2="32" stroke="#818CF8" stroke-width="2" stroke-linecap="round" />
-
-  <!-- North Needle Blade -->
-  <polygon points="32,12 35.5,30 32,32 28.5,30" fill="url(#fav-needle-north)" />
-
-  <!-- South Needle Blade -->
-  <polygon points="32,52 28.5,34 32,32 35.5,34" fill="url(#fav-needle-south)" />
-
-  <!-- Center Pivot -->
-  <circle cx="32" cy="32" r="4" fill="#0B1120" stroke="#38BDF8" stroke-width="1.5" />
-  <circle cx="32" cy="32" r="2" fill="url(#fav-center)" />
+  <!-- N body -->
+  <path d="M6,4 L6,56 L16,56 L16,22 L44,56 L54,56 L54,4 L44,4 L44,38 L16,4 Z" fill="url(#g)"/>
+  <!-- Wave overlay clipped to N -->
+  <g clip-path="url(#nc)">
+    <path d="M0,34 C15,26 30,42 45,34 C52,30 57,34 60,34 L60,60 L0,60 Z" fill="url(#w)" opacity="0.55"/>
+    <path d="M0,40 C15,32 30,48 45,40 C52,36 57,40 60,40 L60,60 L0,60 Z" fill="#a5f3fc" opacity="0.25"/>
+  </g>
+  <!-- shine -->
+  <path d="M8,4 L8,12 L18,4 Z" fill="white" opacity="0.22"/>
 </svg>
