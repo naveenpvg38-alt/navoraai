@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Sparkles, Bookmark, LogOut, ArrowRight, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
+const NavItem = ({ label, active, onClick, icon }) => (
+  <button
+    onClick={onClick}
+    className={`relative px-3 sm:px-4 py-1.5 text-xs sm:text-[13px] font-medium transition-all duration-200 cursor-pointer rounded-full select-none ${
+      active
+        ? 'text-slate-900 dark:text-white bg-slate-200/70 dark:bg-white/10 shadow-sm'
+        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-white/5'
+    }`}
+  >
+    <span className="flex items-center gap-1.5">
+      {icon}
+      <span>{label}</span>
+    </span>
+  </button>
+);
+
 export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout, onGetStarted }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -9,7 +25,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      setIsScrolled(scrollY > 20);
+      setIsScrolled(scrollY > 25);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -18,99 +34,89 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 select-none ${
-        isScrolled
-          ? 'bg-white/80 dark:bg-[#0B1120]/80 backdrop-blur-lg shadow-sm dark:shadow-none'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
-        {/* 1. Brandmark Left: NAVORA · AI */}
+    <header className="fixed top-2.5 sm:top-4 left-0 right-0 z-40 flex justify-center pointer-events-none px-3 sm:px-6 md:px-8 select-none">
+      {/* ── SLEEK FLOATING GLASS NAVBAR ── */}
+      <div
+        className={`pointer-events-auto w-full max-w-5xl lg:max-w-6xl flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-2xl sm:rounded-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/95 dark:bg-[#080E1E]/95 shadow-[0_12px_40px_-5px_rgba(0,0,0,0.15),0_0_20px_-3px_rgba(34,211,238,0.2)] dark:shadow-[0_16px_45px_-5px_rgba(0,0,0,0.7),0_0_25px_-4px_rgba(34,211,238,0.2)] ring-1 ring-black/5 dark:ring-white/[0.08]'
+            : 'bg-white/85 dark:bg-[#0A1024]/85 shadow-[0_8px_30px_-5px_rgba(0,0,0,0.08),0_0_15px_-4px_rgba(34,211,238,0.1)] dark:shadow-[0_10px_35px_-5px_rgba(0,0,0,0.5),0_0_18px_-4px_rgba(34,211,238,0.12)] ring-1 ring-black/5 dark:ring-white/[0.06]'
+        }`}
+        style={{
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        }}
+      >
+        {/* 1. Brandmark Left: Designed NAVORA · AI */}
         <button
           onClick={() => {
             setActiveView('home');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className="flex items-center gap-1.5 group cursor-pointer focus:outline-none"
+          className="flex items-center gap-1.5 group cursor-pointer focus:outline-none pl-1 pr-1.5 shrink-0"
         >
-          <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors">
+          {/* NAVORA wordmark */}
+          <span className="font-display font-black text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors drop-shadow-sm">
             NAVORA
           </span>
 
-          {/* Pulsing Neon Beacon Dot */}
+          {/* Pulsing Cyber Neon Beacon */}
           <span className="relative flex h-2 w-2 mx-0.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
           </span>
 
-          <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-gradient-cyan">
+          {/* Designed AI Badge */}
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded-md text-[11px] sm:text-xs font-mono font-black tracking-wider bg-gradient-to-r from-cyan-500/20 via-sky-500/15 to-violet-500/20 text-cyan-600 dark:text-cyan-300 border border-cyan-500/30 dark:border-cyan-400/35 shadow-[0_0_10px_rgba(34,211,238,0.25)] group-hover:scale-105 transition-transform">
             AI
           </span>
         </button>
 
-        {/* 2. Center: Clean, simple navigation links (no borders) */}
-        <nav className="hidden md:flex items-center gap-8">
-          <button
+        {/* 2. Center: Navigation Links */}
+        <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-slate-100/60 dark:bg-white/[0.03]">
+          <NavItem
+            label="Home"
+            active={activeView === 'home'}
             onClick={() => {
               setActiveView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`text-sm font-medium transition-colors cursor-pointer ${
-              activeView === 'home'
-                ? 'text-cyan-600 dark:text-cyan-400 font-semibold'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-            }`}
-          >
-            Home
-          </button>
-
-          <button
+          />
+          <NavItem
+            label="Plan Outing"
+            active={activeView === 'planner'}
             onClick={() => {
               setActiveView('planner');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer ${
-              activeView === 'planner'
-                ? 'text-cyan-600 dark:text-cyan-400 font-semibold'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-            }`}
-          >
-            <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
-            <span>Plan Outing</span>
-          </button>
-
+            icon={<Sparkles className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />}
+          />
           {user && (
-            <button
+            <NavItem
+              label="Saved"
+              active={activeView === 'saved'}
               onClick={() => {
                 setActiveView('saved');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className={`flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer ${
-                activeView === 'saved'
-                  ? 'text-violet-600 dark:text-violet-400 font-semibold'
-                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-              }`}
-            >
-              <Bookmark className="w-4 h-4 text-violet-500 dark:text-violet-400" />
-              <span>Saved</span>
-            </button>
+              icon={<Bookmark className="w-3.5 h-3.5 text-violet-500 dark:text-violet-400" />}
+            />
           )}
-        </nav>
+        </div>
 
-        {/* 3. Right: Theme Toggle & Actions (clean, no heavy borders) */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        {/* 3. Right: Theme Switcher & Actions */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Quick Theme Switcher Button */}
           <button
             onClick={toggleTheme}
             title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             aria-label="Toggle theme"
-            className="p-2 rounded-full cursor-pointer transition-colors hover:bg-slate-200/60 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-300"
+            className="p-1.5 sm:p-2 rounded-full cursor-pointer transition-all duration-200 active:scale-90 hover:bg-slate-200/60 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-300 shrink-0"
           >
             {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-amber-300" />
+              <Sun className="w-4 h-4 text-amber-300 transition-transform duration-300 rotate-0 hover:rotate-45" />
             ) : (
-              <Moon className="w-4 h-4 text-slate-700" />
+              <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 -rotate-12 hover:rotate-0" />
             )}
           </button>
 
@@ -121,32 +127,36 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
                   setActiveView('profile');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-300 cursor-pointer transition-colors"
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+                  activeView === 'profile'
+                    ? 'bg-violet-500/15 text-violet-600 dark:text-violet-300 shadow-sm'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-white/5'
+                }`}
               >
-                <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-400 to-violet-500 flex items-center justify-center text-[11px] font-bold text-white uppercase leading-none">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-400 to-violet-500 flex items-center justify-center text-[10px] font-bold text-white uppercase leading-none">
                   {user.name ? user.name[0] : 'U'}
                 </div>
-                <span className="hidden sm:inline max-w-[90px] truncate">{user.name || 'Profile'}</span>
+                <span className="hidden md:inline max-w-[80px] truncate">{user.name || 'Profile'}</span>
               </button>
               <button
                 onClick={onLogout}
                 title="Log Out"
-                className="p-1.5 text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 cursor-pointer transition-colors"
+                className="p-1.5 rounded-full text-slate-400 dark:text-slate-500 hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 cursor-pointer"
               >
-                <LogOut className="w-4 h-4" />
+                <LogOut className="w-3.5 h-3.5" />
               </button>
             </>
           ) : (
             <>
               <button
                 onClick={() => onOpenAuth('login')}
-                className="text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white px-2.5 py-1.5 transition-colors cursor-pointer"
+                className="hidden md:inline-block px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer font-medium"
               >
                 Log In
               </button>
               <button
                 onClick={onGetStarted ? onGetStarted : () => onOpenAuth('signup')}
-                className="btn-primary !py-2 !px-4 sm:!px-5 !text-xs sm:!text-sm !rounded-full !gap-1.5 cursor-pointer shadow-none hover:shadow-glow-cyan transition-all group"
+                className="btn-primary !py-1.5 sm:!py-2 !px-3.5 sm:!px-5 !text-xs sm:!text-[13px] !rounded-full !gap-1.5 cursor-pointer shadow-glow-sm hover:shadow-glow-cyan transition-all group shrink-0"
               >
                 <span>Get Started</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
