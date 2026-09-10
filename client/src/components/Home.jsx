@@ -155,7 +155,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
   return (
     <div className="min-h-screen">
       {/* ── HERO ──────────────────────────────────────── */}
-      <section className="relative pt-10 sm:pt-16 pb-16 sm:pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+      <section className="relative pt-16 sm:pt-24 pb-16 sm:pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Overline badge */}
           <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/4 border border-white/10 mb-6 sm:mb-8 animate-fade-up">
