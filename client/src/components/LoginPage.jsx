@@ -167,7 +167,7 @@ export default function LoginPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1120] text-slate-100 flex flex-col relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1120] text-slate-900 dark:text-slate-100 flex flex-col relative overflow-hidden font-sans transition-colors duration-200">
       {/* Ambient background glow orbs */}
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-cyan-500/12 blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 right-0 w-[550px] h-[550px] rounded-full bg-violet-600/12 blur-[140px] pointer-events-none" />
@@ -258,8 +258,8 @@ export default function LoginPage({
               {/* Continuous Moving Waypoint Marquee Ticker */}
               <div className="relative overflow-hidden w-full py-1 group rounded-xl">
                 {/* Left & Right gradient edge fades */}
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0B1120] to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0B1120] to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-50 to-transparent dark:from-[#0B1120] dark:to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-50 to-transparent dark:from-[#0B1120] dark:to-transparent z-10 pointer-events-none" />
 
                 {/* Continuously gliding track (infinite loop) */}
                 <div className="animate-marquee-track flex items-center gap-2.5 scrollbar-none">

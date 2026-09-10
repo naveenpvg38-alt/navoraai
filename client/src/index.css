@@ -17,6 +17,19 @@
   --sar: env(safe-area-inset-right, 0px);
 }
 
+html:not(.dark) {
+  --color-bg:      #F8FAFC;
+  --color-card:    #FFFFFF;
+  --color-border:  rgba(15, 23, 42, 0.08);
+  --color-cyan:    #0284C7;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+
 /* ── Base Reset & Typography ────────────────────────────────── */
 @layer base {
   *, *::before, *::after {
@@ -402,6 +415,166 @@
   button, a, [role="button"] {
     min-height: 44px;
   }
+}
+
+/* ── Light Mode Color Theme & Component Styles ─────────────── */
+html:not(.dark) body {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(56, 189, 248, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 95% 35%, rgba(129, 140, 248, 0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 5% 75%, rgba(56, 189, 248, 0.06) 0%, transparent 65%),
+    url("data:image/svg+xml,%3Csvg width='1200' height='1200' viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230284C7' stroke-width='1.2' stroke-opacity='0.035'%3E%3Cpath d='M-100,200 Q200,80 500,220 T1100,180 T1500,240'/%3E%3Cpath d='M-100,260 Q180,140 480,270 T1080,240 T1500,290'/%3E%3Cpath d='M-100,320 Q160,200 460,330 T1060,300 T1500,350'/%3E%3Cellipse cx='850' cy='320' rx='160' ry='90'/%3E%3Cellipse cx='850' cy='320' rx='120' ry='65'/%3E%3Cellipse cx='850' cy='320' rx='80' ry='42'/%3E%3Cellipse cx='850' cy='320' rx='40' ry='20'/%3E%3Cpath d='M-100,600 Q300,500 700,680 T1400,620'/%3E%3Cpath d='M-100,680 Q280,580 680,750 T1400,690'/%3E%3Cpath d='M-100,760 Q260,660 660,820 T1400,760'/%3E%3Cellipse cx='280' cy='820' rx='180' ry='100'/%3E%3Cellipse cx='280' cy='820' rx='130' ry='70'/%3E%3Cellipse cx='280' cy='820' rx='80' ry='40'/%3E%3C/g%3E%3C/svg%3E");
+  color: #0F172A;
+}
+
+html:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05), 0 20px 30px -10px rgba(0, 0, 0, 0.04);
+}
+
+html:not(.dark) .glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: hover) {
+  html:not(.dark) .glass-card:hover {
+    background: #FFFFFF;
+    border-color: rgba(2, 132, 199, 0.35);
+    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08), 0 0 20px -5px rgba(2, 132, 199, 0.15);
+  }
+}
+
+html:not(.dark) .stat-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: hover) {
+  html:not(.dark) .stat-card:hover {
+    border-color: rgba(2, 132, 199, 0.35);
+    box-shadow: 0 8px 25px -5px rgba(2, 132, 199, 0.15);
+  }
+}
+
+html:not(.dark) .btn-secondary {
+  color: #334155;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+@media (hover: hover) {
+  html:not(.dark) .btn-secondary:hover {
+    color: #0F172A;
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(2, 132, 199, 0.4);
+  }
+}
+
+html:not(.dark) .text-gradient-white {
+  background: linear-gradient(160deg, #0F172A 0%, #334155 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track { background: #F1F5F9; }
+html:not(.dark) ::-webkit-scrollbar-thumb { background: #CBD5E1; }
+html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+html:not(.dark) .leaflet-container {
+  background-color: #E2E8F0 !important;
+}
+
+html:not(.dark) .leaflet-popup-content-wrapper {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1px solid rgba(2, 132, 199, 0.3) !important;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.15) !important;
+}
+
+html:not(.dark) .leaflet-popup-tip {
+  background: #FFFFFF !important;
+}
+
+html:not(.dark) .divider-gradient {
+  background: linear-gradient(90deg, transparent, rgba(2, 132, 199, 0.25), rgba(99, 102, 241, 0.25), transparent);
+}
+
+/* Light Mode Text Contrast & Adaptive Colors */
+html:not(.dark) .text-white:not(.btn-primary):not(.btn-primary *):not([data-theme-ignore]):not(.text-gradient-cyan) {
+  color: #0F172A;
+}
+
+html:not(.dark) .text-slate-100:not(.btn-primary):not(.btn-primary *):not([data-theme-ignore]) {
+  color: #0F172A;
+}
+
+html:not(.dark) .text-slate-200:not(.btn-primary):not(.btn-primary *):not([data-theme-ignore]) {
+  color: #1E293B;
+}
+
+html:not(.dark) .text-slate-300:not(.btn-primary):not(.btn-primary *):not([data-theme-ignore]) {
+  color: #334155;
+}
+
+html:not(.dark) .text-slate-400:not([data-theme-ignore]) {
+  color: #475569;
+}
+
+html:not(.dark) .border-white\/10,
+html:not(.dark) .border-white\/12,
+html:not(.dark) .border-white\/20,
+html:not(.dark) .border-white\/5,
+html:not(.dark) .border-white\/6,
+html:not(.dark) .border-white\/7,
+html:not(.dark) .border-white\/8 {
+  border-color: rgba(15, 23, 42, 0.09);
+}
+
+html:not(.dark) .bg-white\/4,
+html:not(.dark) .bg-white\/5,
+html:not(.dark) .bg-white\/6,
+html:not(.dark) .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+html:not(.dark) .bg-navora-card {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.06);
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html:not(.dark) [style*="background: rgba(13,18,32"],
+html:not(.dark) [style*="background: rgba(13, 18, 32"],
+html:not(.dark) [style*="background: rgba(10,14,26"],
+html:not(.dark) [style*="background: rgba(10, 14, 26"] {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05) !important;
+}
+
+html:not(.dark) [style*="background: rgba(255,255,255,0.04)"],
+html:not(.dark) [style*="background: rgba(255, 255, 255, 0.04)"],
+html:not(.dark) [style*="background: rgba(255,255,255,0.03)"],
+html:not(.dark) [style*="background: rgba(255, 255, 255, 0.03)"] {
+  background: rgba(241, 245, 249, 0.85) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+}
+
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea {
+  color: #0F172A !important;
+}
+
+html:not(.dark) select option {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
 }
 
 /* ── Shimmer Keyframes ───────────────────────────────────────── */

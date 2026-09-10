@@ -19,12 +19,10 @@ export default function MobileNav({ activeView, setActiveView, user, onOpenAuth 
 
   return (
     <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-stretch justify-around"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-stretch justify-around bg-white/95 dark:bg-[#090E1C]/97 border-t border-slate-200 dark:border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-none"
       style={{
-        background: 'rgba(9, 14, 28, 0.97)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.07)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         paddingLeft: 'env(safe-area-inset-left, 0px)',
         paddingRight: 'env(safe-area-inset-right, 0px)',
@@ -43,25 +41,24 @@ export default function MobileNav({ activeView, setActiveView, user, onOpenAuth 
             {/* Active glow background */}
             {active && (
               <span
-                className="absolute inset-x-2 inset-y-1 rounded-xl"
-                style={{ background: 'rgba(34,211,238,0.08)' }}
+                className="absolute inset-x-2 inset-y-1 rounded-xl bg-cyan-500/10 dark:bg-cyan-400/10"
               />
             )}
 
             <div className="relative z-10">
               <Icon
                 className={`w-5 h-5 transition-all duration-200 ${
-                  active ? 'text-cyan-400' : 'text-slate-600'
+                  active ? 'text-cyan-500 dark:text-cyan-400' : 'text-slate-400 dark:text-slate-600'
                 }`}
               />
               {/* Planner pulse dot */}
               {item.id === 'planner' && !active && (
-                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
               )}
             </div>
 
             <span className={`text-[9px] font-mono tracking-widest z-10 transition-colors duration-200 ${
-              active ? 'text-cyan-400' : 'text-slate-700'
+              active ? 'text-cyan-600 dark:text-cyan-400 font-semibold' : 'text-slate-500 dark:text-slate-700'
             }`}>
               {item.label}
             </span>

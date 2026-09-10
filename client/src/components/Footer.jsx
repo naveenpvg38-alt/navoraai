@@ -11,10 +11,14 @@ import {
   Sparkles,
   Route,
   Download,
-  CheckCircle2
+  CheckCircle2,
+  Sun,
+  Moon
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Footer({ setActiveView, onOpenAuth, user }) {
+  const { theme, toggleTheme } = useTheme();
   const [modalContent, setModalContent] = useState(null); // 'privacy' | 'terms' | 'install' | null
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isInstalled, setIsInstalled] = useState(false);
@@ -53,20 +57,20 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
   };
 
   return (
-    <footer className="relative font-poppins border-t border-white/10 bg-[#0B1120]/95 backdrop-blur-2xl text-slate-300 pt-9 pb-8 px-5 sm:px-8 lg:px-12 text-xs overflow-hidden">
+    <footer className="relative font-poppins border-t border-slate-200 dark:border-white/10 bg-slate-100/90 dark:bg-[#0B1120]/95 backdrop-blur-2xl text-slate-600 dark:text-slate-300 pt-9 pb-8 px-5 sm:px-8 lg:px-12 text-xs overflow-hidden transition-colors duration-200">
       {/* Unique Ambient Glow Line */}
       <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-violet-500 opacity-80" />
 
       <div className="max-w-7xl mx-auto space-y-6">
         
         {/* ── TOP TIER: Brand & Navigation ────────────────────── */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-white/8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-200 dark:border-white/8">
           
           {/* Brand Left: Typographic Wordmark + District Tag */}
           <div className="flex items-center gap-3 text-center sm:text-left">
             <div className="text-left">
               <div className="flex items-center gap-1.5">
-                <span className="font-display font-extrabold text-xl text-white tracking-tight leading-tight">
+                <span className="font-display font-extrabold text-xl text-slate-900 dark:text-white tracking-tight leading-tight">
                   NAVORA
                 </span>
                 <span className="relative flex h-1.5 w-1.5 mx-0.5">
@@ -76,21 +80,21 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
                 <span className="font-display font-extrabold text-xl tracking-tight text-gradient-cyan leading-tight">
                   AI
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 hidden sm:inline-block ml-2">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-500 dark:text-cyan-300 hidden sm:inline-block ml-2">
                   Tumkur Circuit Engine
                 </span>
               </div>
-              <p className="text-slate-400 text-xs mt-1 font-medium">
+              <p className="text-slate-500 dark:text-slate-400 text-xs mt-1 font-medium">
                 Plan less, Experience more.
               </p>
             </div>
           </div>
 
           {/* Navigation Links Right */}
-          <nav className="flex items-center flex-wrap justify-center gap-3 sm:gap-5 text-xs text-slate-300 font-medium">
+          <nav className="flex items-center flex-wrap justify-center gap-3 sm:gap-5 text-xs text-slate-600 dark:text-slate-300 font-medium">
             <button
               onClick={() => handleNav('home')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
             >
               <HomeIcon className="w-3.5 h-3.5 text-slate-400" />
               <span>Home</span>
@@ -98,16 +102,16 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
 
             <button
               onClick={() => handleNav('planner')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
             >
-              <Route className="w-3.5 h-3.5 text-cyan-400" />
+              <Route className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />
               <span>Plan Outing</span>
             </button>
 
             {user ? (
               <button
                 onClick={() => handleNav('profile')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
               >
                 <User className="w-3.5 h-3.5 text-slate-400" />
                 <span>Profile</span>
@@ -115,7 +119,7 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
             ) : (
               <button
                 onClick={() => onOpenAuth && onOpenAuth('login')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
               >
                 <LogIn className="w-3.5 h-3.5 text-slate-400" />
                 <span>Login</span>
@@ -124,7 +128,7 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
 
             <button
               onClick={() => setModalContent('install')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
             >
               <Smartphone className="w-3.5 h-3.5 text-slate-400" />
               <span>Install App</span>
@@ -132,7 +136,7 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
 
             <button
               onClick={() => setModalContent('privacy')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
               <span>Privacy Policy</span>
@@ -140,7 +144,7 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
 
             <button
               onClick={() => setModalContent('terms')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 hover:text-cyan-300 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all cursor-pointer"
             >
               <FileText className="w-3.5 h-3.5 text-slate-400" />
               <span>Terms of Use</span>
@@ -148,18 +152,37 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
           </nav>
         </div>
 
-        {/* ── BOTTOM TIER: Copyright & Developer Attribution ── */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 pt-1">
+        {/* ── BOTTOM TIER: Copyright, Theme Switcher & Developer Attribution ── */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 pt-1">
           <div>
-            © {new Date().getFullYear()} <strong className="text-white font-semibold">NAVORA AI</strong>. All Rights Reserved.
+            © {new Date().getFullYear()} <strong className="text-slate-900 dark:text-white font-semibold">NAVORA AI</strong>. All Rights Reserved.
           </div>
+
+          {/* Quick Theme Switcher Pill in Footer */}
+          <button
+            onClick={toggleTheme}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 text-xs transition-all cursor-pointer select-none shadow-sm"
+            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {theme === 'dark' ? (
+              <>
+                <Sun className="w-3.5 h-3.5 text-amber-400" />
+                <span>Theme: Dark</span>
+              </>
+            ) : (
+              <>
+                <Moon className="w-3.5 h-3.5 text-slate-700" />
+                <span>Theme: Light</span>
+              </>
+            )}
+          </button>
 
           <div className="flex items-center gap-1.5 font-sans">
             <span>Designed & Developed by</span>
-            <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/25 font-mono text-[11px] font-bold text-cyan-300">
+            <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/25 font-mono text-[11px] font-bold text-cyan-600 dark:text-cyan-300">
               &lt;/&gt;
             </span>
-            <span className="text-white font-semibold hover:text-cyan-300 transition-colors">
+            <span className="text-slate-900 dark:text-white font-semibold hover:text-cyan-500 dark:hover:text-cyan-300 transition-colors">
               naveen_pvg
             </span>
           </div>

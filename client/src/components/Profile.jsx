@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   Bookmark, Heart, CheckCircle2, Clock, Wallet,
-  Trash2, ArrowRight, Sparkles, Save, LogOut, Sliders
+  Trash2, ArrowRight, Sparkles, Save, LogOut, Sliders,
+  Sun, Moon
 } from 'lucide-react';
 import { api } from '../api';
+import { useTheme } from '../context/ThemeContext';
 
 const tabDef = [
   { id: 'saved',       label: 'Saved Plans',  icon: Bookmark,    accent: 'cyan'    },
@@ -37,6 +39,7 @@ const inputStyle = {
 };
 
 export default function Profile({ user, onSelectPlan, onLogout, defaultTab = 'saved', onOpenPlanner }) {
+  const { theme, setTheme } = useTheme();
   const [activeTab, setActiveTab]  = useState(defaultTab);
   const [plans, setPlans]          = useState([]);
   const [loading, setLoading]      = useState(true);
@@ -202,8 +205,39 @@ export default function Profile({ user, onSelectPlan, onLogout, defaultTab = 'sa
       {activeTab === 'preferences' ? (
         <div className="max-w-2xl p-7 rounded-3xl"
           style={{ background: 'rgba(10,14,26,0.7)', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <h2 className="text-lg font-semibold text-white mb-1 tracking-tight">Default Preferences</h2>
-          <p className="text-slate-600 text-sm mb-6 font-light">These will auto-fill the planner on your next session.</p>
+          <h2 className="text-lg font-semibold text-white mb-1 tracking-tight">Preferences & Appearance</h2>
+          <p className="text-slate-500 text-sm mb-6 font-light">Customize your interface theme and default trip settings.</p>
+
+          {/* Quick Theme Switcher */}
+          <div className="mb-6 pb-6 border-b border-white/8">
+            <label className="block label-overline text-slate-500 mb-2.5">Website Theme</label>
+            <div className="grid grid-cols-2 gap-3 max-w-xs">
+              <button
+                type="button"
+                onClick={() => setTheme('dark')}
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+                  theme === 'dark'
+                    ? 'bg-cyan-500/15 border-cyan-500/50 text-cyan-300 shadow-glow-sm'
+                    : 'border-white/10 text-slate-400 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <Moon className="w-4 h-4 text-cyan-400" />
+                <span>Dark Mode</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setTheme('light')}
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+                  theme === 'light'
+                    ? 'bg-amber-500/15 border-amber-500/50 text-amber-600 dark:text-amber-300 shadow-sm'
+                    : 'border-white/10 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <Sun className="w-4 h-4 text-amber-500" />
+                <span>Light Mode</span>
+              </button>
+            </div>
+          </div>
 
           <form onSubmit={handleSavePreferences} className="space-y-4">
             <div>

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Bookmark, LogOut, ArrowRight, User as UserIcon } from 'lucide-react';
+import { Sparkles, Bookmark, LogOut, ArrowRight, User as UserIcon, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const NavLink = ({ label, active, onClick, icon }) => (
   <button
     onClick={onClick}
     className={`relative px-2.5 sm:px-3 py-1 text-xs sm:text-[13px] font-medium transition-all duration-200 cursor-pointer rounded-full select-none ${
       active
-        ? 'text-white bg-white/10 border border-white/12 shadow-sm'
-        : 'text-slate-400 hover:text-white hover:bg-white/5'
+        ? 'text-slate-900 dark:text-white bg-slate-100 dark:bg-white/10 border border-slate-300/80 dark:border-white/12 shadow-sm'
+        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-white/5'
     }`}
   >
     <span className="flex items-center gap-1.5">
@@ -19,6 +20,7 @@ const NavLink = ({ label, active, onClick, icon }) => (
 
 export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout, onGetStarted }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +37,10 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
     <header className="fixed top-2.5 sm:top-4 left-0 right-0 z-40 flex justify-center pointer-events-none px-3 sm:px-6 select-none">
       {/* ── PERMANENT FLOATING DYNAMIC ISLAND CAPSULE ── */}
       <nav
-        className={`pointer-events-auto flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-300 ease-out border ${
+        className={`pointer-events-auto flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-300 ease-out border ${
           isScrolled
-            ? 'border-cyan-500/35 bg-[#080E1D]/95 shadow-[0_12px_40px_-5px_rgba(0,0,0,0.8),0_0_24px_-3px_rgba(34,211,238,0.25)]'
-            : 'border-white/12 bg-[#090F20]/88 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.6),0_0_15px_-3px_rgba(34,211,238,0.12)]'
+            ? 'border-cyan-500/40 bg-white/95 dark:bg-[#080E1D]/95 text-slate-800 dark:text-white shadow-[0_12px_40px_-5px_rgba(0,0,0,0.12),0_0_24px_-3px_rgba(34,211,238,0.2)] dark:shadow-[0_12px_40px_-5px_rgba(0,0,0,0.8),0_0_24px_-3px_rgba(34,211,238,0.25)]'
+            : 'border-slate-200/80 dark:border-white/12 bg-white/90 dark:bg-[#090F20]/88 text-slate-800 dark:text-white shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08),0_0_15px_-3px_rgba(34,211,238,0.1)] dark:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.6),0_0_15px_-3px_rgba(34,211,238,0.12)]'
         }`}
         style={{
           backdropFilter: 'blur(24px) saturate(180%)',
@@ -53,7 +55,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
           }}
           className="flex items-center gap-1.5 group cursor-pointer focus:outline-none pl-1 pr-1.5 shrink-0"
         >
-          <span className="font-display font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.12)]">
+          <span className="font-display font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors drop-shadow-sm">
             NAVORA
           </span>
 
@@ -69,7 +71,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
         </button>
 
         {/* Vertical Divider */}
-        <span className="h-4 w-px bg-white/12 shrink-0 hidden sm:inline-block" />
+        <span className="h-4 w-px bg-slate-200 dark:bg-white/12 shrink-0 hidden sm:inline-block" />
 
         {/* 2. Center Nav Links (Home, Plan Outing, Saved) */}
         <div className="hidden sm:flex items-center gap-1">
@@ -104,10 +106,24 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
         </div>
 
         {/* Vertical Divider */}
-        <span className="h-4 w-px bg-white/12 shrink-0" />
+        <span className="h-4 w-px bg-slate-200 dark:bg-white/12 shrink-0" />
 
-        {/* 3. Right: Auth or Combined Get Started */}
+        {/* 3. Right: Quick Theme Switcher & Auth Actions */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Quick Theme Switcher Toggle (1-Click Dark/Light) */}
+          <button
+            onClick={toggleTheme}
+            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            aria-label="Toggle theme"
+            className="p-1.5 rounded-full cursor-pointer transition-all duration-200 active:scale-90 border border-slate-200/80 dark:border-white/10 bg-slate-100/70 dark:bg-white/5 hover:bg-slate-200/80 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-300 shrink-0"
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 transition-transform duration-300 rotate-0 hover:rotate-45" />
+            ) : (
+              <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700 transition-transform duration-300 -rotate-12 hover:rotate-0" />
+            )}
+          </button>
+
           {user ? (
             <>
               <button
@@ -117,8 +133,8 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
                 }}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border transition-all duration-200 cursor-pointer ${
                   activeView === 'profile'
-                    ? 'bg-violet-500/15 border-violet-500/35 text-violet-300'
-                    : 'border-white/10 text-slate-300 hover:text-white hover:border-white/20 bg-white/4'
+                    ? 'bg-violet-500/15 border-violet-500/35 text-violet-600 dark:text-violet-300'
+                    : 'border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/20 bg-slate-100/50 dark:bg-white/4'
                 }`}
               >
                 <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-cyan-400 to-violet-500 flex items-center justify-center text-[10px] font-bold text-white uppercase leading-none shrink-0">
@@ -129,7 +145,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
               <button
                 onClick={onLogout}
                 title="Log Out"
-                className="p-1.5 rounded-full text-slate-500 hover:text-rose-400 border border-transparent hover:border-rose-500/25 hover:bg-rose-500/10 transition-all duration-200 cursor-pointer"
+                className="p-1.5 rounded-full text-slate-400 dark:text-slate-500 hover:text-rose-500 dark:hover:text-rose-400 border border-transparent hover:border-rose-500/25 hover:bg-rose-500/10 transition-all duration-200 cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
               </button>
@@ -138,7 +154,7 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
             <>
               <button
                 onClick={() => onOpenAuth('login')}
-                className="hidden md:inline-block px-2.5 py-1 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer font-medium"
+                className="hidden md:inline-block px-2.5 py-1 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer font-medium"
               >
                 Log In
               </button>

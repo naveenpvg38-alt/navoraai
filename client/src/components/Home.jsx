@@ -186,11 +186,8 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
 
             {/* Glowing Live Typewriter Pill */}
             <div
-              className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border mb-4 transition-all shadow-glow-sm"
+              className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border mb-4 transition-all bg-white/90 dark:bg-[#0D1224]/75 border-slate-300/80 dark:border-cyan-500/25 shadow-sm dark:shadow-[0_0_20px_rgba(34,211,238,0.12)]"
               style={{
-                background: 'rgba(13, 18, 36, 0.75)',
-                borderColor: 'rgba(34, 211, 238, 0.25)',
-                boxShadow: '0 0 20px rgba(34, 211, 238, 0.12)',
                 backdropFilter: 'blur(16px)',
               }}
             >
@@ -198,21 +195,21 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
               </span>
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">
+              <span className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
                 Discovering:
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-white flex items-center gap-1.5 min-w-[200px] sm:min-w-[250px] text-left">
+              <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-white flex items-center gap-1.5 min-w-[200px] sm:min-w-[250px] text-left">
                 <span>{DISCOVER_ITEMS[discIdx].emoji}</span>
-                <span className="text-cyan-300">{typedText}</span>
-                <span className="text-cyan-400 font-mono animate-pulse">|</span>
+                <span className="text-cyan-600 dark:text-cyan-300">{typedText}</span>
+                <span className="text-cyan-500 dark:text-cyan-400 font-mono animate-pulse">|</span>
               </span>
             </div>
 
             {/* Smooth Continuous Marquee of Tumkur Landmarks */}
             <div className="relative w-full max-w-2xl overflow-hidden pointer-events-none select-none">
               {/* Soft gradient edge fade masks */}
-              <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-[#0B1120] to-transparent z-10" />
-              <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#0B1120] to-transparent z-10" />
+              <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-slate-50 to-transparent dark:from-[#0B1120] dark:to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-slate-50 to-transparent dark:from-[#0B1120] dark:to-transparent z-10" />
 
               <div className="flex gap-2.5 animate-marquee whitespace-nowrap py-1">
                 {[...TUMKUR_LANDMARKS, ...TUMKUR_LANDMARKS].map((item, idx) => (
