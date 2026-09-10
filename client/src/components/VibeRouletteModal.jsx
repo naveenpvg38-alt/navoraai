@@ -160,14 +160,9 @@ export default function VibeRouletteModal({ isOpen, onClose, onSelectVibe }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-xl animate-fade-in">
       <div 
-        className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl"
-        style={{
-          background: 'rgba(10, 14, 26, 0.98)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(34,211,238,0.1)'
-        }}
+        className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-[#0A0E1A]/98 border border-slate-200 dark:border-white/[0.08]"
       >
         {/* Glow ambient */}
         <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -176,8 +171,7 @@ export default function VibeRouletteModal({ isOpen, onClose, onSelectVibe }) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-slate-500 hover:text-white transition-colors cursor-pointer"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
+          className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors cursor-pointer bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/[0.08]"
         >
           <X className="w-4 h-4" />
         </button>
@@ -185,67 +179,62 @@ export default function VibeRouletteModal({ isOpen, onClose, onSelectVibe }) {
         <div className="p-6 sm:p-8 relative z-10">
           {/* Header */}
           <div className="flex items-center gap-2 mb-2">
-            <span className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+            <span className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
               <Dices className={`w-4 h-4 ${isSpinning ? 'animate-spin' : ''}`} />
             </span>
-            <span className="label-overline text-cyan-400">Tumkur Vibe Roulette</span>
+            <span className="label-overline text-cyan-600 dark:text-cyan-400">Tumkur Vibe Roulette</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white tracking-tight mb-2">
             Don’t Know What To Do?
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mb-6 font-light">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-6 font-light">
             Spin the roulette to let NAVORA AI pick an unexpected, handcrafted Tumkur adventure for you.
           </p>
 
           {/* Vibe Card Box */}
           <div 
-            className={`p-6 rounded-2xl mb-6 transition-all duration-300 ${isSpinning ? 'scale-95 opacity-70' : 'scale-100 opacity-100'}`}
-            style={{
-              background: 'rgba(18, 25, 44, 0.7)',
-              border: '1px solid rgba(34, 211, 238, 0.3)',
-              boxShadow: '0 10px 30px -10px rgba(34, 211, 238, 0.2)'
-            }}
+            className={`p-6 rounded-2xl mb-6 transition-all duration-300 bg-slate-50 dark:bg-[#12192C]/70 border border-slate-200 dark:border-cyan-400/30 shadow-sm dark:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.2)] ${isSpinning ? 'scale-95 opacity-70' : 'scale-100 opacity-100'}`}
           >
             <div className="flex items-center justify-between gap-2 mb-3">
-              <span className="px-2.5 py-1 rounded-full font-mono text-[11px] font-bold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30">
+              <span className="px-2.5 py-1 rounded-full font-mono text-[11px] font-bold text-cyan-700 dark:text-cyan-300 bg-cyan-500/10 border border-cyan-500/30">
                 ✦ {current.vibe}
               </span>
-              <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
-                <MapPin className="w-3 h-3 text-cyan-400" />
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <MapPin className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                 {current.location}
               </span>
             </div>
 
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-1 tracking-tight">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1 tracking-tight">
               {current.title}
             </h3>
-            <p className="text-xs text-slate-300 mb-4 font-light italic">
+            <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 font-light italic">
               "{current.tagline}"
             </p>
 
             {/* Highlights */}
-            <div className="space-y-1.5 mb-5 pt-3 border-t border-white/5">
+            <div className="space-y-1.5 mb-5 pt-3 border-t border-slate-200 dark:border-white/5">
               {current.highlights.map((h, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs text-slate-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <div key={i} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
                   <span>{h}</span>
                 </div>
               ))}
             </div>
 
             {/* Metadata Pills */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-[11px] text-slate-300">
-              <div className="p-2 rounded-xl bg-white/4 border border-white/6 flex items-center gap-1.5">
-                <Clock className="w-3 h-3 text-cyan-400" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-[11px] text-slate-700 dark:text-slate-300">
+              <div className="p-2 rounded-xl bg-white dark:bg-white/4 border border-slate-200 dark:border-white/6 flex items-center gap-1.5 shadow-sm dark:shadow-none">
+                <Clock className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                 <span className="truncate">{current.duration}</span>
               </div>
-              <div className="p-2 rounded-xl bg-white/4 border border-white/6 flex items-center gap-1.5">
-                <Wallet className="w-3 h-3 text-emerald-400" />
+              <div className="p-2 rounded-xl bg-white dark:bg-white/4 border border-slate-200 dark:border-white/6 flex items-center gap-1.5 shadow-sm dark:shadow-none">
+                <Wallet className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                 <span className="truncate">{current.budget}</span>
               </div>
-              <div className="col-span-2 sm:col-span-1 p-2 rounded-xl bg-white/4 border border-white/6 flex items-center gap-1.5">
-                <Compass className="w-3 h-3 text-violet-400" />
+              <div className="col-span-2 sm:col-span-1 p-2 rounded-xl bg-white dark:bg-white/4 border border-slate-200 dark:border-white/6 flex items-center gap-1.5 shadow-sm dark:shadow-none">
+                <Compass className="w-3 h-3 text-violet-600 dark:text-violet-400" />
                 <span className="truncate">{current.transport}</span>
               </div>
             </div>

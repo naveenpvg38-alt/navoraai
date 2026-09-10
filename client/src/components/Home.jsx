@@ -215,12 +215,7 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
                 {[...TUMKUR_LANDMARKS, ...TUMKUR_LANDMARKS].map((item, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium border text-slate-300 shrink-0"
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.03)',
-                      borderColor: 'rgba(255, 255, 255, 0.08)',
-                      backdropFilter: 'blur(8px)',
-                    }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium border text-slate-700 dark:text-slate-300 bg-white/80 dark:bg-white/[0.03] border-slate-200/80 dark:border-white/[0.08] backdrop-blur-sm shrink-0 shadow-sm dark:shadow-none"
                   >
                     <span>{item.emoji}</span>
                     <span>{item.name}</span>
@@ -333,23 +328,18 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
       {/* ── READY TO EXPLORE CTA ──────────────────────── */}
       <section className="py-20 px-5 sm:px-8 max-w-5xl mx-auto">
         <div
-          className="relative rounded-3xl p-8 sm:p-14 text-center overflow-hidden scroll-load-reveal"
-          style={{
-            background: 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(21, 29, 48, 0.9) 100%)',
-            border: '1px solid rgba(34, 211, 238, 0.25)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(34, 211, 238, 0.08) inset',
-          }}
+          className="relative rounded-3xl p-8 sm:p-14 text-center overflow-hidden scroll-load-reveal bg-white dark:bg-gradient-to-br dark:from-[#0D1224]/95 dark:to-[#151D30]/90 border border-slate-200 dark:border-cyan-500/25 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_35px_rgba(34,211,238,0.08)_inset] transition-all"
         >
           {/* Ambient decorative glow */}
-          <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/10 dark:bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-violet-600/10 dark:bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl mx-auto">
-            <span className="label-overline text-cyan-400 mb-2 block">Tumkur Outing Intelligence</span>
-            <h3 className="text-3xl sm:text-5xl font-bold text-white mb-4 tracking-tight">
+            <span className="label-overline text-cyan-600 dark:text-cyan-400 mb-2 block">Tumkur Outing Intelligence</span>
+            <h3 className="text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
               Ready to Discover Tumkur with AI?
             </h3>
-            <p className="text-slate-400 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
               {user
                 ? 'Your personalized outing workspace is ready. Hop directly into the planner to discover fresh scenic trails and iconic eats.'
                 : 'Craft your perfect day in seconds — generate intelligent, zero-backtracking routes tailored exclusively for Tumkur.'}

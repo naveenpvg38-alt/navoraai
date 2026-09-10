@@ -120,8 +120,7 @@ export default function Profile({ user, onSelectPlan, onLogout, defaultTab = 'sa
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pb-28">
 
       {/* Profile hero */}
-      <div className="p-7 sm:p-10 rounded-3xl mb-7 relative overflow-hidden"
-        style={{ background: 'rgba(10,14,26,0.8)', border: '1px solid rgba(255,255,255,0.07)' }}>
+      <div className="p-7 sm:p-10 rounded-3xl mb-7 relative overflow-hidden bg-white dark:bg-[#0A0E1A]/80 border border-slate-200 dark:border-white/[0.07] shadow-xl dark:shadow-none transition-all">
         <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-3xl pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.1), transparent)' }} />
 
@@ -134,9 +133,8 @@ export default function Profile({ user, onSelectPlan, onLogout, defaultTab = 'sa
             </div>
             <div>
               <div className="flex items-center gap-2 mb-0.5">
-                <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{user?.name}</h1>
-                <span className="font-mono text-[10px] text-cyan-400 px-2 py-0.5 rounded-full"
-                  style={{ background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.2)' }}>
+                <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{user?.name}</h1>
+                <span className="font-mono text-[10px] text-cyan-600 dark:text-cyan-400 px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20">
                   EXPLORER
                 </span>
               </div>
@@ -203,9 +201,8 @@ export default function Profile({ user, onSelectPlan, onLogout, defaultTab = 'sa
 
       {/* Tab content */}
       {activeTab === 'preferences' ? (
-        <div className="max-w-2xl p-7 rounded-3xl"
-          style={{ background: 'rgba(10,14,26,0.7)', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <h2 className="text-lg font-semibold text-white mb-1 tracking-tight">Preferences & Appearance</h2>
+        <div className="max-w-2xl p-7 rounded-3xl bg-white dark:bg-[#0A0E1A]/70 border border-slate-200 dark:border-white/[0.07] shadow-sm dark:shadow-none transition-all">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-1 tracking-tight">Preferences & Appearance</h2>
           <p className="text-slate-500 text-sm mb-6 font-light">Customize your interface theme and default trip settings.</p>
 
           {/* Quick Theme Switcher */}

@@ -222,11 +222,11 @@ export default function LoginPage({
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                 <span>TUMKUR EXPLORER ACCESS MATRIX</span>
               </div>
-              <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-3">
+              <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-3">
                 Plan less, <br />
                 <span className="text-gradient-cyan">Experience more.</span>
               </h1>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-md">
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-md">
                 Unlock personalized, zero-backtracking outing itineraries powered by AI, calibrated exclusively for Tumkur’s historic monolithic forts, forest springs, and food trails.
               </p>
             </div>
@@ -235,23 +235,18 @@ export default function LoginPage({
             <div className="space-y-3 pt-3 w-full max-w-lg">
               {/* Top Capsule: Discovering Active Spot with Typewriter Animation */}
               <div
-                className="w-full rounded-full px-5 py-2.5 sm:px-6 sm:py-3 flex items-center gap-3 transition-all duration-300"
-                style={{
-                  background: 'rgba(10, 16, 31, 0.85)',
-                  border: '1px solid rgba(34, 211, 238, 0.35)',
-                  boxShadow: '0 0 25px rgba(34, 211, 238, 0.12), inset 0 0 15px rgba(34, 211, 238, 0.04)',
-                }}
+                className="w-full rounded-full px-5 py-2.5 sm:px-6 sm:py-3 flex items-center gap-3 transition-all duration-300 bg-white/90 dark:bg-[#0A101F]/85 border border-slate-200 dark:border-cyan-400/35 shadow-sm dark:shadow-[0_0_25px_rgba(34,211,238,0.12)]"
               >
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse shrink-0" />
-                <span className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.18em] text-slate-400 shrink-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 dark:bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse shrink-0" />
+                <span className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.18em] text-slate-500 dark:text-slate-400 shrink-0">
                   DISCOVERING:
                 </span>
                 <div className="flex items-center gap-2 overflow-hidden truncate">
                   <span className="text-base shrink-0">{TUMKUR_DISCOVERIES[activeDiscovery].emoji}</span>
-                  <span className="text-cyan-300 font-bold text-xs sm:text-sm tracking-tight truncate">
+                  <span className="text-cyan-700 dark:text-cyan-300 font-bold text-xs sm:text-sm tracking-tight truncate">
                     {typedText}
                   </span>
-                  <span className="text-cyan-400 font-mono animate-pulse shrink-0 text-sm font-light">|</span>
+                  <span className="text-cyan-500 dark:text-cyan-400 font-mono animate-pulse shrink-0 text-sm font-light">|</span>
                 </div>
               </div>
 
@@ -273,8 +268,8 @@ export default function LoginPage({
                         onClick={() => setActiveDiscovery(idx)}
                         className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0 cursor-pointer ${
                           isActive
-                            ? 'bg-cyan-500/20 border border-cyan-400/60 text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.25)] scale-[1.03]'
-                            : 'bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white'
+                            ? 'bg-cyan-500/20 border border-cyan-500/60 text-cyan-800 dark:text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.25)] scale-[1.03]'
+                            : 'bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.08] hover:text-slate-900 dark:hover:text-white'
                         }`}
                       >
                         <span className="text-sm">{spot.emoji}</span>
@@ -292,8 +287,8 @@ export default function LoginPage({
                         onClick={() => setActiveDiscovery(idx)}
                         className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0 cursor-pointer ${
                           isActive
-                            ? 'bg-cyan-500/20 border border-cyan-400/60 text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.25)] scale-[1.03]'
-                            : 'bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white'
+                            ? 'bg-cyan-500/20 border border-cyan-500/60 text-cyan-800 dark:text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.25)] scale-[1.03]'
+                            : 'bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.08] hover:text-slate-900 dark:hover:text-white'
                         }`}
                       >
                         <span className="text-sm">{spot.emoji}</span>
@@ -305,8 +300,8 @@ export default function LoginPage({
               </div>
 
               {/* Animated Moving Laser Telemetry Bar */}
-              <div className="w-full h-[2px] bg-white/[0.06] rounded-full relative overflow-hidden">
-                <div className="animate-laser-sweep w-28 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#22d3ee]" />
+              <div className="w-full h-[2px] bg-slate-200 dark:bg-white/[0.06] rounded-full relative overflow-hidden">
+                <div className="animate-laser-sweep w-28 bg-gradient-to-r from-transparent via-cyan-500 dark:via-cyan-400 to-transparent shadow-[0_0_8px_#22d3ee]" />
               </div>
             </div>
           </div>
@@ -314,21 +309,18 @@ export default function LoginPage({
           {/* ── RIGHT PANEL: Cyber Access Gateway (The Unique Login Form) ── */}
           <div className="lg:col-span-6 flex justify-center w-full">
             <div
-              className="w-full max-w-md rounded-3xl p-6 sm:p-8 relative overflow-hidden animate-fade-up"
+              className="w-full max-w-md rounded-3xl p-6 sm:p-8 relative overflow-hidden animate-fade-up bg-white dark:bg-gradient-to-br dark:from-[#151D30]/90 dark:to-[#0D1224]/95 border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_30px_70px_-10px_rgba(0,0,0,0.8),0_0_40px_rgba(56,189,248,0.08)_inset]"
               style={{
-                background: 'linear-gradient(145deg, rgba(21, 29, 48, 0.88) 0%, rgba(13, 18, 36, 0.95) 100%)',
                 backdropFilter: 'blur(24px)',
                 WebkitBackdropFilter: 'blur(24px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                boxShadow: '0 30px 70px -10px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.08) inset',
               }}
             >
               {/* Form header */}
               <div className="text-center mb-6">
-                <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1.5">
+                <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight mb-1.5">
                   {mode === 'signup' ? 'Create Explorer Account' : 'Welcome Back'}
                 </h2>
-                <p className="text-slate-400 text-xs sm:text-sm">
+                <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">
                   {mode === 'signup'
                     ? 'Join to generate, customize, and save your Tumkur outings.'
                     : 'Sign in to access your saved itineraries and personalized routes.'}
@@ -336,14 +328,14 @@ export default function LoginPage({
               </div>
 
               {/* Fluid Mode Switcher Pill */}
-              <div className="flex rounded-xl p-1 bg-white/4 border border-white/8 mb-6">
+              <div className="flex rounded-xl p-1 bg-slate-100 dark:bg-white/4 border border-slate-200 dark:border-white/8 mb-6">
                 <button
                   type="button"
                   onClick={() => { setMode('login'); setError(''); }}
                   className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                     mode === 'login'
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                      : 'text-slate-400 hover:text-white'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   Sign In
@@ -354,7 +346,7 @@ export default function LoginPage({
                   className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                     mode === 'signup'
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                      : 'text-slate-400 hover:text-white'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   Create Account
@@ -366,25 +358,13 @@ export default function LoginPage({
                 type="button"
                 onClick={handleDemoLogin}
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2.5 py-3 rounded-xl cursor-pointer transition-all duration-300 mb-2 group relative overflow-hidden"
-                style={{
-                  background: 'rgba(56, 189, 248, 0.08)',
-                  border: '1px solid rgba(56, 189, 248, 0.3)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.6)';
-                  e.currentTarget.style.background = 'rgba(56, 189, 248, 0.14)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.3)';
-                  e.currentTarget.style.background = 'rgba(56, 189, 248, 0.08)';
-                }}
+                className="w-full flex items-center justify-center gap-2.5 py-3 rounded-xl cursor-pointer transition-all duration-300 mb-2 group relative overflow-hidden bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-200 dark:border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-100 dark:hover:bg-cyan-500/15"
               >
-                <Zap className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
-                <span className="font-mono text-xs font-semibold tracking-wider text-cyan-300">
+                <Zap className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span className="font-mono text-xs font-semibold tracking-wider text-cyan-700 dark:text-cyan-300">
                   ⚡ 1-CLICK DEMO ACCESS
                 </span>
-                <span className="text-[10px] text-slate-400 hidden sm:inline">(Instant Login)</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 hidden sm:inline">(Instant Login)</span>
               </button>
               <p className="text-center text-[10px] text-slate-500 font-mono mb-5">
                 NO REGISTRATION REQUIRED FOR EVALUATION
@@ -396,17 +376,16 @@ export default function LoginPage({
               {/* Error Alert */}
               {error && (
                 <div
-                  className="mb-4 p-3 rounded-xl flex items-start sm:items-center gap-2.5 text-xs text-rose-300 animate-fade-in"
-                  style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)' }}
+                  className="mb-4 p-3 rounded-xl flex items-start sm:items-center gap-2.5 text-xs text-rose-600 dark:text-rose-300 animate-fade-in bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/25"
                 >
-                  <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400 mt-0.5 sm:mt-0" />
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-500 dark:text-rose-400 mt-0.5 sm:mt-0" />
                   <div className="flex-1 flex flex-wrap items-center justify-between gap-1">
                     <span>{error}</span>
                     {error.toLowerCase().includes('create account') && (
                       <button
                         type="button"
                         onClick={() => { setMode('signup'); setError(''); }}
-                        className="text-cyan-300 underline font-semibold hover:text-white cursor-pointer ml-1 text-xs"
+                        className="text-cyan-600 dark:text-cyan-300 underline font-semibold hover:text-cyan-700 dark:hover:text-white cursor-pointer ml-1 text-xs"
                       >
                         Click here to register →
                       </button>
@@ -419,63 +398,63 @@ export default function LoginPage({
               <form onSubmit={handleSubmit} className="space-y-4">
                 {mode === 'signup' && (
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-xs font-medium text-slate-700 dark:text-slate-400 mb-1.5 ml-1">
                       Full Name
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <User className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         type="text"
                         required
                         placeholder="e.g. Naveen Kumar"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full pl-11 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none transition-all duration-200 rounded-xl bg-white/4 border border-white/8 focus:border-cyan-400/50"
+                        className="w-full pl-11 pr-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition-all duration-200 rounded-xl bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 focus:border-cyan-500"
                       />
                     </div>
                   </div>
                 )}
 
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5 ml-1">
+                  <label className="block text-xs font-medium text-slate-700 dark:text-slate-400 mb-1.5 ml-1">
                     Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <Mail className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
                       type="email"
                       required
                       placeholder="you@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none transition-all duration-200 rounded-xl bg-white/4 border border-white/8 focus:border-cyan-400/50"
+                      className="w-full pl-11 pr-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition-all duration-200 rounded-xl bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 focus:border-cyan-500"
                     />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5 ml-1">
-                    <label className="text-xs font-medium text-slate-400">Password</label>
+                    <label className="text-xs font-medium text-slate-700 dark:text-slate-400">Password</label>
                     {mode === 'login' && (
-                      <span className="text-[11px] text-cyan-400/80 hover:text-cyan-300 transition-colors cursor-pointer">
+                      <span className="text-[11px] text-cyan-600 dark:text-cyan-400/80 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors cursor-pointer">
                         Forgot password?
                       </span>
                     )}
                   </div>
                   <div className="relative">
-                    <Lock className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <Lock className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       required
                       placeholder="Min. 6 characters"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-11 pr-11 py-3 text-sm text-white placeholder-slate-500 focus:outline-none transition-all duration-200 rounded-xl bg-white/4 border border-white/8 focus:border-cyan-400/50"
+                      className="w-full pl-11 pr-11 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition-all duration-200 rounded-xl bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 focus:border-cyan-500"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors cursor-pointer p-1"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300 transition-colors cursor-pointer p-1"
                       title={showPassword ? 'Hide password' : 'Show password'}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -504,8 +483,8 @@ export default function LoginPage({
               </form>
 
               {/* Bottom toggle / disclaimer */}
-              <div className="mt-6 pt-5 border-t border-white/6 text-center space-y-2">
-                <p className="text-xs text-slate-400">
+              <div className="mt-6 pt-5 border-t border-slate-200 dark:border-white/6 text-center space-y-2">
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   {mode === 'signup' ? 'Already have an account? ' : "Don't have an account? "}
                   <button
                     type="button"
@@ -513,7 +492,7 @@ export default function LoginPage({
                       setMode(mode === 'signup' ? 'login' : 'signup');
                       setError('');
                     }}
-                    className="text-cyan-400 hover:text-cyan-300 font-semibold underline underline-offset-2 cursor-pointer ml-1"
+                    className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 font-semibold underline underline-offset-2 cursor-pointer ml-1"
                   >
                     {mode === 'signup' ? 'Sign In' : 'Create Account'}
                   </button>

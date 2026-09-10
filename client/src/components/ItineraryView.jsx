@@ -138,8 +138,7 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
       </div>
 
       {/* Plan header card */}
-      <div className="p-7 sm:p-10 rounded-3xl mb-8 relative overflow-hidden"
-        style={{ background: 'rgba(10,14,26,0.8)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 30px 60px -20px rgba(0,0,0,0.8)' }}>
+      <div className="p-7 sm:p-10 rounded-3xl mb-8 relative overflow-hidden bg-white dark:bg-[#0A0E1A]/80 border border-slate-200 dark:border-white/[0.07] shadow-xl dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] transition-all">
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none animate-aurora"
           style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.08), transparent)' }} />
 
@@ -147,23 +146,20 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
           <div className="flex-1">
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-xs font-bold text-cyan-300"
-                style={{ background: 'rgba(34,211,238,0.1)', border: '1px solid rgba(34,211,238,0.3)' }}>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-xs font-bold text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 border border-cyan-500/30">
                 <Sparkles className="w-3 h-3 animate-spin-slow" />
                 {plan.match_score || 98}% MATCH
               </span>
-              <span className="px-3 py-1 rounded-full text-xs text-slate-400"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <span className="px-3 py-1 rounded-full text-xs text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.07]">
                 {plan.location || 'Tumkur, Karnataka'}
               </span>
-              <span className="px-3 py-1 rounded-full text-xs text-violet-300"
-                style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.25)' }}>
+              <span className="px-3 py-1 rounded-full text-xs text-violet-600 dark:text-violet-300 bg-violet-500/10 border border-violet-500/25">
                 {plan.mood || 'Curated'}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mb-3">{plan.title}</h1>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light max-w-2xl">{plan.description}</p>
+            <h1 className="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight mb-3">{plan.title}</h1>
+            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed font-light max-w-2xl">{plan.description}</p>
 
             {/* Start Live Journey CTA */}
             <div className="mt-5 flex items-center gap-3">
@@ -181,34 +177,30 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
 
           {/* Metrics */}
           <div className="flex flex-row lg:flex-col gap-3 shrink-0">
-            <div className="px-5 py-4 rounded-2xl text-center min-w-[120px]"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <div className="label-overline text-slate-600 flex items-center justify-center gap-1 mb-1.5">
+            <div className="px-5 py-4 rounded-2xl text-center min-w-[120px] bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.07] shadow-sm dark:shadow-none">
+              <div className="label-overline text-slate-500 dark:text-slate-600 flex items-center justify-center gap-1 mb-1.5">
                 <Clock className="w-2.5 h-2.5" /> Duration
               </div>
-              <div className="font-mono text-sm font-bold text-white">{plan.duration}</div>
+              <div className="font-mono text-sm font-bold text-slate-900 dark:text-white">{plan.duration}</div>
             </div>
-            <div className="px-5 py-4 rounded-2xl text-center min-w-[120px]"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <div className="label-overline text-slate-600 flex items-center justify-center gap-1 mb-1.5">
+            <div className="px-5 py-4 rounded-2xl text-center min-w-[120px] bg-slate-100/80 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.07] shadow-sm dark:shadow-none">
+              <div className="label-overline text-slate-500 dark:text-slate-600 flex items-center justify-center gap-1 mb-1.5">
                 <Wallet className="w-2.5 h-2.5" /> Est. Cost
               </div>
-              <div className="font-mono text-sm font-bold text-emerald-400">{plan.estimated_cost}</div>
+              <div className="font-mono text-sm font-bold text-emerald-600 dark:text-emerald-400">{plan.estimated_cost}</div>
             </div>
           </div>
         </div>
 
         {/* AI insight strip */}
         {plan.why_matched && (
-          <div className="mt-7 pt-6 border-t flex items-start gap-4 p-4 rounded-2xl"
-            style={{ borderColor: 'rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(34,211,238,0.12)' }}>
-            <div className="p-2 rounded-xl shrink-0"
-              style={{ background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.2)' }}>
-              <Lightbulb className="w-4 h-4 text-cyan-400" />
+          <div className="mt-7 pt-6 border-t flex items-start gap-4 p-4 rounded-2xl bg-cyan-500/5 dark:bg-white/[0.02] border border-cyan-500/20 dark:border-cyan-500/12">
+            <div className="p-2 rounded-xl shrink-0 bg-cyan-500/10 border border-cyan-500/20">
+              <Lightbulb className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             </div>
             <div>
-              <h4 className="label-overline text-cyan-500 mb-1.5">AI Insight — Why This Matches Your Vibe</h4>
-              <p className="text-slate-400 text-sm leading-relaxed font-light">{plan.why_matched}</p>
+              <h4 className="label-overline text-cyan-600 dark:text-cyan-400 mb-1.5">AI Insight — Why This Matches Your Vibe</h4>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-light">{plan.why_matched}</p>
             </div>
           </div>
         )}
@@ -223,51 +215,42 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
         <div className="lg:col-span-7">
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2.5">
-              <Route className="w-4 h-4 text-cyan-400" />
-              <h2 className="font-semibold text-white text-base">Step-by-Step Itinerary</h2>
+              <Route className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+              <h2 className="font-semibold text-slate-900 dark:text-white text-base">Step-by-Step Itinerary</h2>
             </div>
-            <span className="font-mono text-xs text-slate-600">{plan.items?.length || 0} STOPS</span>
+            <span className="font-mono text-xs text-slate-500 dark:text-slate-600">{plan.items?.length || 0} STOPS</span>
           </div>
 
-          <div className="relative pl-7 space-y-6"
-            style={{ borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="relative pl-7 space-y-6 border-l border-slate-200 dark:border-white/[0.07]">
             {plan.items?.map((item, index) => (
               <div key={item.item_id || index} className="relative group">
                 {/* Node */}
-                <div className="absolute -left-[28px] top-1.5 w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs font-bold text-cyan-400 transition-transform group-hover:scale-110"
-                  style={{ background: '#0D1220', border: '2px solid rgba(34,211,238,0.5)' }}>
+                <div className="absolute -left-[28px] top-1.5 w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-white dark:bg-[#0D1220] border-2 border-cyan-500/60 shadow-sm transition-transform group-hover:scale-110">
                   {index + 1}
                 </div>
 
                 {/* Transit badge */}
                 {index > 0 && item.travel_time && (
-                  <div className="mb-3 -mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-mono text-[10px] text-cyan-400"
-                    style={{ background: 'rgba(34,211,238,0.06)', border: '1px solid rgba(34,211,238,0.15)' }}>
+                  <div className="mb-3 -mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-mono text-[10px] text-cyan-700 dark:text-cyan-300 bg-cyan-500/10 border border-cyan-500/20">
                     <Train className="w-3 h-3" /> {item.travel_time}
                   </div>
                 )}
 
                 {/* Stop card */}
-                <div className="p-5 rounded-2xl transition-all duration-300 group-hover:-translate-y-0.5"
-                  style={{ background: 'rgba(13,18,32,0.7)', border: '1px solid rgba(255,255,255,0.06)' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}
-                >
+                <div className="p-5 rounded-2xl transition-all duration-300 group-hover:-translate-y-0.5 bg-white dark:bg-[#0D1220]/75 border border-slate-200 dark:border-white/[0.06] shadow-sm dark:shadow-none hover:border-cyan-500/30">
                   <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <span className="label-overline text-cyan-600">{item.category || 'Curated Stop'}</span>
-                    <div className="flex items-center gap-1.5 font-mono text-xs text-slate-500 px-2.5 py-1 rounded-lg"
-                      style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <span className="label-overline text-cyan-600 dark:text-cyan-400">{item.category || 'Curated Stop'}</span>
+                    <div className="flex items-center gap-1.5 font-mono text-xs text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06]">
                       <Clock className="w-3 h-3" />
                       {item.start_time} – {item.end_time}
                     </div>
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-2 tracking-tight">{item.place_name}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-4 font-light">{item.activity}</p>
+                  <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2 tracking-tight">{item.place_name}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 font-light">{item.activity}</p>
 
-                  <div className="flex flex-wrap items-center justify-between gap-3 pt-3"
-                    style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                    <span className="font-mono text-xs font-semibold text-emerald-400">{item.estimated_cost}</span>
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200 dark:border-white/[0.06]">
+                    <span className="font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">{item.estimated_cost}</span>
                     {item.insider_tip && (
                       <div className="flex items-center gap-1.5 text-slate-500 italic">
                         <Lightbulb className="w-3.5 h-3.5 text-amber-500 shrink-0" />
@@ -285,30 +268,29 @@ export default function ItineraryView({ plan, user, onSave, onToggleFavourite, o
         <div className="lg:col-span-5">
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2.5">
-              <MapPin className="w-4 h-4 text-cyan-400" />
-              <h2 className="font-semibold text-white text-base">Interactive Route Map</h2>
+              <MapPin className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+              <h2 className="font-semibold text-slate-900 dark:text-white text-base">Interactive Route Map</h2>
             </div>
             {googleMapsUrl ? (
               <a
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 font-mono text-[11px] text-cyan-400 hover:text-cyan-300 transition-colors"
+                className="flex items-center gap-1 font-mono text-[11px] text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
                 title="Launch in Google Maps App"
               >
                 <span>Google Maps GPS</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             ) : (
-              <span className="font-mono text-xs text-slate-600">OPENSTREETMAP</span>
+              <span className="font-mono text-xs text-slate-500 dark:text-slate-600">OPENSTREETMAP</span>
             )}
           </div>
 
           <div className="sticky top-24 h-[500px]">
             <LeafletMap items={plan.items || []} />
-            <div className="mt-3 p-3 rounded-xl flex items-center gap-2.5 text-xs text-slate-600 font-light"
-              style={{ background: 'rgba(13,18,32,0.6)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <Compass className="w-4 h-4 text-cyan-600 shrink-0" />
+            <div className="mt-3 p-3 rounded-xl flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-400 font-light bg-white dark:bg-[#0D1220]/60 border border-slate-200 dark:border-white/[0.05] shadow-sm dark:shadow-none">
+              <Compass className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
               Click any numbered pin to preview stop details, timings, and costs.
             </div>
           </div>

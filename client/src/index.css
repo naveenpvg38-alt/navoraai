@@ -549,13 +549,26 @@ html:not(.dark) .bg-navora-card {
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
-html:not(.dark) [style*="background: rgba(13,18,32"],
-html:not(.dark) [style*="background: rgba(13, 18, 32"],
-html:not(.dark) [style*="background: rgba(10,14,26"],
-html:not(.dark) [style*="background: rgba(10, 14, 26"] {
-  background: rgba(255, 255, 255, 0.92) !important;
+html:not(.dark) [style*="rgba(13, 18, 36"],
+html:not(.dark) [style*="rgba(13,18,36"],
+html:not(.dark) [style*="rgba(21, 29, 48"],
+html:not(.dark) [style*="rgba(21,29,48"],
+html:not(.dark) [style*="rgba(10, 14, 26"],
+html:not(.dark) [style*="rgba(10,14,26"],
+html:not(.dark) [style*="rgba(13, 18, 32"],
+html:not(.dark) [style*="rgba(13,18,32"],
+html:not(.dark) [style*="rgba(8, 12, 24"],
+html:not(.dark) [style*="rgba(8,12,24"],
+html:not(.dark) [style*="rgba(10, 16, 31"],
+html:not(.dark) [style*="rgba(10,16,31"],
+html:not(.dark) [style*="rgba(13, 22, 44"],
+html:not(.dark) [style*="rgba(18, 25, 44"],
+html:not(.dark) [style*="#0D1224"],
+html:not(.dark) [style*="#0B1120"],
+html:not(.dark) [style*="#0A0E1A"] {
+  background: #FFFFFF !important;
   border-color: rgba(15, 23, 42, 0.09) !important;
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06) !important;
 }
 
 html:not(.dark) [style*="background: rgba(255,255,255,0.04)"],
@@ -564,6 +577,20 @@ html:not(.dark) [style*="background: rgba(255,255,255,0.03)"],
 html:not(.dark) [style*="background: rgba(255, 255, 255, 0.03)"] {
   background: rgba(241, 245, 249, 0.85) !important;
   border-color: rgba(203, 213, 225, 0.8) !important;
+}
+
+html:not(.dark) .clock-dial-bg {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html:not(.dark) .clock-face {
+  fill: #F8FAFC !important;
+  stroke: rgba(15, 23, 42, 0.12) !important;
+}
+
+html:not(.dark) .clock-hour-hand {
+  stroke: #0F172A !important;
 }
 
 html:not(.dark) input,

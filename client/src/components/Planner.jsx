@@ -8,8 +8,7 @@ import {
 
 const SectionCard = ({ children, className = '' }) => (
   <div
-    className={`p-4 sm:p-5 rounded-2xl ${className}`}
-    style={{ background: 'rgba(13,18,32,0.7)', border: '1px solid rgba(255,255,255,0.06)' }}
+    className={`p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0D1220]/75 border border-slate-200/90 dark:border-white/[0.06] shadow-sm dark:shadow-none transition-all ${className}`}
   >
     {children}
   </div>
@@ -19,14 +18,13 @@ const SectionHeader = ({ step, title, desc, badge }) => (
   <div className="flex items-start justify-between mb-3.5">
     <div>
       <div className="flex items-center gap-2 mb-0.5">
-        <span className="font-mono text-[11px] font-bold text-slate-700">{step}</span>
-        <h2 className="text-white font-semibold text-sm sm:text-base tracking-tight">{title}</h2>
+        <span className="font-mono text-[11px] font-bold text-slate-400 dark:text-slate-600">{step}</span>
+        <h2 className="text-slate-900 dark:text-white font-semibold text-sm sm:text-base tracking-tight">{title}</h2>
       </div>
       <p className="text-slate-500 text-[11px] sm:text-xs">{desc}</p>
     </div>
     {badge && (
-      <span className="font-mono text-[10px] sm:text-[11px] text-cyan-400 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shrink-0 ml-2"
-        style={{ background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.2)' }}>
+      <span className="font-mono text-[10px] sm:text-[11px] text-cyan-600 dark:text-cyan-400 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shrink-0 ml-2 bg-cyan-500/10 border border-cyan-500/20">
         {badge}
       </span>
     )}
@@ -399,7 +397,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
       {/* Header */}
       <div className="text-center mb-10">
         <p className="label-overline mb-3">Personalize Your Experience</p>
-        <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-3">
+        <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
           Craft Your <span className="text-gradient-cyan">Ideal Day</span>
         </h1>
         <p className="text-slate-500 text-sm font-light max-w-md mx-auto mb-4">
@@ -432,13 +430,10 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                   onClick={() => setMood(m.id)}
                   className={`group relative flex flex-col items-center justify-center py-2.5 px-2 sm:py-3 sm:px-2.5 rounded-xl border cursor-pointer transition-all duration-200 overflow-hidden select-none ${
                     active
-                      ? `${m.activeBorder} shadow-md scale-[1.02] -translate-y-0.5`
-                      : 'border-white/8 bg-white/[0.025] hover:border-white/20 hover:bg-white/[0.05] hover:-translate-y-0.5'
+                      ? `${m.activeBorder} bg-cyan-50/80 dark:bg-gradient-to-br dark:from-[#151D30]/95 dark:to-[#0D1224]/98 shadow-md scale-[1.02] -translate-y-0.5`
+                      : 'border-slate-200 dark:border-white/8 bg-slate-50 dark:bg-white/[0.025] hover:border-slate-300 dark:hover:border-white/20 hover:bg-slate-100 dark:hover:bg-white/[0.05] hover:-translate-y-0.5'
                   }`}
                   style={{
-                    background: active
-                      ? 'linear-gradient(145deg, rgba(21, 29, 48, 0.95) 0%, rgba(13, 18, 36, 0.98) 100%)'
-                      : undefined,
                     boxShadow: active
                       ? `0 8px 20px -4px ${m.activeGlow}, inset 0 0 16px rgba(255,255,255,0.03)`
                       : undefined,
@@ -472,7 +467,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
 
                   {/* Clean Mood Label */}
                   <span className={`font-semibold text-xs tracking-tight transition-colors duration-200 ${
-                    active ? `${m.textAccent} font-bold` : 'text-slate-300 group-hover:text-white'
+                    active ? `${m.textAccent} font-bold` : 'text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white'
                   }`}>
                     {m.label}
                   </span>
@@ -482,7 +477,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                     className={`h-0.5 rounded-full mt-1 transition-all duration-200 ${
                       active
                         ? 'w-5 bg-current shadow-[0_0_6px_currentColor]'
-                        : 'w-0 group-hover:w-2.5 bg-white/30'
+                        : 'w-0 group-hover:w-2.5 bg-slate-300 dark:bg-white/30'
                     }`}
                   />
                 </button>
@@ -501,7 +496,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
           />
 
           {maxNotice && (
-            <div className="mb-2.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-400/30 text-amber-300 text-[11px] font-mono flex items-center justify-between animate-fadeIn shadow-sm">
+            <div className="mb-2.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-400/30 text-amber-500 dark:text-amber-300 text-[11px] font-mono flex items-center justify-between animate-fadeIn shadow-sm">
               <span className="flex items-center gap-1.5">
                 <span>⚠️</span>
                 <span>Maximum 2 activities allowed. Deselect one first to pick another.</span>
@@ -509,7 +504,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
               <button
                 type="button"
                 onClick={() => setMaxNotice(false)}
-                className="text-amber-400/70 hover:text-amber-200 ml-2 text-xs cursor-pointer"
+                className="text-amber-500/70 dark:text-amber-400/70 hover:text-amber-600 dark:hover:text-amber-200 ml-2 text-xs cursor-pointer"
               >
                 ✕
               </button>
@@ -527,15 +522,12 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                   onClick={() => toggleInterest(item.name)}
                   className={`group relative flex items-center justify-between py-2 px-2.5 sm:py-2.5 sm:px-3 rounded-xl border cursor-pointer transition-all duration-200 select-none overflow-hidden text-left ${
                     active
-                      ? `${item.activeBorder} scale-[1.01] shadow-md`
+                      ? `${item.activeBorder} bg-cyan-50/80 dark:bg-gradient-to-br dark:from-[#151D30]/95 dark:to-[#0D1224]/98 scale-[1.01] shadow-md`
                       : atMax
-                      ? 'border-white/5 bg-white/[0.015] opacity-60 hover:opacity-90 hover:border-amber-400/30'
-                      : 'border-white/8 bg-white/[0.025] hover:border-white/20 hover:bg-white/[0.05] hover:translate-x-0.5'
+                      ? 'border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.015] opacity-60 hover:opacity-90 hover:border-amber-400/30'
+                      : 'border-slate-200 dark:border-white/8 bg-slate-50 dark:bg-white/[0.025] hover:border-slate-300 dark:hover:border-white/20 hover:bg-slate-100 dark:hover:bg-white/[0.05] hover:translate-x-0.5'
                   }`}
                   style={{
-                    background: active
-                      ? 'linear-gradient(135deg, rgba(21, 29, 48, 0.95) 0%, rgba(13, 18, 36, 0.98) 100%)'
-                      : undefined,
                     boxShadow: active
                       ? `0 6px 18px -4px ${item.activeGlow}, inset 0 0 14px rgba(255,255,255,0.03)`
                       : undefined,
@@ -554,8 +546,8 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                     <div
                       className={`w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-lg flex items-center justify-center text-lg sm:text-xl shrink-0 transition-all duration-200 ${
                         active
-                          ? 'bg-white/10 shadow-inner scale-105'
-                          : 'bg-white/[0.03] border border-white/8 group-hover:scale-105'
+                          ? 'bg-white dark:bg-white/10 shadow-sm dark:shadow-inner scale-105'
+                          : 'bg-white/70 dark:bg-white/[0.03] border border-slate-200 dark:border-white/8 group-hover:scale-105'
                       }`}
                     >
                       <span className="drop-shadow-sm">{item.icon}</span>
@@ -564,12 +556,12 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                     <div className="min-w-0">
                       <span
                         className={`block font-semibold text-xs sm:text-sm tracking-tight transition-colors duration-200 leading-tight ${
-                          active ? `${item.textAccent} font-bold` : 'text-slate-200 group-hover:text-white'
+                          active ? `${item.textAccent} font-bold` : 'text-slate-800 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white'
                         }`}
                       >
                         {item.label}
                       </span>
-                      <span className="block text-[10px] font-mono text-slate-500 truncate leading-tight mt-0.5">
+                      <span className="block text-[10px] font-mono text-slate-500 dark:text-slate-500 truncate leading-tight mt-0.5">
                         {item.name}
                       </span>
                     </div>
@@ -580,8 +572,8 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                     <div
                       className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200 ${
                         active
-                          ? 'bg-cyan-400 text-slate-950 shadow-[0_0_10px_rgba(34,211,238,0.5)] scale-105'
-                          : 'border border-white/20 text-transparent group-hover:border-cyan-400/50'
+                          ? 'bg-cyan-500 text-white dark:bg-cyan-400 dark:text-slate-950 shadow-[0_0_10px_rgba(34,211,238,0.5)] scale-105'
+                          : 'border border-slate-300 dark:border-white/20 text-transparent group-hover:border-cyan-500/50'
                       }`}
                     >
                       <Check className={`w-3 h-3 stroke-[3] transition-transform duration-150 ${active ? 'scale-100' : 'scale-0'}`} />
@@ -696,15 +688,14 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                 const active = duration === d;
                 return (
                   <button key={d} type="button" onClick={() => setDuration(d)}
-                    className="w-full p-3 rounded-xl border text-left text-sm font-medium flex items-center justify-between cursor-pointer transition-all"
-                    style={{
-                      background: active ? 'rgba(34,211,238,0.07)' : 'rgba(255,255,255,0.03)',
-                      borderColor: active ? 'rgba(34,211,238,0.4)' : 'rgba(255,255,255,0.06)',
-                      color: active ? '#67E8F9' : '#64748B',
-                    }}
+                    className={`w-full p-3 rounded-xl border text-left text-sm font-medium flex items-center justify-between cursor-pointer transition-all ${
+                      active
+                        ? 'bg-cyan-50/90 dark:bg-cyan-500/10 border-cyan-500 text-cyan-800 dark:text-cyan-300 font-semibold shadow-sm'
+                        : 'bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-400 hover:border-slate-300 dark:hover:border-white/10'
+                    }`}
                   >
                     <span>{d}</span>
-                    {active && <Check className="w-3.5 h-3.5 text-cyan-400" />}
+                    {active && <Check className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />}
                   </button>
                 );
               })}
@@ -745,25 +736,20 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                 <div className="flex flex-col items-center justify-center py-1">
                   {/* Analog Clock SVG Dial */}
                   <div
-                    className="relative flex items-center justify-center p-2 rounded-2xl select-none"
-                    style={{
-                      background: 'radial-gradient(circle at 50% 50%, rgba(34,211,238,0.08) 0%, rgba(8,12,24,0.95) 75%)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      boxShadow: '0 4px 20px -2px rgba(0,0,0,0.5), inset 0 0 16px rgba(34,211,238,0.05)'
-                    }}
+                    className="relative flex items-center justify-center p-2 rounded-2xl select-none clock-dial-bg bg-white dark:bg-[#080C18] border border-slate-200 dark:border-white/8 shadow-sm dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)]"
                   >
                     <svg width="156" height="156" viewBox="0 0 156 156" className="drop-shadow-[0_0_12px_rgba(34,211,238,0.15)]">
                       {/* Outer ambient glow dashes */}
                       <circle cx="78" cy="78" r="74" fill="none" stroke="rgba(34,211,238,0.2)" strokeWidth="1" strokeDasharray="3 4" />
                       {/* Dial Face */}
-                      <circle cx="78" cy="78" r="70" fill="rgba(10,15,28,0.95)" stroke="rgba(255,255,255,0.09)" strokeWidth="1.5" />
+                      <circle cx="78" cy="78" r="70" className="clock-face fill-slate-50 dark:fill-[#0A0F1C] stroke-slate-200 dark:stroke-white/[0.09]" strokeWidth="1.5" />
 
                       {/* Subtle radial ticks */}
                       {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
                         <line
                           key={deg}
                           x1="78" y1="12" x2="78" y2={deg % 90 === 0 ? "18" : "15"}
-                          stroke={deg % 90 === 0 ? "rgba(34,211,238,0.7)" : "rgba(255,255,255,0.15)"}
+                          stroke={deg % 90 === 0 ? "rgba(34,211,238,0.7)" : "rgba(148,163,184,0.3)"}
                           strokeWidth={deg % 90 === 0 ? "1.5" : "1"}
                           transform={`rotate(${deg}, 78, 78)`}
                         />
@@ -789,7 +775,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                               y={my}
                               textAnchor="middle"
                               className={`font-mono text-[8px] select-none transition-colors ${
-                                isCurrent ? 'fill-cyan-300 font-bold' : 'fill-slate-500 group-hover:fill-slate-200'
+                                isCurrent ? 'fill-cyan-600 dark:fill-cyan-300 font-bold' : 'fill-slate-400 dark:fill-slate-500 group-hover:fill-slate-700 dark:group-hover:fill-slate-200'
                               }`}
                             >
                               {label}
@@ -826,8 +812,8 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                               textAnchor="middle"
                               className={`font-mono text-[11px] select-none transition-colors ${
                                 isCurrentHour
-                                  ? 'fill-cyan-300 font-bold'
-                                  : 'fill-slate-400 group-hover:fill-white font-medium'
+                                  ? 'fill-cyan-600 dark:fill-cyan-300 font-bold'
+                                  : 'fill-slate-600 dark:fill-slate-400 group-hover:fill-slate-900 dark:group-hover:fill-white font-medium'
                               }`}
                             >
                               {h}
@@ -839,7 +825,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                       {/* Hour Hand */}
                       <line
                         x1="78" y1="78" x2="78" y2="47"
-                        stroke="#ffffff"
+                        className="clock-hour-hand stroke-slate-800 dark:stroke-white"
                         strokeWidth="3.5"
                         strokeLinecap="round"
                         transform={`rotate(${hourAngle}, 78, 78)`}
@@ -849,7 +835,8 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                       {/* Minute Hand */}
                       <line
                         x1="78" y1="78" x2="78" y2="28"
-                        stroke="#22d3ee"
+                        stroke="#0284c7"
+                        className="dark:stroke-[#22d3ee]"
                         strokeWidth="2.2"
                         strokeLinecap="round"
                         transform={`rotate(${minAngle}, 78, 78)`}
@@ -857,28 +844,28 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                       />
 
                       {/* Center Hub */}
-                      <circle cx="78" cy="78" r="4.5" fill="#22d3ee" />
-                      <circle cx="78" cy="78" r="1.8" fill="#0b0f19" />
+                      <circle cx="78" cy="78" r="4.5" fill="#0284c7" className="dark:fill-[#22d3ee]" />
+                      <circle cx="78" cy="78" r="1.8" fill="#ffffff" className="dark:fill-[#0b0f19]" />
                     </svg>
                   </div>
 
                   {/* AM / PM Segmented Toggle with Centered Time */}
                   <div className="flex items-center justify-center mt-3">
-                    <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-xl border border-white/10 bg-black/40 shadow-inner">
+                    <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-black/40 shadow-inner">
                       <button
                         type="button"
                         onClick={() => setPeriod('AM')}
                         className={`px-3 py-1 text-xs font-mono font-bold rounded-lg cursor-pointer transition-all ${
                           clockTime.period === 'AM'
-                            ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/30 font-extrabold'
-                            : 'text-slate-400 hover:text-white'
+                            ? 'bg-cyan-500 text-white dark:text-black shadow-md shadow-cyan-500/30 font-extrabold'
+                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                         }`}
                       >
                         AM
                       </button>
 
                       <div
-                        className="font-mono text-sm font-bold text-cyan-300 tracking-wider px-1 select-none cursor-pointer hover:text-cyan-200 transition-colors"
+                        className="font-mono text-sm font-bold text-cyan-600 dark:text-cyan-300 tracking-wider px-1 select-none cursor-pointer hover:text-cyan-500 transition-colors"
                         title="Click to toggle minutes (:00 ↔ :30)"
                         onClick={() => setMinute(clockTime.minutes === 0 ? 30 : 0)}
                       >
@@ -890,8 +877,8 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
                         onClick={() => setPeriod('PM')}
                         className={`px-3 py-1 text-xs font-mono font-bold rounded-lg cursor-pointer transition-all ${
                           clockTime.period === 'PM'
-                            ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/30 font-extrabold'
-                            : 'text-slate-400 hover:text-white'
+                            ? 'bg-cyan-500 text-white dark:text-black shadow-md shadow-cyan-500/30 font-extrabold'
+                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                         }`}
                       >
                         PM
@@ -909,22 +896,19 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
           <div className="flex items-start justify-between mb-5">
             <div>
               <div className="flex items-center gap-2.5 mb-1">
-                <span className="font-mono text-xs font-bold text-slate-700">05</span>
-                <h2 className="text-white font-semibold text-base">Trip Type & Group Size</h2>
+                <span className="font-mono text-xs font-bold text-slate-400 dark:text-slate-600">05</span>
+                <h2 className="text-slate-900 dark:text-white font-semibold text-base">Trip Type & Group Size</h2>
               </div>
-              <p className="text-slate-600 text-xs">Tailors place capacities and ambiance for your party.</p>
+              <p className="text-slate-500 text-xs">Tailors place capacities and ambiance for your party.</p>
             </div>
             {/* People counter */}
-            <div className="flex items-center gap-2 shrink-0 ml-3"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '6px 12px' }}>
-              <span className="text-[11px] font-mono text-slate-600">PEOPLE</span>
+            <div className="flex items-center gap-2 shrink-0 ml-3 bg-slate-100 dark:bg-white/4 border border-slate-200 dark:border-white/8 rounded-xl px-3 py-1.5 shadow-sm dark:shadow-none">
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-600">PEOPLE</span>
               <button type="button" onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
-                className="w-6 h-6 rounded-lg flex items-center justify-center text-sm font-bold text-white cursor-pointer transition-colors"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>−</button>
-              <span className="font-mono text-sm font-bold text-cyan-300 w-4 text-center">{peopleCount}</span>
+                className="w-6 h-6 rounded-lg flex items-center justify-center text-sm font-bold text-slate-700 dark:text-white bg-white dark:bg-white/6 border border-slate-200 dark:border-white/8 cursor-pointer transition-colors shadow-sm dark:shadow-none">−</button>
+              <span className="font-mono text-sm font-bold text-cyan-600 dark:text-cyan-300 w-4 text-center">{peopleCount}</span>
               <button type="button" onClick={() => setPeopleCount(peopleCount + 1)}
-                className="w-6 h-6 rounded-lg flex items-center justify-center text-sm font-bold text-white cursor-pointer transition-colors"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>+</button>
+                className="w-6 h-6 rounded-lg flex items-center justify-center text-sm font-bold text-slate-700 dark:text-white bg-white dark:bg-white/6 border border-slate-200 dark:border-white/8 cursor-pointer transition-colors shadow-sm dark:shadow-none">+</button>
             </div>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
@@ -933,14 +917,14 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
               return (
                 <button key={t.type} type="button"
                   onClick={() => { setTripType(t.type); setPeopleCount(t.count); }}
-                  className="p-3 rounded-xl border text-center cursor-pointer transition-all"
-                  style={{
-                    background: active ? 'rgba(236,72,153,0.07)' : 'rgba(255,255,255,0.03)',
-                    borderColor: active ? 'rgba(236,72,153,0.4)' : 'rgba(255,255,255,0.06)',
-                  }}
+                  className={`p-3 rounded-xl border text-center cursor-pointer transition-all ${
+                    active
+                      ? 'bg-pink-50 dark:bg-pink-500/10 border-pink-400 dark:border-pink-500/40 text-pink-700 dark:text-pink-300 shadow-sm'
+                      : 'bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-400 hover:border-slate-300'
+                  }`}
                 >
-                  <div className={`text-xs font-bold ${active ? 'text-pink-300' : 'text-white'}`}>{t.type}</div>
-                  <div className="text-[10px] text-slate-600 mt-0.5">~{t.count} {t.count === 1 ? 'person' : 'people'}</div>
+                  <div className={`text-xs font-bold ${active ? 'text-pink-600 dark:text-pink-300' : 'text-slate-900 dark:text-white'}`}>{t.type}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-600 mt-0.5">~{t.count} {t.count === 1 ? 'person' : 'people'}</div>
                 </button>
               );
             })}
@@ -956,14 +940,13 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
               const active = transport === tm.id;
               return (
                 <button key={tm.id} type="button" onClick={() => setTransport(tm.id)}
-                  className="p-3.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all"
-                  style={{
-                    background: active ? 'rgba(34,211,238,0.07)' : 'rgba(255,255,255,0.03)',
-                    borderColor: active ? 'rgba(34,211,238,0.4)' : 'rgba(255,255,255,0.06)',
-                    color: active ? '#67E8F9' : '#64748B',
-                  }}
+                  className={`p-3.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${
+                    active
+                      ? 'bg-cyan-50 dark:bg-cyan-500/10 border-cyan-400 dark:border-cyan-400/40 text-cyan-800 dark:text-cyan-300 shadow-sm'
+                      : 'bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-400 hover:border-slate-300'
+                  }`}
                 >
-                  <div className="p-1.5 rounded-lg" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                  <div className="p-1.5 rounded-lg bg-white dark:bg-white/5 border border-slate-200 dark:border-white/7 shadow-sm dark:shadow-none">
                     {tm.icon}
                   </div>
                   <span className="text-xs font-medium">{tm.label}</span>
@@ -978,17 +961,14 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
           <SectionHeader step="07" title="Location" desc="Where in Tumkur do you want to explore?" />
 
           <div className="relative">
-            <MapPin className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
+            <MapPin className="w-4 h-4 text-cyan-600 dark:text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
             <input
               type="text"
               required
               value={location}
               onChange={(e) => { setLocation(e.target.value); setGpsCoords(null); }}
               placeholder="e.g. Tumkur City, DD Hills, Madhugiri..."
-              className="w-full pl-10 pr-24 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition-all rounded-xl"
-              style={inputStyle}
-              onFocus={(e) => { e.target.style.borderColor = 'rgba(34,211,238,0.45)'; }}
-              onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+              className="w-full pl-10 pr-24 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition-all rounded-xl bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 focus:border-cyan-500"
             />
             {/* GPS Button inside input */}
             <button
@@ -996,16 +976,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
               onClick={handleDetectLocation}
               disabled={detectingLocation}
               title="Detect my location"
-              className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-              style={{
-                background: gpsCoords
-                  ? 'rgba(16,185,129,0.15)'
-                  : 'rgba(34,211,238,0.1)',
-                border: gpsCoords
-                  ? '1px solid rgba(16,185,129,0.35)'
-                  : '1px solid rgba(34,211,238,0.25)',
-                color: gpsCoords ? '#34d399' : '#22d3ee',
-              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer bg-cyan-500/10 border border-cyan-500/25 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/20"
             >
               <LocateFixed className={`w-3.5 h-3.5 ${detectingLocation ? 'animate-spin' : ''}`} />
               <span>{detectingLocation ? 'Finding...' : gpsCoords ? 'GPS ✓' : 'GPS'}</span>
@@ -1014,7 +985,7 @@ export default function Planner({ onGenerate, initialPreferences = {} }) {
 
           {/* Show coords only when GPS is active */}
           {gpsCoords && (
-            <p className="text-[11px] text-emerald-400 font-mono mt-2 pl-1">
+            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono mt-2 pl-1">
               📍 {gpsCoords.lat.toFixed(4)}°, {gpsCoords.lng.toFixed(4)}° · ±{gpsCoords.accuracy}m
             </p>
           )}

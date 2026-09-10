@@ -273,10 +273,7 @@ export default function ActiveTripHud({ plan, onClose, onCompleteTrip }) {
             {/* Main Active Waypoint Card */}
             {currentStop && (
               <div
-                className="p-5 sm:p-7 rounded-3xl border border-cyan-400/30 mb-4 relative overflow-hidden transition-all shadow-[0_0_40px_rgba(34,211,238,0.12)]"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(13, 22, 44, 0.92) 0%, rgba(9, 14, 28, 0.95) 100%)'
-                }}
+                className="p-5 sm:p-7 rounded-3xl border border-cyan-500/30 mb-4 relative overflow-hidden transition-all shadow-[0_0_40px_rgba(34,211,238,0.12)] bg-white/95 dark:bg-gradient-to-br dark:from-[#0D162C]/92 dark:to-[#090E1C]/95 text-slate-900 dark:text-white"
               >
                 {/* Neon radar scanline animation */}
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-laser-sweep" />
