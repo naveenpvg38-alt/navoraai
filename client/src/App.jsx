@@ -176,7 +176,7 @@ export default function App() {
           <ScrollLoadIndicator />
 
           {/* Main Views */}
-          <main className="flex-grow">
+          <main className="flex-grow pt-16 sm:pt-20">
             {isGenerating ? (
               <GenerationLoader preferences={pendingPreferences} />
             ) : (
