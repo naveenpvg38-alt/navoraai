@@ -1,5 +1,5 @@
-import React from 'react';
-import { Sparkles, Bookmark, LogOut } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Bookmark, LogOut, ArrowRight } from 'lucide-react';
 
 const NavLink = ({ label, active, onClick, icon }) => (
   <button
@@ -21,26 +21,52 @@ const NavLink = ({ label, active, onClick, icon }) => (
 );
 
 export default function Navbar({ activeView, setActiveView, user, onOpenAuth, onLogout, onGetStarted }) {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(scrollY > 60);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] transition-all duration-200"
+    <header
+      className={`sticky top-0 z-40 transition-all duration-300 ease-out ${
+        isScrolled
+          ? 'pt-2.5 sm:pt-3.5 px-3 sm:px-6 flex justify-center pointer-events-none'
+          : 'w-full border-b border-white/[0.06]'
+      }`}
       style={{
-        background: 'rgba(11, 17, 32, 0.92)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        paddingTop: 'env(safe-area-inset-top, 0px)',
-        paddingLeft: 'env(safe-area-inset-left, 0px)',
-        paddingRight: 'env(safe-area-inset-right, 0px)',
+        background: isScrolled ? 'transparent' : 'rgba(11, 17, 32, 0.92)',
+        backdropFilter: isScrolled ? 'none' : 'blur(20px)',
+        WebkitBackdropFilter: isScrolled ? 'none' : 'blur(20px)',
+        paddingTop: isScrolled ? undefined : 'env(safe-area-inset-top, 0px)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-[60px] flex items-center justify-between">
-
-        {/* Brand wordmark: NAVORA · AI with pulsing neon beacon dot */}
+      <div
+        className={`transition-all duration-300 ease-out flex items-center justify-between ${
+          isScrolled
+            ? 'pointer-events-auto rounded-full border border-cyan-500/30 bg-[#0B1120]/95 backdrop-blur-2xl shadow-[0_12px_40px_-5px_rgba(0,0,0,0.7),0_0_24px_-3px_rgba(34,211,238,0.28)] px-3.5 sm:px-5 py-1.5 sm:py-2 gap-3 sm:gap-6'
+            : 'max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-[60px] w-full'
+        }`}
+      >
+        {/* Brand wordmark */}
         <button
-          onClick={() => setActiveView('home')}
-          className="flex items-center gap-2 group cursor-pointer focus:outline-none select-none"
+          onClick={() => {
+            setActiveView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="flex items-center gap-2 group cursor-pointer focus:outline-none select-none shrink-0"
         >
           <div className="flex items-center gap-1.5">
-            <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.1)]">
+            <span className={`font-display font-extrabold tracking-tight text-white group-hover:text-cyan-300 transition-colors drop-shadow-[0_2px_12px_rgba(255,255,255,0.1)] ${
+              isScrolled ? 'text-base sm:text-lg' : 'text-xl sm:text-2xl'
+            }`}>
               NAVORA
             </span>
             {/* Pulsing Neon Beacon Dot */}
@@ -48,41 +74,61 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
             </span>
-            <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-gradient-cyan">
+            <span className={`font-display font-extrabold tracking-tight text-gradient-cyan ${
+              isScrolled ? 'text-base sm:text-lg' : 'text-xl sm:text-2xl'
+            }`}>
               AI
             </span>
           </div>
-          <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-slate-500 uppercase ml-1 pl-2 border-l border-white/10">
-            Tumkur
-          </span>
+          {!isScrolled && (
+            <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-slate-500 uppercase ml-1 pl-2 border-l border-white/10">
+              Tumkur
+            </span>
+          )}
         </button>
 
         {/* Center nav — desktop only */}
-        <nav className="hidden md:flex items-center gap-0.5">
-          <NavLink label="Home"       active={activeView === 'home'}    onClick={() => setActiveView('home')} />
+        <nav className={`items-center gap-0.5 ${isScrolled ? 'hidden lg:flex' : 'hidden md:flex'}`}>
+          <NavLink
+            label="Home"
+            active={activeView === 'home'}
+            onClick={() => {
+              setActiveView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
           <NavLink
             label="Plan Outing"
             active={activeView === 'planner'}
-            onClick={() => setActiveView('planner')}
+            onClick={() => {
+              setActiveView('planner');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             icon={<Sparkles className="w-3 h-3 text-cyan-400" />}
           />
           {user && (
             <NavLink
               label="Saved"
               active={activeView === 'saved'}
-              onClick={() => setActiveView('saved')}
+              onClick={() => {
+                setActiveView('saved');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               icon={<Bookmark className="w-3 h-3" />}
             />
           )}
         </nav>
 
-        {/* Right: auth — mobile shows compact version */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* Right: Auth / Combined Get Started action */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {user ? (
             <>
               <button
-                onClick={() => setActiveView('profile')}
-                className={`flex items-center gap-2 px-2 sm:px-3 py-1.5 rounded-xl text-[13px] font-medium border transition-all duration-200 cursor-pointer ${
+                onClick={() => {
+                  setActiveView('profile');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-full text-[13px] font-medium border transition-all duration-200 cursor-pointer ${
                   activeView === 'profile'
                     ? 'bg-violet-500/10 border-violet-500/30 text-violet-300'
                     : 'border-white/8 text-slate-400 hover:text-white hover:border-white/15 bg-white/3'
@@ -96,24 +142,32 @@ export default function Navbar({ activeView, setActiveView, user, onOpenAuth, on
               <button
                 onClick={onLogout}
                 title="Log Out"
-                className="p-2 rounded-xl text-slate-600 hover:text-rose-400 border border-transparent hover:border-rose-500/20 hover:bg-rose-500/8 transition-all duration-200 cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-full text-slate-600 hover:text-rose-400 border border-transparent hover:border-rose-500/20 hover:bg-rose-500/8 transition-all duration-200 cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
               </button>
             </>
           ) : (
             <>
-              <button
-                onClick={() => onOpenAuth('login')}
-                className="hidden sm:block px-4 py-1.5 text-[13px] text-slate-400 hover:text-white transition-colors cursor-pointer font-medium"
-              >
-                Log In
-              </button>
+              {!isScrolled && (
+                <button
+                  onClick={() => onOpenAuth('login')}
+                  className="hidden sm:block px-4 py-1.5 text-[13px] text-slate-400 hover:text-white transition-colors cursor-pointer font-medium"
+                >
+                  Log In
+                </button>
+              )}
+              {/* Combined Get Started Button */}
               <button
                 onClick={onGetStarted ? onGetStarted : () => onOpenAuth('signup')}
-                className="btn-primary !py-2 !px-4 sm:!px-5 !text-[13px] !rounded-xl !gap-0 cursor-pointer"
+                className={`btn-primary !gap-1.5 cursor-pointer shadow-glow-sm hover:shadow-glow-cyan transition-all group ${
+                  isScrolled
+                    ? '!py-1.5 sm:!py-2 !px-3.5 sm:!px-4 !text-xs sm:!text-[13px] !rounded-full'
+                    : '!py-2 !px-4 sm:!px-5 !text-[13px] !rounded-xl'
+                }`}
               >
-                Get Started
+                <span>Get Started</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
             </>
           )}
