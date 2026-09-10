@@ -215,8 +215,8 @@ export default function LoginPage({
                 <span>TUMKUR EXPLORER ACCESS MATRIX</span>
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-3">
-                Your Mood. <br />
-                <span className="text-gradient-cyan">Your Move.</span>
+                Plan less, <br />
+                <span className="text-gradient-cyan">Experience more.</span>
               </h1>
               <p className="text-slate-400 text-sm leading-relaxed max-w-md">
                 Unlock personalized, zero-backtracking outing itineraries powered by AI, calibrated exclusively for Tumkur’s historic monolithic forts, forest springs, and food trails.

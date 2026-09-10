@@ -152,7 +152,7 @@ export default function SplashScreen({ onComplete }) {
             </span>
           </div>
           <p className="text-slate-400 text-sm font-medium tracking-wide">
-            Your Mood, <span className="text-cyan-300 font-semibold">Your Move.</span>
+            Plan less, <span className="text-cyan-300 font-semibold">Experience more.</span>
           </p>
         </div>
 

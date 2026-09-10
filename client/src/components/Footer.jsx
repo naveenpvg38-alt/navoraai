@@ -77,7 +77,7 @@ export default function Footer({ setActiveView, onOpenAuth, user }) {
                 </span>
               </div>
               <p className="text-slate-400 text-xs mt-0.5 font-medium">
-                Your Mood, Your Move.
+                Plan less, Experience more.
               </p>
             </div>
           </div>

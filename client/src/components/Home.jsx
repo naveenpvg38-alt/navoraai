@@ -163,49 +163,11 @@ export default function Home({ user, onGetStarted, onStartPlanning, onQuickTempl
             <span className="label-overline">Tumkur · AI-Powered Outing Planner</span>
           </div>
 
-          {/* Single-Line Hero Headline with Custom First-Letter Design & Space Grotesk Font */}
-          <h1
-            className="font-space font-extrabold text-white mb-6 sm:mb-8 tracking-tight leading-none whitespace-nowrap animate-fade-up select-none flex items-center justify-center flex-nowrap"
-            style={{ fontSize: 'clamp(1.4rem, 5.2vw, 4.4rem)' }}
-          >
-            {/* First phrase: Your Mood. */}
-            <span className="inline-flex items-center">
-              {/* Custom First-Letter Design: Stylized Glowing Y with Accent Spark */}
-              <span className="relative inline-flex items-center justify-center mr-0.5">
-                <span className="text-transparent bg-clip-text bg-gradient-to-tr from-cyan-300 via-sky-400 to-indigo-400 font-black drop-shadow-[0_0_24px_rgba(56,189,248,0.7)] text-[1.08em]">
-                  Y
-                </span>
-                <span className="absolute -top-1.5 -right-1 text-[0.36em] text-cyan-300 animate-pulse font-mono pointer-events-none">
-                  ✦
-                </span>
-              </span>
-              <span>our</span>
-            </span>
-
-            <span className="text-gradient-cyan font-black ml-1.5 sm:ml-2.5">
-              Mood.
-            </span>
-
-            {/* Subtle Divider Spacer */}
-            <span className="mx-2 sm:mx-4 text-slate-600 font-light opacity-60">·</span>
-
-            {/* Second phrase: Your Move. */}
-            <span className="inline-flex items-center">
-              {/* Matching Stylized First-Letter Design */}
-              <span className="relative inline-flex items-center justify-center mr-0.5">
-                <span className="text-transparent bg-clip-text bg-gradient-to-tr from-cyan-300 via-sky-400 to-indigo-400 font-black drop-shadow-[0_0_24px_rgba(56,189,248,0.7)] text-[1.08em]">
-                  Y
-                </span>
-                <span className="absolute -top-1.5 -right-1 text-[0.36em] text-cyan-300 animate-pulse font-mono pointer-events-none">
-                  ✦
-                </span>
-              </span>
-              <span>our</span>
-            </span>
-
-            <span className="text-gradient-cyan font-black ml-1.5 sm:ml-2.5">
-              Move.
-            </span>
+          {/* Hero headline */}
+          <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1] animate-fade-up">
+            Plan less,{' '}
+            <span className="text-gradient-cyan">Experience</span>
+            {' '}more.
           </h1>
 
           {/* Simple Animated Hero Outing Showcase */}
