@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+/**
+ * ScrollLoadIndicator — Top Laser Progress Rail
+ * Positioned at the very top of the viewport (top-0).
+ * Automatically hides when scrolling downwards, and reappears when scrolling upwards or at the top.
+ */
 export default function ScrollLoadIndicator() {
   const [scrollPct, setScrollPct] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const scrollTimeout = useRef(null);
 
   useEffect(() => {
@@ -13,12 +20,22 @@ export default function ScrollLoadIndicator() {
 
       setScrollPct(pct);
 
+      // When scrolling downwards: hide the line
+      // When scrolling upwards or near the top: show the line
+      if (winScroll > lastScrollY.current && winScroll > 30) {
+        setIsVisible(false);
+      } else if (winScroll < lastScrollY.current || winScroll <= 30) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = winScroll;
+
       // Active scrolling state
       setIsScrolling(true);
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
       scrollTimeout.current = setTimeout(() => {
         setIsScrolling(false);
-      }, 500);
+      }, 400);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -31,7 +48,13 @@ export default function ScrollLoadIndicator() {
   }, []);
 
   return (
-    <div className="fixed top-[60px] left-0 right-0 z-40 pointer-events-none select-none">
+    <div
+      className="fixed top-0 left-0 right-0 z-50 pointer-events-none select-none transition-all duration-300 ease-out"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+      }}
+    >
       {/* Track base */}
       <div className="w-full h-[3px] bg-white/[0.04] backdrop-blur-xs relative overflow-hidden">
         {/* Active progress beam */}
